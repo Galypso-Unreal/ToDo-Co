@@ -23,6 +23,9 @@ class TaskController extends Controller
      */
     public function createAction(Request $request)
     {
+
+        /* Get login user */
+
         $task = new Task();
         $form = $this->createForm(TaskType::class, $task);
 
@@ -30,6 +33,13 @@ class TaskController extends Controller
 
         if ($form->isValid()) {
             $em = $this->getDoctrine()->getManager();
+            
+            /* Check if user exist and add this user to the task*/
+            
+            if($this->getUser()->getId()){
+                $user_id = $this->getUser()->getId();
+                $task->setUser($user_id);
+            }
 
             $em->persist($task);
             $em->flush();

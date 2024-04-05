@@ -37,7 +37,7 @@ class TaskController extends Controller
             /* Check if user exist and add this user to the task*/
             
             if($this->getUser()->getId()){
-                $user_id = $this->getUser()->getId();
+                $user_id = $this->getUser();
                 $task->setUser($user_id);
             }
 
@@ -93,12 +93,19 @@ class TaskController extends Controller
      */
     public function deleteTaskAction(Task $task)
     {
-        $em = $this->getDoctrine()->getManager();
-        $em->remove($task);
-        $em->flush();
+        if($this->getUser() === $task->getUser()){
+            $em = $this->getDoctrine()->getManager();
+            $em->remove($task);
+            $em->flush();
 
-        $this->addFlash('success', 'La tâche a bien été supprimée.');
+            $this->addFlash('success', 'La tâche a bien été supprimée.');
 
-        return $this->redirectToRoute('task_list');
+            return $this->redirectToRoute('task_list');
+        }
+        else{
+            $this->addFlash('error', 'Vous ne pouvez pas supprimer la tâche d\'un autre utilisateur');
+            return $this->redirectToRoute('task_list');
+        }
+        
     }
 }

@@ -93,7 +93,7 @@ class TaskController extends Controller
      */
     public function deleteTaskAction(Task $task)
     {
-        if($this->getUser() === $task->getUser()){
+        if($this->getUser() === $task->getUser() || $this->getUser()->getRoles() === ['ROLE_ADMIN'] && $task->getUser()->getRoles() === ['ROLE_ANONYM']){
             $em = $this->getDoctrine()->getManager();
             $em->remove($task);
             $em->flush();

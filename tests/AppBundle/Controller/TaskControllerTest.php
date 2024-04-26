@@ -16,7 +16,7 @@ class TaskControllerTest extends WebTestCase
     //         'ROLE_USER', // Ajoutez ici le ou les rôles que vous souhaitez attribuer à l'utilisateur
     //     ]);
 
-    //     $crawler = $client->request('GET', '/');
+    //     $client->request('GET', '/tasks');
 
     //     // Vérifier si la réponse est réussie (code 200)
     //     $this->assertSame(200, $client->getResponse()->getStatusCode());

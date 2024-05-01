@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\AppBundle\Form;
+namespace Tests\App\Form;
 
 use Symfony\Component\Form\Test\TypeTestCase;
-use AppBundle\Form\TaskType;
+use App\Form\TaskType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 

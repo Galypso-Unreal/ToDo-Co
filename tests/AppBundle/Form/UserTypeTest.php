@@ -1,9 +1,9 @@
 <?php
 
-namespace Tests\AppBundle\Form;
+namespace Tests\App\Form;
 
 use Symfony\Component\Form\Test\TypeTestCase;
-use AppBundle\Form\UserType;
+use App\Form\UserType;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 use Symfony\Component\Form\Extension\Core\Type\PasswordType;

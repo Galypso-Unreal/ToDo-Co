@@ -1,0 +1,48 @@
+doctrine:
+    dbal:
+        url: '%env(DATABASE_URL)%'
+
+        # IMPORTANT: You MUST configure your server version,
+        # either here or in the DATABASE_URL env var (see .env file)
+        #server_version: '16'
+
+        # only needed for MySQL
+        charset: utf8mb4
+        default_table_options:
+            collate: utf8mb4_unicode_ci
+
+        # backtrace queries in profiler (increases memory usage per request)
+        #profiling_collect_backtrace: '%kernel.debug%'
+    orm:
+        auto_generate_proxy_classes: true
+        naming_strategy: doctrine.orm.naming_strategy.underscore_number_aware
+        auto_mapping: true
+        mappings:
+            App:
+                is_bundle: false
+                type: annotation
+                dir: '%kernel.project_dir%/src/Entity'
+                prefix: 'App\Entity'
+                alias: App
+
+# # Doctrine Configuration
+# doctrine:
+#     dbal:
+#         driver:   pdo_mysql
+#         host:     "%database_host%"
+#         port:     "%database_port%"
+#         dbname:   "%database_name%"
+#         user:     "%database_user%"
+#         password: "%database_password%"
+#         charset:  UTF8
+#         # if using pdo_sqlite as your database driver:
+#         #   1. add the path in parameters.yml
+#         #     e.g. database_path: "%kernel.root_dir%/data/data.db3"
+#         #   2. Uncomment database_path in parameters.yml.dist
+#         #   3. Uncomment next line:
+#         #     path:     "%database_path%"
+
+#     orm:
+#         auto_generate_proxy_classes: "%kernel.debug%"
+#         naming_strategy: doctrine.orm.naming_strategy.underscore
+#         auto_mapping: true

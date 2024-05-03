@@ -1,7 +1,0 @@
-# app:
-#     resource: "@App/Controller/"
-#     type:     annotation
-
-# login:
-#     path: /login
-#     controller: "@App/Controller/

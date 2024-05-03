@@ -5,10 +5,10 @@ namespace App\Controller;
 use App\Entity\Task;
 use App\Form\TaskType;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 
-class TaskController extends Controller
+class TaskController extends AbstractController
 {
     /**
      * @Route("/tasks", name="task_list")
@@ -31,22 +31,24 @@ class TaskController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $em = $this->getDoctrine()->getManager();
-            
-            /* Check if user exist and add this user to the task*/
-            
-            if($this->getUser()->getId()){
-                $user_id = $this->getUser();
-                $task->setUser($user_id);
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $em = $this->getDoctrine()->getManager();
+
+                /* Check if user exist and add this user to the task*/
+
+                if ($this->getUser()->getId()) {
+                    $user_id = $this->getUser();
+                    $task->setUser($user_id);
+                }
+
+                $em->persist($task);
+                $em->flush();
+
+                $this->addFlash('success', 'La tâche a été bien été ajoutée.');
+
+                return $this->redirectToRoute('task_list');
             }
-
-            $em->persist($task);
-            $em->flush();
-
-            $this->addFlash('success', 'La tâche a été bien été ajoutée.');
-
-            return $this->redirectToRoute('task_list');
         }
 
         return $this->render('task/create.html.twig', ['form' => $form->createView()]);
@@ -61,12 +63,14 @@ class TaskController extends Controller
 
         $form->handleRequest($request);
 
-        if ($form->isValid()) {
-            $this->getDoctrine()->getManager()->flush();
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $this->getDoctrine()->getManager()->flush();
 
-            $this->addFlash('success', 'La tâche a bien été modifiée.');
+                $this->addFlash('success', 'La tâche a bien été modifiée.');
 
-            return $this->redirectToRoute('task_list');
+                return $this->redirectToRoute('task_list');
+            }
         }
 
         return $this->render('task/edit.html.twig', [
@@ -93,7 +97,7 @@ class TaskController extends Controller
      */
     public function deleteTaskAction(Task $task)
     {
-        if($this->getUser() === $task->getUser() || $this->getUser()->getRoles() === ['ROLE_ADMIN'] && $task->getUser()->getRoles() === ['ROLE_ANONYM']){
+        if ($this->getUser() === $task->getUser() || $this->getUser()->getRoles() === ['ROLE_ADMIN'] && $task->getUser()->getRoles() === ['ROLE_ANONYM']) {
             $em = $this->getDoctrine()->getManager();
             $em->remove($task);
             $em->flush();
@@ -101,11 +105,9 @@ class TaskController extends Controller
             $this->addFlash('success', 'La tâche a bien été supprimée.');
 
             return $this->redirectToRoute('task_list');
-        }
-        else{
+        } else {
             $this->addFlash('error', 'Vous ne pouvez pas supprimer la tâche d\'un autre utilisateur');
             return $this->redirectToRoute('task_list');
         }
-        
     }
 }

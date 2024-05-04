@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class SecurityControllerTest extends WebTestCase
 {
-    public function testLoginPage()
+    public function testLoginPage(): void
     {
         $client = static::createClient();
 
@@ -16,7 +16,7 @@ class SecurityControllerTest extends WebTestCase
         $this->assertSame(200, $client->getResponse()->getStatusCode());
     }
 
-    public function testLoginFormSubmission()
+    public function testLoginFormSubmission(): void
     {
         $client = static::createClient();
 
@@ -31,7 +31,7 @@ class SecurityControllerTest extends WebTestCase
         $this->assertTrue($client->getContainer()->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY'));
     }
 
-    public function testLogout()
+    public function testLogout(): void
     {
         $client = static::createClient();
 

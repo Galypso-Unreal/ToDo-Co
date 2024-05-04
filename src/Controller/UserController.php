@@ -4,20 +4,21 @@ namespace App\Controller;
 
 use App\Entity\User;
 use App\Form\UserType;
+use Doctrine\Persistence\ManagerRegistry;
 use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserController extends AbstractController
 {
     /**
      * @Route("/users/", name="user_list")
      */
-    public function listAction()
+    public function listAction(ManagerRegistry $managerRegistry)
     {
         if ($this->isGranted('ROLE_ADMIN') === true) {
-            return $this->render('user/list.html.twig', ['users' => $this->getDoctrine()->getRepository('App:User')->findAll()]);
+            return $this->render('user/list.html.twig', ['users' => $managerRegistry->getRepository(User::class)->findAll()]);
         } else {
             return $this->redirectToRoute("homepage");
         }
@@ -26,7 +27,7 @@ class UserController extends AbstractController
     /**
      * @Route("/users/create", name="user_create")
      */
-    public function createAction(Request $request, UserPasswordEncoderInterface $userPasswordHasher)
+    public function createAction(Request $request, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $managerRegistry)
     {
         if ($this->isGranted('ROLE_ADMIN') === true) {
             $user = new User();
@@ -36,8 +37,8 @@ class UserController extends AbstractController
 
             if ($form->isSubmitted()) {
                 if ($form->isValid()) {
-                    $em = $this->getDoctrine()->getManager();
-                    $password = $userPasswordHasher->encodePassword($user, $user->getPassword());
+                    $em = $managerRegistry->getManager();
+                    $password = $userPasswordHasher->hashPassword($user, $user->getPassword());
                     $user->setPassword($password);
                     $em->persist($user);
                     $em->flush();
@@ -57,7 +58,7 @@ class UserController extends AbstractController
     /**
      * @Route("/users/{id}/edit", name="user_edit")
      */
-    public function editAction(User $user, Request $request, UserPasswordEncoderInterface $userPasswordHasher)
+    public function editAction(User $user, Request $request, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $managerRegistry)
     {
         if ($this->isGranted('ROLE_ADMIN') === true) {
             $form = $this->createForm(UserType::class, $user);
@@ -66,10 +67,10 @@ class UserController extends AbstractController
 
             if ($form->isSubmitted()) {
                 if ($form->isValid()) {
-                    $password = $userPasswordHasher->encodePassword($user, $user->getPassword());
+                    $password = $userPasswordHasher->hashPassword($user, $user->getPassword());
                     $user->setPassword($password);
 
-                    $this->getDoctrine()->getManager()->flush();
+                    $managerRegistry->getManager()->flush();
 
                     $this->addFlash('success', "L'utilisateur a bien été modifié");
 

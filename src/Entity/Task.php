@@ -62,7 +62,7 @@ class Task
         return $this->createdAt;
     }
 
-    public function setCreatedAt($createdAt)
+    public function setCreatedAt($createdAt): void
     {
         $this->createdAt = $createdAt;
     }
@@ -72,7 +72,7 @@ class Task
         return $this->title;
     }
 
-    public function setTitle($title)
+    public function setTitle($title): void
     {
         $this->title = $title;
     }
@@ -82,7 +82,7 @@ class Task
         return $this->content;
     }
 
-    public function setContent($content)
+    public function setContent($content): void
     {
         $this->content = $content;
     }
@@ -92,7 +92,7 @@ class Task
         return $this->isDone;
     }
 
-    public function toggle($flag)
+    public function toggle($flag): void
     {
         $this->isDone = $flag;
     }
@@ -104,7 +104,7 @@ class Task
         return $this->user;
     }
 
-    public function setUser($user)
+    public function setUser($user): void
     {
         $this->user = $user;
     }

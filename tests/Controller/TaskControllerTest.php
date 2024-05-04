@@ -22,7 +22,7 @@ class TaskControllerTest extends WebTestCase
     //     $this->assertSame(200, $client->getResponse()->getStatusCode());
     // }
 
-    public function testCreateAction()
+    public function testCreateAction(): void
     {
         $client = static::createClient();
         $client->request('GET', '/tasks/create');
@@ -30,7 +30,7 @@ class TaskControllerTest extends WebTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
-    public function testEditAction()
+    public function testEditAction(): void
     {
         $client = static::createClient();
         $client->request('GET', '/tasks/1/edit');
@@ -38,7 +38,7 @@ class TaskControllerTest extends WebTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
-    public function testToggleTaskAction()
+    public function testToggleTaskAction(): void
     {
         $client = static::createClient();
         $client->request('GET', '/tasks/1/toggle');
@@ -46,7 +46,7 @@ class TaskControllerTest extends WebTestCase
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }
 
-    public function testDeleteTaskAction()
+    public function testDeleteTaskAction(): void
     {
         $client = static::createClient();
         $client->request('GET', '/tasks/1/delete');

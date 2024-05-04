@@ -1,43 +1,50 @@
 <?php 
 namespace App\DataFixtures;
 
-use App\Entity\Product;
+
 use App\Entity\Task;
 use App\Entity\User;
 use Doctrine\Bundle\FixturesBundle\Fixture;
 use Doctrine\Persistence\ObjectManager;
 use Symfony\Component\DependencyInjection\ContainerInterface;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class AppFixtures extends Fixture
 {
     protected $container;
 
-    public function setContainer(ContainerInterface $container = null)
+    public function setContainer(ContainerInterface $container = null): void
     {
         $this->container = $container;
     }
 
-    public function load(ObjectManager $manager)
+    private $passwordEncoder;
+
+    public function __construct(UserPasswordHasherInterface $userPasswordHasher)
+    {
+        $this->passwordEncoder = $userPasswordHasher;
+    }
+
+    public function load(ObjectManager $manager): void
     {
 
-        $passwordEncoder = $this->container->get('security.password_encoder');
 
         // Create users
         $user_anonym = new User();
         $user_anonym->setUsername('AnonymeUser');
         $user_anonym->setEmail('anonym@todo.com');
-        $user_anonym->setPassword($passwordEncoder->encodePassword($user_anonym, 'anonym'));
+        $user_anonym->setPassword($this->passwordEncoder->hashPassword($user_anonym, 'anonym'));
         $user_anonym->setRoles(['ROLE_ANONYM']);
 
         $user_user = new User();
         $user_user->setUsername('User');
-        $user_user->setPassword($passwordEncoder->encodePassword($user_user, 'user'));
+        $user_user->setPassword($this->passwordEncoder->hashPassword($user_user, 'user'));
         $user_user->setEmail('user@todo.com');
         $user_user->setRoles(['ROLE_USER']);
 
         $user_admin = new User();
         $user_admin->setUsername('Admin');
-        $user_admin->setPassword($passwordEncoder->encodePassword($user_admin, 'admin'));
+        $user_admin->setPassword($this->passwordEncoder->hashPassword($user_admin, 'admin'));
         $user_admin->setEmail('admin@todo.com');
         $user_admin->setRoles(['ROLE_ADMIN']);
 

@@ -5,16 +5,15 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use Doctrine\Persistence\ManagerRegistry;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Route;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
+use Symfony\Component\Routing\Annotation\Route;
 
 class UserController extends AbstractController
 {
-    /**
-     * @Route("/users/", name="user_list")
-     */
+
+    #[Route('/users/', name: 'user_list')]
     public function listAction(ManagerRegistry $managerRegistry)
     {
         if ($this->isGranted('ROLE_ADMIN') === true) {
@@ -24,9 +23,8 @@ class UserController extends AbstractController
         }
     }
 
-    /**
-     * @Route("/users/create", name="user_create")
-     */
+
+    #[Route('/users/create', name: 'user_create')]
     public function createAction(Request $request, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $managerRegistry)
     {
         if ($this->isGranted('ROLE_ADMIN') === true) {
@@ -55,9 +53,7 @@ class UserController extends AbstractController
         }
     }
 
-    /**
-     * @Route("/users/{id}/edit", name="user_edit")
-     */
+    #[Route('/users/{id}/edit', name: 'user_edit')]
     public function editAction(User $user, Request $request, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $managerRegistry)
     {
         if ($this->isGranted('ROLE_ADMIN') === true) {

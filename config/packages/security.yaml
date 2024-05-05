@@ -44,7 +44,6 @@ security:
             security: false
 
         main:
-            anonymous: ~
             pattern: ^/
             form_login:
                 login_path: login

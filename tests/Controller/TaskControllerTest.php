@@ -2,6 +2,7 @@
 
 namespace App\Tests\Controller;
 
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class TaskControllerTest extends WebTestCase
@@ -25,31 +26,70 @@ class TaskControllerTest extends WebTestCase
     public function testCreateAction(): void
     {
         $client = static::createClient();
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        // retrieve the test user
+        $testUser = $userRepository->findOneBy(['username' => 'User']);
+
+        // simulate $testUser being logged in
+        $client->loginUser($testUser);
+
         $client->request('GET', '/tasks/create');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $this->assertResponseIsSuccessful();
     }
 
     public function testEditAction(): void
     {
         $client = static::createClient();
-        $client->request('GET', '/tasks/1/edit');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        // retrieve the test user
+        $testUser = $userRepository->findOneBy(['username' => 'User']);
+
+        // simulate $testUser being logged in
+        $client->loginUser($testUser);
+
+        $client->request('GET', '/tasks/100/edit');
+
+        $this->assertResponseIsSuccessful();
     }
 
     public function testToggleTaskAction(): void
     {
         $client = static::createClient();
-        $client->request('GET', '/tasks/1/toggle');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode());
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        // retrieve the test user
+        $testUser = $userRepository->findOneBy(['username' => 'User']);
+
+        // simulate $testUser being logged in
+        $client->loginUser($testUser);
+
+        $client->request('GET', '/tasks/100/toggle');
+
+        $client->followRedirect();
+
+        $this->assertRouteSame('task_list');
+
+        $this->assertResponseIsSuccessful();
     }
 
     public function testDeleteTaskAction(): void
     {
         $client = static::createClient();
-        $client->request('GET', '/tasks/1/delete');
+
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        // retrieve the test user
+        $testUser = $userRepository->findOneBy(['username' => 'User']);
+
+        // simulate $testUser being logged in
+        $client->loginUser($testUser);
+
+        $client->request('GET', '/tasks/100/delete');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode());
     }

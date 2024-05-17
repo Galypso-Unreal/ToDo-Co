@@ -2,30 +2,39 @@
 
 namespace App\Tests\Controller;
 
+use App\Entity\User;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserControllerTest extends WebTestCase
 {
+    private ?EntityManagerInterface $entityManager = null;
+
     public function testListAction(): void
     {
         $client = static::createClient();
+
         $client->request('GET', '/users/');
 
         $this->assertEquals(302, $client->getResponse()->getStatusCode()); // check if redirection is good
     }
 
-    // public function testListActionAsAdmin()
-    // {
-    //     // Créer un client en utilisant la méthode statique createClient
-    //     $client = static::createClient([], [
-    //         'PHP_AUTH_USER' => 'Admin',
-    //         'PHP_AUTH_PW' => 'admin',
-    //     ]);
+    public function testListActionAsAdmin()
+    {
+        $client = static::createClient();
+        $userRepository = static::getContainer()->get(UserRepository::class);
 
-    //     $client->request('GET', '/users/');
+        // retrieve the test user
+        $testUser = $userRepository->findOneBy(['username' => 'Admin']);
 
-    //     $this->assertEquals(200, $client->getResponse()->getStatusCode());
-    // }
+        // simulate $testUser being logged in
+        $client->loginUser($testUser);
+
+        $client->request('GET', '/users/');
+
+        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+    }
 
     public function testCreateAction(): void
     {

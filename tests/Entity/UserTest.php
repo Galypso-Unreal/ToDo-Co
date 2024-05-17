@@ -4,14 +4,56 @@
 namespace App\Tests\Entity;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use DateTime;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class UserTest extends KernelTestCase{
 
-    function testId(): void{
-       /* auto generate id by database untested */
+    private ?EntityManagerInterface $entityManager = null;
+
+    protected function setUp(): void
+    {
+        $kernel = self::bootKernel();
+
+        $this->entityManager = $kernel->getContainer()
+            ->get('doctrine')
+            ->getManager();
     }
+
+    function testId(): void{
+
+
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        // Query for a user named "test-user-phpunit"
+        $testUser = $userRepository->findOneBy(['username' => 'test-user-phpunit']);
+
+        // If test-user-phpunit exists, delete him
+        if ($testUser) {
+            $this->entityManager->remove($testUser);
+            $this->entityManager->flush();
+        }
+
+
+        $user = new User();
+        $user->setPassword('noencodepass');
+        $user->setEmail('test-user@gmail.com');
+        $user->setUsername('test-user-phpunit');
+ 
+
+        $this->entityManager->persist($user);
+        $this->entityManager->flush();
+ 
+        // Get task from database
+        $taskRepository = $this->entityManager->getRepository(User::class);
+        $savedTask = $taskRepository->find($user->getId());
+ 
+        // Check if id is correct
+        $this->assertNotNull($savedTask);
+        $this->assertIsInt($savedTask->getId());
+     }
 
     function testUsername(): void{
         $user = new User();

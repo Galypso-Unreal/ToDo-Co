@@ -3,6 +3,7 @@
 namespace App\Tests\Controller;
 
 use App\Entity\User;
+use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class SecurityControllerTest extends WebTestCase
@@ -13,7 +14,7 @@ class SecurityControllerTest extends WebTestCase
 
         $crawler = $client->request('GET', '/login');
 
-        $this->assertSame(200, $client->getResponse()->getStatusCode());
+        $this->assertResponseIsSuccessful();
     }
 
     public function testLoginFormSubmission(): void
@@ -31,13 +32,28 @@ class SecurityControllerTest extends WebTestCase
         $this->assertTrue($client->getContainer()->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY'));
     }
 
-    public function testLogout(): void
+    public function testLogoutCheck(): void
     {
         $client = static::createClient();
+        $userRepository = static::getContainer()->get(UserRepository::class);
+        
 
+        // retrieve the test user
+        $testUser = $userRepository->findOneBy(['username' => 'User']);
+
+        // simulate $testUser being logged in
+        $client->loginUser($testUser);
+
+        // Disconnect
         $client->request('GET', '/logout');
 
-        $this->assertTrue($client->getResponse()->isRedirect());
+        // Follow redirect
+        $client->followRedirect();
+
+        // Check if on page login
+        $this->assertRouteSame('login');
+
+        $this->assertResponseIsSuccessful();
     }
     
 }

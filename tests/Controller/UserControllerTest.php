@@ -17,8 +17,25 @@ class UserControllerTest extends WebTestCase
 
         $client->request('GET', '/users/');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode()); // check if redirection is good
+        $client->followRedirect();
+
+        $this->assertRouteSame('login');
+
+        $this->assertResponseIsSuccessful();
     }
+
+    // public function testListActionAsUser(): void
+    // {
+    //     $client = static::createClient();
+
+    //     $client->request('GET', '/users/');
+
+    //     $client->followRedirect();
+
+    //     $this->assertRouteSame('homepage');
+
+    //     $this->assertResponseIsSuccessful();
+    // }
 
     public function testListActionAsAdmin()
     {
@@ -33,22 +50,40 @@ class UserControllerTest extends WebTestCase
 
         $client->request('GET', '/users/');
 
-        $this->assertEquals(200, $client->getResponse()->getStatusCode());
+        $this->assertResponseIsSuccessful();
     }
 
     public function testCreateAction(): void
     {
         $client = static::createClient();
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        // retrieve the test user
+        $testUser = $userRepository->findOneBy(['username' => 'Admin']);
+
+        // simulate $testUser being logged in
+        $client->loginUser($testUser);
+
         $client->request('GET', '/users/create');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode()); // check if redirection is good
+        $this->assertResponseIsSuccessful();
     }
 
     public function testEditAction(): void
     {
         $client = static::createClient();
-        $client->request('GET', '/users/1/edit'); // get user id  1
+        $userRepository = static::getContainer()->get(UserRepository::class);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode()); // check if redirection is good
+        // retrieve the test user
+        $testUser = $userRepository->findOneBy(['username' => 'Admin']);
+
+        // simulate $testUser being logged in
+        $client->loginUser($testUser);
+
+        $id = $testUser->getId();
+
+        $client->request('GET', '/users/'.$id.'/edit'); // get user id  1
+
+        $this->assertResponseIsSuccessful();
     }
 }

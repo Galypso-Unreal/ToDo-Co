@@ -30,6 +30,13 @@ class SecurityControllerTest extends WebTestCase
         $client->submit($form);
 
         $this->assertTrue($client->getContainer()->get('security.authorization_checker')->isGranted('IS_AUTHENTICATED_FULLY'));
+
+        $client->followRedirect();
+
+        // Check if on page homepage
+        $this->assertRouteSame('homepage');
+
+        $this->assertResponseIsSuccessful();
     }
 
     public function testLogoutCheck(): void

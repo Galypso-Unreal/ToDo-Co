@@ -23,12 +23,18 @@ class SecurityController extends AbstractController
         ));
     }
 
+    /**
+ * @codeCoverageIgnore
+ */
     #[Route('/login_check', name: 'login_check')]
     public function loginCheck(): void
     {
         // This code is never executed.
     }
 
+    /**
+ * @codeCoverageIgnore
+ */
     #[Route('/logout', name: 'logout')]
     public function logoutCheck(): void
     {

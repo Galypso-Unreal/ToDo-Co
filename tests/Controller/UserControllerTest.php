@@ -24,18 +24,22 @@ class UserControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
     }
 
-    // public function testListActionAsUser(): void
-    // {
-    //     $client = static::createClient();
+    public function testListActionAsUser(): void
+    {
+        $client = static::createClient();
 
-    //     $client->request('GET', '/users/');
+        $userRepository = static::getContainer()->get(UserRepository::class);
 
-    //     $client->followRedirect();
+        // retrieve the test user
+        $testUser = $userRepository->findOneBy(['username' => 'Admin']);
 
-    //     $this->assertRouteSame('homepage');
+        // simulate $testUser being logged in
+        $client->loginUser($testUser);
 
-    //     $this->assertResponseIsSuccessful();
-    // }
+        $client->request('GET', '/users/');
+
+        $this->assertResponseIsSuccessful();
+    }
 
     public function testListActionAsAdmin()
     {
@@ -75,15 +79,31 @@ class UserControllerTest extends WebTestCase
         $userRepository = static::getContainer()->get(UserRepository::class);
 
         // retrieve the test user
-        $testUser = $userRepository->findOneBy(['username' => 'Admin']);
+        $user = $userRepository->findOneBy(['username' => 'Admin']);
 
         // simulate $testUser being logged in
-        $client->loginUser($testUser);
+        $client->loginUser($user);
+
+        $testUser = $userRepository->findOneBy(['username' => 'AnonymeUser']);
 
         $id = $testUser->getId();
 
-        $client->request('GET', '/users/'.$id.'/edit'); // get user id  1
+        $crawler = $client->request('GET', '/users/'.$id.'/edit');
 
+        $form = $crawler->selectButton('modifyUser')->form();
+
+        $this->assertResponseIsSuccessful();
+
+        $form['user[password][first]'] = 'password123';
+        $form['user[password][second]'] = 'password123';
+
+        // Submit form
+        $client->submit($form);
+
+        // Follow redirection
+        $client->followRedirect();
+
+        // Check if user has been created
         $this->assertResponseIsSuccessful();
     }
 }

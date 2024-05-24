@@ -37,8 +37,22 @@ class TaskControllerTest extends WebTestCase
         // simulate $testUser being logged in
         $client->loginUser($testUser);
 
-        $client->request('GET', '/tasks/create');
+        $crawler = $client->request('GET', '/tasks/create');
 
+        $this->assertResponseIsSuccessful();
+
+        $form = $crawler->selectButton('createTask')->form();
+
+        // Add content to form
+        $form['task[title]'] = 'Test Task';
+        $form['task[content]'] = 'This is a Test Task';
+
+        $client->submit($form);
+
+        // Follow redirection
+        $client->followRedirect();
+
+        // Check if task has been created
         $this->assertResponseIsSuccessful();
     }
 
@@ -58,8 +72,22 @@ class TaskControllerTest extends WebTestCase
 
         $task_id = $taskRepository->findOneTaskByUser($testUser->getId())->getId();
 
-        $client->request('GET', '/tasks/'.$task_id.'/edit');
+        $crawler = $client->request('GET', '/tasks/'.$task_id.'/edit');
 
+        $this->assertResponseIsSuccessful();
+
+        $form = $crawler->selectButton('modifyTask')->form();
+
+        // Add content to form
+        $form['task[title]'] = 'Test Task modified';
+        $form['task[content]'] = 'This is a Test Task modified';
+
+        $client->submit($form);
+
+        // Follow redirection
+        $client->followRedirect();
+
+        // Check if task has been created
         $this->assertResponseIsSuccessful();
     }
 

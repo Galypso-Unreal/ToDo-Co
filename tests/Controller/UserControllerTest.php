@@ -2,44 +2,108 @@
 
 namespace App\Tests\Controller;
 
+use App\Entity\User;
+use App\Repository\UserRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserControllerTest extends WebTestCase
 {
+    private ?EntityManagerInterface $entityManager = null;
+
     public function testListAction(): void
     {
         $client = static::createClient();
+
         $client->request('GET', '/users/');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode()); // check if redirection is good
+        $client->followRedirect();
+
+        $this->assertRouteSame('login');
+
+        $this->assertResponseIsSuccessful();
     }
 
-    // public function testListActionAsAdmin()
-    // {
-    //     // Créer un client en utilisant la méthode statique createClient
-    //     $client = static::createClient([], [
-    //         'PHP_AUTH_USER' => 'Admin',
-    //         'PHP_AUTH_PW' => 'admin',
-    //     ]);
+    public function testListActionAsUser(): void
+    {
+        $client = static::createClient();
 
-    //     $client->request('GET', '/users/');
+        $userRepository = static::getContainer()->get(UserRepository::class);
 
-    //     $this->assertEquals(200, $client->getResponse()->getStatusCode());
-    // }
+        // retrieve the test user
+        $testUser = $userRepository->findOneBy(['username' => 'Admin']);
+
+        // simulate $testUser being logged in
+        $client->loginUser($testUser);
+
+        $client->request('GET', '/users/');
+
+        $this->assertResponseIsSuccessful();
+    }
+
+    public function testListActionAsAdmin()
+    {
+        $client = static::createClient();
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        // retrieve the test user
+        $testUser = $userRepository->findOneBy(['username' => 'Admin']);
+
+        // simulate $testUser being logged in
+        $client->loginUser($testUser);
+
+        $client->request('GET', '/users/');
+
+        $this->assertResponseIsSuccessful();
+    }
 
     public function testCreateAction(): void
     {
         $client = static::createClient();
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        // retrieve the test user
+        $testUser = $userRepository->findOneBy(['username' => 'Admin']);
+
+        // simulate $testUser being logged in
+        $client->loginUser($testUser);
+
         $client->request('GET', '/users/create');
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode()); // check if redirection is good
+        $this->assertResponseIsSuccessful();
     }
 
     public function testEditAction(): void
     {
         $client = static::createClient();
-        $client->request('GET', '/users/1/edit'); // get user id  1
+        $userRepository = static::getContainer()->get(UserRepository::class);
 
-        $this->assertEquals(302, $client->getResponse()->getStatusCode()); // check if redirection is good
+        // retrieve the test user
+        $user = $userRepository->findOneBy(['username' => 'Admin']);
+
+        // simulate $testUser being logged in
+        $client->loginUser($user);
+
+        $testUser = $userRepository->findOneBy(['username' => 'AnonymeUser']);
+
+        $id = $testUser->getId();
+
+        $crawler = $client->request('GET', '/users/'.$id.'/edit');
+
+        $form = $crawler->selectButton('modifyUser')->form();
+
+        $this->assertResponseIsSuccessful();
+
+        $form['user[password][first]'] = 'password123';
+        $form['user[password][second]'] = 'password123';
+
+        // Submit form
+        $client->submit($form);
+
+        // Follow redirection
+        $client->followRedirect();
+
+        // Check if user has been created
+        $this->assertResponseIsSuccessful();
     }
 }

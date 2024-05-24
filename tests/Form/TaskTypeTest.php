@@ -4,25 +4,46 @@ namespace App\Tests\Form;
 
 use Symfony\Component\Form\Test\TypeTestCase;
 use App\Form\TaskType;
+use App\Repository\UserRepository;
+use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 
-class TaskTypeTest extends TypeTestCase
+class TaskTypeTest extends WebTestCase
 {
-    // public function testSubmitValidData()
-    // {
-    //     $formData = [
-    //         'title' => 'Test Title',
-    //         'content' => 'Test Content',
-    //     ];
+    public function testSubmitValidData()
+    {
+        $client = static::createClient();
+        $userRepository = static::getContainer()->get(UserRepository::class);
+        
 
-    //     $form = $this->factory->create(TaskType::class);
-    //     $form->submit($formData);
+        // retrieve the test user
+        $testUser = $userRepository->findOneBy(['username' => 'User']);
 
-    //     $this->assertTrue($form->isSynchronized());
-    //     $this->assertEquals($formData['title'], $form->get('title')->getData());
-    //     $this->assertEquals($formData['content'], $form->get('content')->getData());
-    // }
+        // simulate $testUser being logged in
+        $client->loginUser($testUser);
 
-    // Add more test cases as needed
+        // Go to the page create user
+        $crawler = $client->request('GET', '/tasks/create');
+
+        // Check if page is correctlyh loaded
+        $this->assertResponseIsSuccessful();
+
+        // Select form
+        
+        $form = $crawler->selectButton('createTask')->form();
+
+        // Add content to form
+        $form['task[title]'] = 'Test Task';
+        $form['task[content]'] = 'This is a Test Task';
+
+        $client->submit($form);
+
+        // Follow redirection
+        $client->followRedirect();
+
+        // Check if task has been created
+        $this->assertResponseIsSuccessful();
+    }
+
 }

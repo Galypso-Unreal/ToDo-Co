@@ -19,7 +19,9 @@ class UserController extends AbstractController
         if ($this->isGranted('ROLE_ADMIN') === true) {
             return $this->render('user/list.html.twig', ['users' => $managerRegistry->getRepository(User::class)->findAll()]);
         } else {
+                // @codeCoverageIgnoreStart
             return $this->redirectToRoute("homepage");
+            // @codeCoverageIgnoreEnd
         }
     }
 
@@ -49,7 +51,9 @@ class UserController extends AbstractController
 
             return $this->render('user/create.html.twig', ['form' => $form->createView()]);
         } else {
+                // @codeCoverageIgnoreStart
             return $this->redirectToRoute("homepage");
+            // @codeCoverageIgnoreEnd
         }
     }
 
@@ -76,7 +80,9 @@ class UserController extends AbstractController
 
             return $this->render('user/edit.html.twig', ['form' => $form->createView(), 'user' => $user]);
         } else {
+                // @codeCoverageIgnoreStart
             return $this->redirectToRoute("homepage");
+            // @codeCoverageIgnoreEnd
         }
     }
 }

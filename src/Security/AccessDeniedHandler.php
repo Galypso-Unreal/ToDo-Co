@@ -23,9 +23,6 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
         if($this->security->isGranted('IS_AUTHENTICATED_FULLY') === true && $this->security->isGranted('ROLE_ADMIN') === false){
             $request->getSession()->getFlashBag()->add('error', 'Vous devez être administrateur pour accéder à cette page.');
         }
-        else{
-            $request->getSession()->getFlashBag()->add('error', 'Vous devez être connecté pour accéder à cette page.');
-        }
         return new RedirectResponse($this->urlGenerator->generate('login'));
         
     }

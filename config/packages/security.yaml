@@ -44,6 +44,7 @@ security:
             security: false
 
         main:
+            access_denied_handler: App\Security\AccessDeniedHandler
             pattern: ^/
             form_login:
                 login_path: login

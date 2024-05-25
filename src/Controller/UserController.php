@@ -16,73 +16,56 @@ class UserController extends AbstractController
     #[Route('/users/', name: 'user_list')]
     public function listAction(ManagerRegistry $managerRegistry)
     {
-        if ($this->isGranted('ROLE_ADMIN') === true) {
-            return $this->render('user/list.html.twig', ['users' => $managerRegistry->getRepository(User::class)->findAll()]);
-        } else {
-                // @codeCoverageIgnoreStart
-            return $this->redirectToRoute("homepage");
-            // @codeCoverageIgnoreEnd
-        }
+        return $this->render('user/list.html.twig', ['users' => $managerRegistry->getRepository(User::class)->findAll()]);
     }
 
 
     #[Route('/users/create', name: 'user_create')]
     public function createAction(Request $request, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $managerRegistry)
     {
-        if ($this->isGranted('ROLE_ADMIN') === true) {
-            $user = new User();
-            $form = $this->createForm(UserType::class, $user);
 
-            $form->handleRequest($request);
+        $user = new User();
+        $form = $this->createForm(UserType::class, $user);
 
-            if ($form->isSubmitted()) {
-                if ($form->isValid()) {
-                    $em = $managerRegistry->getManager();
-                    $password = $userPasswordHasher->hashPassword($user, $user->getPassword());
-                    $user->setPassword($password);
-                    $em->persist($user);
-                    $em->flush();
+        $form->handleRequest($request);
 
-                    $this->addFlash('success', "L'utilisateur a bien été ajouté.");
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $em = $managerRegistry->getManager();
+                $password = $userPasswordHasher->hashPassword($user, $user->getPassword());
+                $user->setPassword($password);
+                $em->persist($user);
+                $em->flush();
 
-                    return $this->redirectToRoute('user_list');
-                }
+                $this->addFlash('success', "L'utilisateur a bien été ajouté.");
+
+                return $this->redirectToRoute('user_list');
             }
-
-            return $this->render('user/create.html.twig', ['form' => $form->createView()]);
-        } else {
-                // @codeCoverageIgnoreStart
-            return $this->redirectToRoute("homepage");
-            // @codeCoverageIgnoreEnd
         }
+
+        return $this->render('user/create.html.twig', ['form' => $form->createView()]);
     }
 
     #[Route('/users/{id}/edit', name: 'user_edit')]
     public function editAction(User $user, Request $request, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $managerRegistry)
     {
-        if ($this->isGranted('ROLE_ADMIN') === true) {
-            $form = $this->createForm(UserType::class, $user);
+        $form = $this->createForm(UserType::class, $user);
 
-            $form->handleRequest($request);
+        $form->handleRequest($request);
 
-            if ($form->isSubmitted()) {
-                if ($form->isValid()) {
-                    $password = $userPasswordHasher->hashPassword($user, $user->getPassword());
-                    $user->setPassword($password);
+        if ($form->isSubmitted()) {
+            if ($form->isValid()) {
+                $password = $userPasswordHasher->hashPassword($user, $user->getPassword());
+                $user->setPassword($password);
 
-                    $managerRegistry->getManager()->flush();
+                $managerRegistry->getManager()->flush();
 
-                    $this->addFlash('success', "L'utilisateur a bien été modifié");
+                $this->addFlash('success', "L'utilisateur a bien été modifié");
 
-                    return $this->redirectToRoute('user_list');
-                }
+                return $this->redirectToRoute('user_list');
             }
-
-            return $this->render('user/edit.html.twig', ['form' => $form->createView(), 'user' => $user]);
-        } else {
-                // @codeCoverageIgnoreStart
-            return $this->redirectToRoute("homepage");
-            // @codeCoverageIgnoreEnd
         }
+
+        return $this->render('user/edit.html.twig', ['form' => $form->createView(), 'user' => $user]);
     }
 }

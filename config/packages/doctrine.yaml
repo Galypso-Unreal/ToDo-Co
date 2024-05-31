@@ -20,7 +20,10 @@ doctrine:
         mappings:
             App:
                 is_bundle: false
-                type: annotation
+                type: attribute
                 dir: '%kernel.project_dir%/src/Entity'
                 prefix: 'App\Entity'
                 alias: App
+        enable_lazy_ghost_objects: true
+        controller_resolver:
+            auto_mapping: false

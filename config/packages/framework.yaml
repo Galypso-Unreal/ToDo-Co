@@ -29,6 +29,13 @@ framework:
         # http://symfony.com/doc/current/reference/configuration/framework.html#handler-id
         handler_id:  session.handler.native_file
         save_path:   "%kernel.project_dir%/../var/sessions/%kernel.environment%"
+        cookie_secure: auto
+        cookie_samesite: lax
     fragments:       ~
     http_method_override: true
     assets: ~
+    handle_all_throwables: true
+    php_errors:
+        log: true
+    annotations:
+        enabled: false

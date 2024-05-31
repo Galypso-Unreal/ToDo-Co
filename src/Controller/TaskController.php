@@ -4,6 +4,8 @@ namespace App\Controller;
 
 use App\Entity\Task;
 use App\Form\TaskType;
+use App\Repository\TaskRepository;
+use Doctrine\ORM\EntityManagerInterface;
 use Doctrine\Persistence\ManagerRegistry;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
@@ -16,6 +18,13 @@ class TaskController extends AbstractController
     public function listAction(ManagerRegistry $managerRegistry)
     {
         return $this->render('task/list.html.twig', ['tasks' => $managerRegistry->getRepository(Task::class)->findAll()]);
+        
+    }
+
+    #[Route('/tasks/done', name: 'task_list_done')]
+    public function listActionDone(ManagerRegistry $managerRegistry)
+    {
+        return $this->render('task/list.html.twig', ['tasks' => $managerRegistry->getRepository(Task::class)->findBy(["isDone"=>"1"])]);
         
     }
 
@@ -57,24 +66,32 @@ class TaskController extends AbstractController
     #[Route('/tasks/{id}/edit', name: 'task_edit')]
     public function editAction(Task $task, Request $request, ManagerRegistry $managerRegistry)
     {
-        $form = $this->createForm(TaskType::class, $task);
+        
+        if($this->getUser() === $task->getUser()){
+            $form = $this->createForm(TaskType::class, $task);
 
-        $form->handleRequest($request);
+            $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
-                $managerRegistry->getManager()->flush();
+            if ($form->isSubmitted()) {
+                if ($form->isValid()) {
+                    $managerRegistry->getManager()->flush();
 
-                $this->addFlash('success', 'La tâche a bien été modifiée.');
+                    $this->addFlash('success', 'La tâche a bien été modifiée.');
 
-                return $this->redirectToRoute('task_list');
+                    return $this->redirectToRoute('task_list');
+                }
             }
-        }
 
-        return $this->render('task/edit.html.twig', [
-            'form' => $form->createView(),
-            'task' => $task,
-        ]);
+            return $this->render('task/edit.html.twig', [
+                'form' => $form->createView(),
+                'task' => $task,
+            ]);
+        }
+        else{
+            $this->addFlash('error', sprintf('La tâche %s ne peux pas être modifier par un autre utilisateur', $task->getTitle()));
+            return $this->redirectToRoute('task_list');
+        }
+        
     }
 
     #[Route('/tasks/{id}/toggle', name: 'task_toggle')]
@@ -83,7 +100,12 @@ class TaskController extends AbstractController
         $task->toggle(!$task->isDone());
         $managerRegistry->getManager()->flush();
 
-        $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
+        if($task->isDone() == true){
+            $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
+        }
+        else{
+            $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme non faite.', $task->getTitle()));
+        }
 
         return $this->redirectToRoute('task_list');
     }

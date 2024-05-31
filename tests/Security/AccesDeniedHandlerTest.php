@@ -26,7 +26,6 @@ class AccesDeniedHandlerTest extends WebTestCase
 
         $containsText = false;
         foreach ($flashMessages as $message) {
-            echo $message;
             if (strpos($message, 'Vous devez être administrateur pour accéder à cette page.') !== false) {
                 $containsText = true;
                 break;

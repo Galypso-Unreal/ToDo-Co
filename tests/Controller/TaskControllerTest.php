@@ -26,6 +26,24 @@ class TaskControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
     }
 
+    public function testListDoneAction()
+    {
+
+        $client = static::createClient();
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        // retrieve the test user
+        $testUser = $userRepository->findOneBy(['username' => 'User']);
+
+        // simulate $testUser being logged in
+        $client->loginUser($testUser);
+
+        $client->request('GET', '/tasks/done');
+
+        // Check if 200 return
+        $this->assertResponseIsSuccessful();
+    }
+
     public function testCreateAction(): void
     {
         $client = static::createClient();
@@ -91,6 +109,47 @@ class TaskControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
     }
 
+    public function testEditAsWrongUserAction(): void
+    {
+        $client = static::createClient();
+
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        $taskRepository = static::getContainer()->get(TaskRepository::class);
+
+        // retrieve the test user
+        $testUser = $userRepository->findOneBy(['username' => 'User']);
+
+        // retrieve the test user admin
+        $testUserAdmin = $userRepository->findOneBy(['username' => 'Admin']);
+
+        // simulate $testUser being logged in
+        $client->loginUser($testUser);
+
+        $task = $taskRepository->findOneTaskByUser($testUserAdmin->getId());
+
+        $client->request('GET', '/tasks/'.$task->getId().'/edit');
+
+        $flashMessages = $client->getRequest()->getSession()->getFlashBag()->get('error');
+
+        $containsText = false;
+        foreach ($flashMessages as $message) {
+            if (strpos($message, "ne peux pas être modifier par un autre utilisateur") !== false) {
+                $containsText = true;
+                break;
+            }
+        }
+
+        $this->assertEquals(true,$containsText);
+
+        $client->followRedirect();
+
+        $this->assertRouteSame('task_list');
+
+        $this->assertResponseIsSuccessful();
+
+    }
+
     public function testToggleTaskAction(): void
     {
         $client = static::createClient();
@@ -108,6 +167,43 @@ class TaskControllerTest extends WebTestCase
         $client->loginUser($testUser);
 
         $client->request('GET', '/tasks/'.$task_id.'/toggle');
+
+        $client->followRedirect();
+
+        $this->assertRouteSame('task_list');
+
+        $this->assertResponseIsSuccessful();
+    }
+
+    public function testToggleTaskActionAsNotDone(): void
+    {
+        $client = static::createClient();
+
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        $taskRepository = static::getContainer()->get(TaskRepository::class);
+
+        // retrieve the test user
+        $testUser = $userRepository->findOneBy(['username' => 'User']);
+
+        $task_id = $taskRepository->findOneBy(['user' => $testUser->getId()])->getId();
+
+        // simulate $testUser being logged in
+        $client->loginUser($testUser);
+
+        $client->request('GET', '/tasks/'.$task_id.'/toggle');
+
+        $flashMessages = $client->getRequest()->getSession()->getFlashBag()->get('success');
+
+        $containsText = false;
+        foreach ($flashMessages as $message) {
+            if (strpos($message, "a bien été marquée comme non faite.") !== false) {
+                $containsText = true;
+                break;
+            }
+        }
+
+        $this->assertEquals(true,$containsText);
 
         $client->followRedirect();
 

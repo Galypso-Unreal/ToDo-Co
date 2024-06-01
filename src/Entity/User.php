@@ -41,6 +41,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * The above PHP function is a constructor that initializes a new ArrayCollection for the tasks
      * property.
+     *
+     * @return void
      */
     public function __construct()
     {
@@ -49,8 +51,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * This PHP function returns the value of the "id" property of the object.
-     * 
-     * @return The function `getId()` is returning the value of the property `` of the object.
+     *
+     * @return mixed value of the property `id` of the object
      */
     public function getId()
     {
@@ -59,8 +61,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * This PHP function returns the username as the user identifier.
-     * 
-     * @return string The `username` property of the object is being returned as a string.
+     *
+     * @return mixed The `username` property of the object is being returned as a string.
      */
     public function getUserIdentifier(): string
     {
@@ -69,9 +71,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * This PHP function returns the username associated with the current object.
-     * 
-     * @return The `getUsername()` function is returning the value of the `username` property of the
-     * object.
+     *
+     * @return mixed The `getUsername()` function is returning the value of the `username` property of the object
      */
     public function getUsername()
     {
@@ -80,10 +81,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * The function `setUsername` in PHP sets the username property of an object.
-     * 
-     * @param username $username The `setUsername` function is a method that sets the value of the `username`
-     * property of an object to the value passed as an argument. In this case, the parameter
-     * `` is the value that will be assigned to the `username` property of the object.
+     *
+     * @param mixed $username setUsername parameter
+     * @return void value username of the object
      */
     public function setUsername($username): void
     {
@@ -113,9 +113,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * The function `setPassword` in PHP sets the password for an object.
-     * 
-     * @param password $password The `setPassword` function is a method that sets the password for an object. The
+     *
+     * @param mixed $password setPassword parameter The `setPassword` function is a method that sets the password for an object. The
      * function takes one parameter, which is the new password that you want to set for the object.
+     * @return void
      */
     public function setPassword($password): void
     {
@@ -125,7 +126,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * This PHP function named getEmail returns the email property of the object it is called on.
      * 
-     * @return The getEmail() function is returning the value of the email property of the object.
+     * @return void getEmail() function is returning the value of the email property of the object.
      */
     public function getEmail()
     {
@@ -134,10 +135,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     /**
      * The setEmail function in PHP sets the email property of an object.
-     * 
-     * @param email $email The `setEmail` function is a method that sets the email property of an object to
+     *
+     * @param mixed $email setEmail parameter. The `setEmail` function is a method that sets the email property of an object to
      * the value passed as a parameter. In this case, the parameter is ``, which is the email
      * address that you want to set for the object.
+     * @return void
      */
     public function setEmail($email): void
     {
@@ -160,7 +162,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * The function `setRoles` in PHP sets the roles of an object based on the provided array.
      * 
-     * @param array $roles The `setRoles` function is a method that sets the roles of an object. It
+     * @param array $roles setRoles parameter. The `setRoles` function is a method that sets the roles of an object. It
      * takes an array of roles as a parameter and assigns it to the `roles` property of the object.
      */
     public function setRoles(array $roles): void
@@ -171,6 +173,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * The eraseCredentials function in PHP is used to remove sensitive data from the user's
      * authentication credentials.
+     *
+     * @return void
      */
     public function eraseCredentials(): void
     {

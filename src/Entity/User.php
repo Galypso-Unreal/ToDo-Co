@@ -81,7 +81,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * The function `setUsername` in PHP sets the username property of an object.
      * 
-     * @param username The `setUsername` function is a method that sets the value of the `username`
+     * @param username $username The `setUsername` function is a method that sets the value of the `username`
      * property of an object to the value passed as an argument. In this case, the parameter
      * `` is the value that will be assigned to the `username` property of the object.
      */
@@ -114,7 +114,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * The function `setPassword` in PHP sets the password for an object.
      * 
-     * @param password The `setPassword` function is a method that sets the password for an object. The
+     * @param password $password The `setPassword` function is a method that sets the password for an object. The
      * function takes one parameter, which is the new password that you want to set for the object.
      */
     public function setPassword($password): void
@@ -135,7 +135,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * The setEmail function in PHP sets the email property of an object.
      * 
-     * @param email The `setEmail` function is a method that sets the email property of an object to
+     * @param email $email The `setEmail` function is a method that sets the email property of an object to
      * the value passed as a parameter. In this case, the parameter is ``, which is the email
      * address that you want to set for the object.
      */
@@ -160,7 +160,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * The function `setRoles` in PHP sets the roles of an object based on the provided array.
      * 
-     * @param array roles The `setRoles` function is a method that sets the roles of an object. It
+     * @param array $roles The `setRoles` function is a method that sets the roles of an object. It
      * takes an array of roles as a parameter and assigns it to the `roles` property of the object.
      */
     public function setRoles(array $roles): void

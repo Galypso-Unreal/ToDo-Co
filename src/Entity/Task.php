@@ -155,7 +155,7 @@ class Task
     /**
      * The setUser function in PHP sets the user property of an object.
      * 
-     * @param user The `setUser` function is a method that sets the value of the `user` property in the
+     * @param user $user The `setUser` function is a method that sets the value of the `user` property in the
      * class to the value passed as an argument. The parameter `$user` is the value that will be
      * assigned to the `user` property.
      */

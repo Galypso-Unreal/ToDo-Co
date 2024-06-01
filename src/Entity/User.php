@@ -38,67 +38,118 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: "json")]
     private $roles = [];
 
-    // Contruct array collection for user (a user can have multiples tasks).
+    /**
+     * The above PHP function is a constructor that initializes a new ArrayCollection for the tasks
+     * property.
+     */
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
     }
 
-    // Get id of user.
+    /**
+     * This PHP function returns the value of the "id" property of the object.
+     * 
+     * @return The function `getId()` is returning the value of the property `` of the object.
+     */
     public function getId()
     {
         return $this->id;
     }
 
-    // Get user identifier (here username).
+    /**
+     * This PHP function returns the username as the user identifier.
+     * 
+     * @return string The `username` property of the object is being returned as a string.
+     */
     public function getUserIdentifier(): string
     {
         return $this->username;
     }
 
-    // Get username of user.
+    /**
+     * This PHP function returns the username associated with the current object.
+     * 
+     * @return The `getUsername()` function is returning the value of the `username` property of the
+     * object.
+     */
     public function getUsername()
     {
         return $this->username;
     }
 
-    // Set username of user.
+    /**
+     * The function `setUsername` in PHP sets the username property of an object.
+     * 
+     * @param username The `setUsername` function is a method that sets the value of the `username`
+     * property of an object to the value passed as an argument. In this case, the parameter
+     * `` is the value that will be assigned to the `username` property of the object.
+     */
     public function setUsername($username): void
     {
         $this->username = $username;
     }
 
-    // Get salt security of user.
+    /**
+     * The getSalt function in PHP returns a nullable string value.
+     * 
+     * @return ?string The `getSalt()` function is returning a `null` value.
+     */
     public function getSalt(): ?string
     {
         return null;
     }
 
-    // Get password of user.
+    /**
+     * This PHP function returns the password value as a nullable string.
+     * 
+     * @return ?string The `getPassword()` function is returning a nullable string value, which means
+     * it can return either a string or `null`.
+     */
     public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    // Set password user.
+    /**
+     * The function `setPassword` in PHP sets the password for an object.
+     * 
+     * @param password The `setPassword` function is a method that sets the password for an object. The
+     * function takes one parameter, which is the new password that you want to set for the object.
+     */
     public function setPassword($password): void
     {
         $this->password = $password;
     }
 
-    // Get user email.
+    /**
+     * This PHP function named getEmail returns the email property of the object it is called on.
+     * 
+     * @return The getEmail() function is returning the value of the email property of the object.
+     */
     public function getEmail()
     {
         return $this->email;
     }
 
-    // Set user email.
+    /**
+     * The setEmail function in PHP sets the email property of an object.
+     * 
+     * @param email The `setEmail` function is a method that sets the email property of an object to
+     * the value passed as a parameter. In this case, the parameter is ``, which is the email
+     * address that you want to set for the object.
+     */
     public function setEmail($email): void
     {
         $this->email = $email;
     }
 
-    // Get roles of user (admin or user).
+    /**
+     * This PHP function named getRoles returns an array of roles.
+     * 
+     * @return array The `getRoles()` function is returning an array of roles stored in the ``
+     * property of the object.
+     */
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -106,13 +157,21 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $roles;
     }
 
-    // Set user roles.
+    /**
+     * The function `setRoles` in PHP sets the roles of an object based on the provided array.
+     * 
+     * @param array roles The `setRoles` function is a method that sets the roles of an object. It
+     * takes an array of roles as a parameter and assigns it to the `roles` property of the object.
+     */
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
     }
 
-    // Delete credentails user.
+    /**
+     * The eraseCredentials function in PHP is used to remove sensitive data from the user's
+     * authentication credentials.
+     */
     public function eraseCredentials(): void
     {
     }

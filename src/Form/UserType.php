@@ -14,7 +14,24 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 class UserType extends AbstractType
 {
 
-    // Build form of user with username, password, email and roles options.
+    /**
+     * The function builds a form with fields for username, password, email, and roles with a model
+     * transformer for roles.
+     * 
+     * @param FormBuilderInterface builder The `$builder` parameter in the `buildForm` method is an
+     * instance of `FormBuilderInterface` class. It is used to define the structure and behavior of the
+     * form. You can add form fields, configure options, and apply transformations using the methods
+     * provided by the `FormBuilderInterface` class.
+     * @param array options The `$options` parameter in the `buildForm` method is an array that can
+     * contain various configuration options for the form. These options can be used to customize the
+     * behavior and appearance of the form fields. In the provided code snippet, the ``
+     * parameter is not being used directly within the `
+     * 
+     * @return void The `buildForm` function is returning a form builder object with several form
+     * fields added to it. The fields being added are 'username' of type TextType, 'password' of type
+     * RepeatedType (PasswordType), 'email' of type EmailType, and 'roles' of type ChoiceType with
+     * options for 'User' and 'Admin'. Additionally, a model transformer is being added to
+     */
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

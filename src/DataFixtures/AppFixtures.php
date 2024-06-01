@@ -17,7 +17,11 @@ class AppFixtures extends Fixture
 {
     protected $container;
 
-    // Set container for using variables of it.
+    /**
+     * The function `setContainer` sets the container property of an object to a specified value.
+     * 
+     * @param ContainerInterface
+     */
     public function setContainer(ContainerInterface $container = null): void
     {
         $this->container = $container;
@@ -25,13 +29,23 @@ class AppFixtures extends Fixture
 
     private $passwordEncoder;
     
-    // Construct userPasswordHasher for encoding password user when create them from test.
+    /**
+     * The constructor function initializes the password encoder with a UserPasswordHasherInterface
+     * object.
+     * 
+     * @param UserPasswordHasherInterface
+     */
     public function __construct(UserPasswordHasherInterface $userPasswordHasher)
     {
         $this->passwordEncoder = $userPasswordHasher;
     }
 
     // Loading fixtures.
+    /**
+     * The function creates users with different roles and tasks assigned to them in a PHP application.
+     * 
+     * @param ObjectManager
+     */
     public function load(ObjectManager $manager): void
     {
 

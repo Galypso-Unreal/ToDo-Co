@@ -97,7 +97,6 @@ class UserController extends AbstractController
     }
 
     #[Route('/users/{id}/edit', name: 'user_edit')]
-    // Edit user form.
     /**
      * This PHP function edits a user entity, hashes the password, updates the user in the database,
      * and redirects to the user list page with a success message.

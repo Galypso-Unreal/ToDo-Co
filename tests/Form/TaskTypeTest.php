@@ -19,10 +19,10 @@ class TaskTypeTest extends WebTestCase
         $userRepository = static::getContainer()->get(UserRepository::class);
 
 
-        // retrieve the test user
+        // Retrieve the test user
         $testUser = $userRepository->findOneBy(['username' => 'User']);
 
-        // simulate $testUser being logged in
+        // Simulate $testUser being logged in
         $client->loginUser($testUser);
 
         // Go to the page create user

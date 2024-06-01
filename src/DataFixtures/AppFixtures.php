@@ -40,7 +40,6 @@ class AppFixtures extends Fixture
         $this->passwordEncoder = $userPasswordHasher;
     }
 
-    // Loading fixtures.
     /**
      * The function creates users with different roles and tasks assigned to them in a PHP application.
      * 

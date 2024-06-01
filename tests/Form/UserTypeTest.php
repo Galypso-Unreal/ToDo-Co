@@ -27,10 +27,10 @@ class UserTypeTest extends WebTestCase
         $userRepository = static::getContainer()->get(UserRepository::class);
         $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
 
-        // retrieve the test user
+        // Retrieve the test user
         $testUser = $userRepository->findOneBy(['username' => 'Admin']);
 
-        // simulate $testUser being logged in
+        // Simulate $testUser being logged in
         $client->loginUser($testUser);
 
         // Go to the page create user

@@ -31,10 +31,10 @@ class UserControllerTest extends WebTestCase
 
         $userRepository = static::getContainer()->get(UserRepository::class);
 
-        // retrieve the test user.
+        // Retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'Admin']);
 
-        // simulate $testUser being logged in.
+        // Simulate $testUser being logged in.
         $client->loginUser($testUser);
 
         $client->request('GET', '/users/');
@@ -48,10 +48,10 @@ class UserControllerTest extends WebTestCase
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
 
-        // retrieve the test user.
+        // Retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'Admin']);
 
-        // simulate $testUser being logged in.
+        // Simulate $testUser being logged in.
         $client->loginUser($testUser);
 
         $client->request('GET', '/users/');
@@ -65,10 +65,10 @@ class UserControllerTest extends WebTestCase
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
 
-        // retrieve the test user.
+        // Retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'Admin']);
 
-        // simulate $testUser being logged in.
+        // Simulate $testUser being logged in.
         $client->loginUser($testUser);
 
         $client->request('GET', '/users/create');
@@ -82,10 +82,10 @@ class UserControllerTest extends WebTestCase
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
 
-        // retrieve the test user.
+        // Retrieve the test user.
         $user = $userRepository->findOneBy(['username' => 'Admin']);
 
-        // simulate $testUser being logged in.
+        // Simulate $testUser being logged in.
         $client->loginUser($user);
 
         $testUser = $userRepository->findOneBy(['username' => 'AnonymeUser']);

@@ -66,7 +66,7 @@ class Task
      * The function `setCreatedAt` sets the value of the `createdAt` property in a PHP class.
      * 
      * @param createdAt The `setCreatedAt` function is a method that sets the value of the `createdAt`
-     * property of an object to the value passed as a parameter. The parameter `` is the
+     * property of an object to the value passed as a parameter. The parameter `$createdAt` is the
      * value that will be assigned to the `createdAt` property of the object.
      */
     public function setCreatedAt($createdAt): void
@@ -88,7 +88,7 @@ class Task
      * The function `setTitle` in PHP sets the title of an object.
      * 
      * @param title The `setTitle` function is a method that sets the title of an object to the value
-     * passed as a parameter. In this case, the parameter is ``, which is the new title that will
+     * passed as a parameter. In this case, the parameter is `$title`, which is the new title that will
      * be assigned to the object.
      */
     public function setTitle($title): void
@@ -133,7 +133,7 @@ class Task
      * The function `toggle` in PHP sets the value of the `isDone` property to the provided flag value.
      * 
      * @param flag The `flag` parameter in the `toggle` function is used to determine the value of the
-     * `isDone` property. When the `toggle` function is called with a boolean value for the `flag`
+     * `isDone` property. When the `toggle` function is called with a boolean value for the `$flag`
      * parameter, it will set the `isDone` property of the object to that boolean value
      */
     public function toggle($flag): void
@@ -156,7 +156,7 @@ class Task
      * The setUser function in PHP sets the user property of an object.
      * 
      * @param user The `setUser` function is a method that sets the value of the `user` property in the
-     * class to the value passed as an argument. The parameter `` is the value that will be
+     * class to the value passed as an argument. The parameter `$user` is the value that will be
      * assigned to the `user` property.
      */
     public function setUser($user): void

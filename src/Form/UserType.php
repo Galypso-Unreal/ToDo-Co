@@ -13,6 +13,8 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 
 class UserType extends AbstractType
 {
+
+    // Build form of user with username, password, email and roles options.
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

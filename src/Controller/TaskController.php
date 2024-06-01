@@ -16,12 +16,14 @@ class TaskController extends AbstractController
 {
     private CacheItemPoolInterface $cachePool;
 
+    // Contruct cache system pool.
     public function __construct(CacheItemPoolInterface $cachePool)
     {
         $this->cachePool = $cachePool;
     }
 
     #[Route('/tasks', name: 'task_list')]
+    // Get list of tasks.
     public function listAction(ManagerRegistry $managerRegistry)
     {
         $item = $this->cachePool->getItem('tasks_list');
@@ -37,6 +39,7 @@ class TaskController extends AbstractController
     }
 
     #[Route('/tasks/done', name: 'task_list_done')]
+    // Get list of finished tasks.
     public function listActionDone(ManagerRegistry $managerRegistry)
     {
         $item = $this->cachePool->getItem('tasks_list_done');
@@ -53,6 +56,7 @@ class TaskController extends AbstractController
 
 
     #[Route('/tasks/create', name: 'task_create')]
+    // Create a new task (form).
     public function createAction(Request $request, ManagerRegistry $managerRegistry)
     {
 
@@ -67,7 +71,6 @@ class TaskController extends AbstractController
                 $em = $managerRegistry->getManager();
 
                 // Check if user exist and add this user to the task.
-
                 if ($this->getUser()->getId()) {
                     $user_id = $this->getUser();
                     $task->setUser($user_id);
@@ -87,6 +90,7 @@ class TaskController extends AbstractController
     }
 
     #[Route('/tasks/{id}/edit', name: 'task_edit')]
+    // Edit task form.
     public function editAction(Task $task, Request $request, ManagerRegistry $managerRegistry)
     {
 
@@ -117,6 +121,7 @@ class TaskController extends AbstractController
     }
 
     #[Route('/tasks/{id}/toggle', name: 'task_toggle')]
+    // Toggle task to set them done or not.
     public function toggleTaskAction(Task $task, ManagerRegistry $managerRegistry)
     {
         $task->toggle(!$task->isDone());
@@ -134,6 +139,7 @@ class TaskController extends AbstractController
     }
 
     #[Route('/tasks/{id}/delete', name: 'task_delete')]
+    // Delete a task, user need to be the same than creator or admin.
     public function deleteTaskAction(Task $task, ManagerRegistry $managerRegistry)
     {
         if ($this->getUser() === $task->getUser() || $this->getUser()->getRoles() === ['ROLE_ADMIN'] && $task->getUser()->getRoles() === ['ROLE_ANONYM']) {

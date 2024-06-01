@@ -8,6 +8,8 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class AccesDeniedHandlerTest extends WebTestCase
 
 {
+
+    // Test user redirect if not admin.
     public function testPageAdminAsUser(): void
     {
         $client = static::createClient();

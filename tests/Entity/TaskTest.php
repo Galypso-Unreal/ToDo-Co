@@ -13,6 +13,7 @@ class TaskTest extends KernelTestCase
 
     private ?EntityManagerInterface $entityManager = null;
 
+    // Get doctrine for managing entities.
     protected function setUp(): void
     {
         $kernel = self::bootKernel();
@@ -22,6 +23,7 @@ class TaskTest extends KernelTestCase
             ->getManager();
     }
 
+    // Test if construct work.
     function testConstruct(): void
     {
         $task = new Task();
@@ -29,6 +31,7 @@ class TaskTest extends KernelTestCase
         $this->assertNotNull($task);
     }
 
+    // Test if get id function work.
     function testId(): void
     {
         // Create new task
@@ -49,6 +52,7 @@ class TaskTest extends KernelTestCase
         $this->assertIsInt($savedTask->getId());
     }
 
+    // Test if created at work.
     function testCreatedAt(): void
     {
         $task = new Task();
@@ -57,6 +61,7 @@ class TaskTest extends KernelTestCase
         $this->assertEquals(new DateTime('2022-07-03 04:53:53'), $task->getCreatedAt());
     }
 
+    // Test set title.
     function testTitle(): void
     {
         $task = new Task();
@@ -64,6 +69,7 @@ class TaskTest extends KernelTestCase
         $this->assertEquals('here', $task->getTitle());
     }
 
+    // Test set content.
     function testContent(): void
     {
         $task = new Task();
@@ -71,6 +77,7 @@ class TaskTest extends KernelTestCase
         $this->assertEquals('testContent', $task->getContent());
     }
 
+    // Test isDone function work.
     function testIsDone(): void
     {
         $task = new Task();
@@ -78,6 +85,7 @@ class TaskTest extends KernelTestCase
         $this->assertEquals(true, $task->isDone());
     }
 
+    // Test linked user to a task.
     function testUser(): void
     {
         $user = new User();

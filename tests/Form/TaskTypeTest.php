@@ -11,6 +11,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class TaskTypeTest extends WebTestCase
 {
+
+    // Test if submit data work on task form.
     public function testSubmitValidData()
     {
         $client = static::createClient();

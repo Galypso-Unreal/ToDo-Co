@@ -12,12 +12,15 @@ use Symfony\Component\Security\Http\Authorization\AccessDeniedHandlerInterface;
 
 class AccessDeniedHandler implements AccessDeniedHandlerInterface
 {
+
+    // Construct : Urlgenerator and security userd for handle 403.
     public function __construct(
         private UrlGeneratorInterface $urlGenerator,
         private Security $security,
     ) {
     }
 
+    // Handle 403 and redirect if user is not admin.
     public function handle(Request $request, AccessDeniedException $accessDeniedException): ?Response
     {
         if ($this->security->isGranted('IS_AUTHENTICATED_FULLY') === true && $this->security->isGranted('ROLE_ADMIN') === false) {

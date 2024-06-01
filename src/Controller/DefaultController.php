@@ -9,6 +9,7 @@ class DefaultController extends AbstractController
 {
 
     #[Route('/', name: 'homepage')]
+    // Default index for homepage dashboard user.
     public function index()
     {
         return $this->render('default/index.html.twig');

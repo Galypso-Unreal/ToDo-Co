@@ -38,56 +38,67 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: "json")]
     private $roles = [];
 
+    // Contruct array collection for user (a user can have multiples tasks).
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
     }
 
+    // Get id of user.
     public function getId()
     {
         return $this->id;
     }
 
+    // Get user identifier (here username).
     public function getUserIdentifier(): string
     {
         return $this->username;
     }
 
+    // Get username of user.
     public function getUsername()
     {
         return $this->username;
     }
 
+    // Set username of user.
     public function setUsername($username): void
     {
         $this->username = $username;
     }
 
+    // Get salt security of user.
     public function getSalt(): ?string
     {
         return null;
     }
 
+    // Get password of user.
     public function getPassword(): ?string
     {
         return $this->password;
     }
 
+    // Set password user.
     public function setPassword($password): void
     {
         $this->password = $password;
     }
 
+    // Get user email.
     public function getEmail()
     {
         return $this->email;
     }
 
+    // Set user email.
     public function setEmail($email): void
     {
         $this->email = $email;
     }
 
+    // Get roles of user (admin or user).
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -95,11 +106,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $roles;
     }
 
+    // Set user roles.
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
     }
 
+    // Delete credentails user.
     public function eraseCredentials(): void
     {
     }

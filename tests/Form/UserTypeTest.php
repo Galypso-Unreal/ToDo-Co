@@ -20,7 +20,7 @@ class UserTypeTest extends WebTestCase
 
     private ?EntityManagerInterface $entityManager = null;
 
-
+    // Test if submit data work on user form.
     public function testSubmitValidData(): void
     {
         $client = static::createClient();

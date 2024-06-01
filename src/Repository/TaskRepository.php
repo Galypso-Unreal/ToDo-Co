@@ -16,6 +16,8 @@ use Doctrine\Persistence\ManagerRegistry;
  */
 class TaskRepository extends ServiceEntityRepository
 {
+
+    // Construct base managerRegistry for task.
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Task::class);

@@ -16,12 +16,14 @@ class UserController extends AbstractController
 
     private CacheItemPoolInterface $cachePool;
 
+    // Create cache pool.
     public function __construct(CacheItemPoolInterface $cachePool)
     {
         $this->cachePool = $cachePool;
     }
 
     #[Route('/users/', name: 'user_list')]
+    // Get list of users.
     public function listAction(ManagerRegistry $managerRegistry)
     {
         $item = $this->cachePool->getItem('users_list');
@@ -38,6 +40,7 @@ class UserController extends AbstractController
 
 
     #[Route('/users/create', name: 'user_create')]
+    // Create new user form.
     public function createAction(Request $request, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $managerRegistry)
     {
 
@@ -64,6 +67,7 @@ class UserController extends AbstractController
     }
 
     #[Route('/users/{id}/edit', name: 'user_edit')]
+    // Edit user form.
     public function editAction(User $user, Request $request, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $managerRegistry)
     {
         $form = $this->createForm(UserType::class, $user);

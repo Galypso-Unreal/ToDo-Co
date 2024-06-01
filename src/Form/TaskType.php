@@ -8,6 +8,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class TaskType extends AbstractType
 {
+
+    // Build form task with title and content.
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

@@ -14,6 +14,7 @@ class UserTest extends KernelTestCase
 
     private ?EntityManagerInterface $entityManager = null;
 
+    // Set up doctrine for entity manager.
     protected function setUp(): void
     {
         $kernel = self::bootKernel();
@@ -23,6 +24,7 @@ class UserTest extends KernelTestCase
             ->getManager();
     }
 
+    // Test id function.
     function testId(): void
     {
 
@@ -57,6 +59,7 @@ class UserTest extends KernelTestCase
         $this->assertIsInt($savedTask->getId());
     }
 
+    // Test get/set username.
     function testUsername(): void
     {
         $user = new User();
@@ -64,12 +67,14 @@ class UserTest extends KernelTestCase
         $this->assertEquals('John', $user->getUserIdentifier());
     }
 
+    // Test salt function (working security).
     function testSalt(): void
     {
         $user = new User();
         $this->assertEquals(null, $user->getSalt());
     }
 
+    // Test password managment (not encoded).
     function testPassword(): void
     {
         $user = new User();
@@ -77,6 +82,7 @@ class UserTest extends KernelTestCase
         $this->assertEquals('noencodepass', $user->getPassword());
     }
 
+    // Test mail get/set.
     function testMail(): void
     {
         $user = new User();
@@ -84,6 +90,7 @@ class UserTest extends KernelTestCase
         $this->assertEquals('email@test.com', $user->getEmail());
     }
 
+    // Test roles of user.
     function testRoles(): void
     {
         $user = new User();
@@ -91,6 +98,7 @@ class UserTest extends KernelTestCase
         $this->assertEquals(['ROLE_TEST'], $user->getRoles());
     }
 
+    // Test erase credential (working security).
     function testEraseCredentials(): void
     {
         $user = new User();

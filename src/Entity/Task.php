@@ -111,7 +111,7 @@ class Task
      * The function `setContent` in PHP sets the content of an object.
      * 
      * @param content The `setContent` function is a method that sets the content of an object to the
-     * value passed as a parameter. The parameter `` is the new content that will be assigned
+     * value passed as a parameter. The parameter `$content` is the new content that will be assigned
      * to the object's `content` property.
      */
     public function setContent($content): void

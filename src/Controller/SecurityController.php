@@ -13,9 +13,16 @@ class SecurityController extends AbstractController
 {
     #[Route('/login', name: 'login')]
     /**
-     * Login function for user on login page.
-     *
-     * @return void
+     * The loginAction function checks if the user is authenticated fully and displays login form with
+     * error message if not.
+     * 
+     * @param Request
+     * 
+     * @param AuthenticationUtils
+     * 
+     * @return If the user is not authenticated fully, the method will return a rendered view of the
+     * login form with the last username and any authentication error. If the user is already
+     * authenticated, it will redirect to the homepage.
      */
     public function loginAction(Request $request, AuthenticationUtils $authenticationUtils)
     {

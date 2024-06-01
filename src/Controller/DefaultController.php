@@ -10,9 +10,9 @@ class DefaultController extends AbstractController
 
     #[Route('/', name: 'homepage')]
     /**
-     * Default index for homepage dashboard user.
-     *
-     * @return void
+     * The index function in PHP renders the default/index.html.twig template.
+     * 
+     * @return The `index` function is returning the rendered template `default/index.html.twig`.
      */
     public function index()
     {

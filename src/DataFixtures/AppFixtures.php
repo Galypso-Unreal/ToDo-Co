@@ -33,7 +33,7 @@ class AppFixtures extends Fixture
     {
 
 
-        // Create users
+        // Create users.
         $user_anonym = new User();
         $user_anonym->setUsername('AnonymeUser');
         $user_anonym->setEmail('anonym@todo.com');
@@ -56,11 +56,11 @@ class AppFixtures extends Fixture
         $manager->persist($user_user);
         $manager->persist($user_admin);
 
-        // Create Tasks
+        // Create Tasks.
         $task1 = new Task();
         $task1->setTitle('Tâche User');
         $task1->setContent('Contenu de la tâche User');
-        $task1->setUser($user_user); // User for task
+        $task1->setUser($user_user); // User for task.
         $manager->persist($task1);
 
         $task2 = new Task();

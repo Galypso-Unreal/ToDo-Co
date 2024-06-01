@@ -12,7 +12,11 @@ use Symfony\Component\Routing\Annotation\Route;
 class SecurityController extends AbstractController
 {
     #[Route('/login', name: 'login')]
-    // Login function for user on login page.
+    /**
+     * Login function for user on login page.
+     *
+     * @return void
+     */
     public function loginAction(Request $request, AuthenticationUtils $authenticationUtils)
     {
         if ($this->isGranted("IS_AUTHENTICATED_FULLY") === false) {
@@ -32,7 +36,11 @@ class SecurityController extends AbstractController
      * @codeCoverageIgnore
      */
     #[Route('/login_check', name: 'login_check')]
-    // Code for checking if user is correctly logged.
+    /**
+     * Code for checking if user is correctly logged.
+     *
+     * @return void
+     */
     public function loginCheck(): void
     {
         // This code is never executed.
@@ -42,7 +50,11 @@ class SecurityController extends AbstractController
      * @codeCoverageIgnore
      */
     #[Route('/logout', name: 'logout')]
-    // Function for logout url user.
+    /**
+     * Function for logout url user.
+     *
+     * @return void
+     */
     public function logoutCheck(): void
     {
         // This code is never executed.

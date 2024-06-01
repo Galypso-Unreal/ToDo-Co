@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\User;
 use App\Form\UserType;
 use Doctrine\Persistence\ManagerRegistry;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
@@ -13,10 +14,26 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
 
+    private CacheItemPoolInterface $cachePool;
+
+    public function __construct(CacheItemPoolInterface $cachePool)
+    {
+        $this->cachePool = $cachePool;
+    }
+
     #[Route('/users/', name: 'user_list')]
     public function listAction(ManagerRegistry $managerRegistry)
     {
-        return $this->render('user/list.html.twig', ['users' => $managerRegistry->getRepository(User::class)->findAll()]);
+        $item = $this->cachePool->getItem('users_list');
+
+        if (!$item->isHit()) {
+            $users = $managerRegistry->getRepository(User::class)->findAll();
+            $item->set($users);
+            $this->cachePool->save($item);
+        } else {
+            $users = $item->get();
+        }
+        return $this->render('user/list.html.twig', ['users' => $users]);
     }
 
 
@@ -38,7 +55,7 @@ class UserController extends AbstractController
                 $em->flush();
 
                 $this->addFlash('success', "L'utilisateur a bien été ajouté.");
-
+                $this->cachePool->deleteItem('users_list');
                 return $this->redirectToRoute('user_list');
             }
         }
@@ -61,7 +78,7 @@ class UserController extends AbstractController
                 $managerRegistry->getManager()->flush();
 
                 $this->addFlash('success', "L'utilisateur a bien été modifié");
-
+                $this->cachePool->deleteItem('users_list');
                 return $this->redirectToRoute('user_list');
             }
         }

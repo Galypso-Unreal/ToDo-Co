@@ -22,15 +22,15 @@ class TaskControllerTest extends WebTestCase
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
 
-        // retrieve the test user
+        // retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'User']);
 
-        // simulate $testUser being logged in
+        // simulate $testUser being logged in.
         $client->loginUser($testUser);
 
         $client->request('GET', '/tasks');
 
-        // Check if 200 return
+        // Check if 200 return.
         $this->assertResponseIsSuccessful();
     }
 
@@ -40,15 +40,15 @@ class TaskControllerTest extends WebTestCase
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
 
-        // retrieve the test user
+        // retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'User']);
 
-        // simulate $testUser being logged in
+        // simulate $testUser being logged in.
         $client->loginUser($testUser);
 
         $client->request('GET', '/tasks/done');
 
-        // Check if 200 return
+        // Check if 200 return.
         $this->assertResponseIsSuccessful();
     }
 
@@ -58,18 +58,18 @@ class TaskControllerTest extends WebTestCase
         $userRepository = static::getContainer()->get(UserRepository::class);
         $cache = static::getContainer()->get(CacheInterface::class);
 
-        // retrieve the test user
+        // retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'User']);
 
-        // simulate $testUser being logged in
+        // simulate $testUser being logged in.
         $client->loginUser($testUser);
 
         $client->request('GET', '/tasks/done');
 
-        // Check if 200 return
+        // Check if 200 return.
         $this->assertResponseIsSuccessful();
 
-        // Check if the data is stored in cache
+        // Check if the data is stored in cache.
         $cachedData = $cache->get('tasks_list_done', function () {
             return null;
         });
@@ -83,10 +83,10 @@ class TaskControllerTest extends WebTestCase
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
 
-        // retrieve the test user
+        // retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'User']);
 
-        // simulate $testUser being logged in
+        // simulate $testUser being logged in.
         $client->loginUser($testUser);
 
         $crawler = $client->request('GET', '/tasks/create');
@@ -95,16 +95,16 @@ class TaskControllerTest extends WebTestCase
 
         $form = $crawler->selectButton('createTask')->form();
 
-        // Add content to form
+        // Add content to form.
         $form['task[title]'] = 'Test Task';
         $form['task[content]'] = 'This is a Test Task';
 
         $client->submit($form);
 
-        // Follow redirection
+        // Follow redirection.
         $client->followRedirect();
 
-        // Check if task has been created
+        // Check if task has been created.
         $this->assertResponseIsSuccessful();
     }
 
@@ -116,10 +116,10 @@ class TaskControllerTest extends WebTestCase
 
         $taskRepository = static::getContainer()->get(TaskRepository::class);
 
-        // retrieve the test user
+        // retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'User']);
 
-        // simulate $testUser being logged in
+        // simulate $testUser being logged in.
         $client->loginUser($testUser);
 
         $task_id = $taskRepository->findOneTaskByUser($testUser->getId())->getId();
@@ -130,16 +130,16 @@ class TaskControllerTest extends WebTestCase
 
         $form = $crawler->selectButton('modifyTask')->form();
 
-        // Add content to form
+        // Add content to form.
         $form['task[title]'] = 'Test Task modified';
         $form['task[content]'] = 'This is a Test Task modified';
 
         $client->submit($form);
 
-        // Follow redirection
+        // Follow redirection.
         $client->followRedirect();
 
-        // Check if task has been created
+        // Check if task has been created.
         $this->assertResponseIsSuccessful();
     }
 
@@ -151,13 +151,13 @@ class TaskControllerTest extends WebTestCase
 
         $taskRepository = static::getContainer()->get(TaskRepository::class);
 
-        // retrieve the test user
+        // retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'User']);
 
-        // retrieve the test user admin
+        // retrieve the test user admin.
         $testUserAdmin = $userRepository->findOneBy(['username' => 'Admin']);
 
-        // simulate $testUser being logged in
+        // simulate $testUser being logged in.
         $client->loginUser($testUser);
 
         $task = $taskRepository->findOneTaskByUser($testUserAdmin->getId());
@@ -191,12 +191,12 @@ class TaskControllerTest extends WebTestCase
 
         $taskRepository = static::getContainer()->get(TaskRepository::class);
 
-        // retrieve the test user
+        // retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'User']);
 
         $task_id = $taskRepository->findOneTaskByUser($testUser->getId())->getId();
 
-        // simulate $testUser being logged in
+        // simulate $testUser being logged in.
         $client->loginUser($testUser);
 
         $client->request('GET', '/tasks/' . $task_id . '/toggle');
@@ -216,12 +216,12 @@ class TaskControllerTest extends WebTestCase
 
         $taskRepository = static::getContainer()->get(TaskRepository::class);
 
-        // retrieve the test user
+        // retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'User']);
 
         $task_id = $taskRepository->findOneBy(['user' => $testUser->getId()])->getId();
 
-        // simulate $testUser being logged in
+        // simulate $testUser being logged in.
         $client->loginUser($testUser);
 
         $client->request('GET', '/tasks/' . $task_id . '/toggle');
@@ -253,12 +253,12 @@ class TaskControllerTest extends WebTestCase
 
         $taskRepository = static::getContainer()->get(TaskRepository::class);
 
-        // retrieve the test user
+        // retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'User']);
 
         $task_id = $taskRepository->findOneTaskByUser($testUser->getId())->getId();
 
-        // simulate $testUser being logged in
+        // simulate $testUser being logged in.
         $client->loginUser($testUser);
 
         $client->request('GET', '/tasks/' . $task_id . '/delete');
@@ -280,14 +280,14 @@ class TaskControllerTest extends WebTestCase
 
         $taskRepository = static::getContainer()->get(TaskRepository::class);
 
-        // retrieve the test user
+        // retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'User']);
 
         $testUserWrong = $userRepository->findOneBy(['username' => 'Admin']);
 
         $task_id = $taskRepository->findOneTaskByUser($testUser->getId())->getId();
 
-        // simulate $testUser being logged in
+        // simulate $testUser being logged in.
         $client->loginUser($testUserWrong);
 
         $client->request('GET', '/tasks/' . $task_id . '/delete');

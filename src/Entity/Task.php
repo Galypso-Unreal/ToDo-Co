@@ -83,7 +83,7 @@ class Task
         $this->isDone = $flag;
     }
 
-    /* Add get / set function user */
+    // Add get / set function user.
 
     public function getUser()
     {

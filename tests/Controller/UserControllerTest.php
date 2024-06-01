@@ -29,10 +29,10 @@ class UserControllerTest extends WebTestCase
 
         $userRepository = static::getContainer()->get(UserRepository::class);
 
-        // retrieve the test user
+        // retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'Admin']);
 
-        // simulate $testUser being logged in
+        // simulate $testUser being logged in.
         $client->loginUser($testUser);
 
         $client->request('GET', '/users/');
@@ -45,10 +45,10 @@ class UserControllerTest extends WebTestCase
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
 
-        // retrieve the test user
+        // retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'Admin']);
 
-        // simulate $testUser being logged in
+        // simulate $testUser being logged in.
         $client->loginUser($testUser);
 
         $client->request('GET', '/users/');
@@ -61,10 +61,10 @@ class UserControllerTest extends WebTestCase
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
 
-        // retrieve the test user
+        // retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'Admin']);
 
-        // simulate $testUser being logged in
+        // simulate $testUser being logged in.
         $client->loginUser($testUser);
 
         $client->request('GET', '/users/create');
@@ -77,10 +77,10 @@ class UserControllerTest extends WebTestCase
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
 
-        // retrieve the test user
+        // retrieve the test user.
         $user = $userRepository->findOneBy(['username' => 'Admin']);
 
-        // simulate $testUser being logged in
+        // simulate $testUser being logged in.
         $client->loginUser($user);
 
         $testUser = $userRepository->findOneBy(['username' => 'AnonymeUser']);
@@ -96,13 +96,13 @@ class UserControllerTest extends WebTestCase
         $form['user[password][first]'] = 'password123';
         $form['user[password][second]'] = 'password123';
 
-        // Submit form
+        // Submit form.
         $client->submit($form);
 
-        // Follow redirection
+        // Follow redirection.
         $client->followRedirect();
 
-        // Check if user has been created
+        // Check if user has been created.
         $this->assertResponseIsSuccessful();
     }
 }

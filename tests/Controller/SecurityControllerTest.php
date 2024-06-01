@@ -23,10 +23,10 @@ class SecurityControllerTest extends WebTestCase
         $userRepository = static::getContainer()->get(UserRepository::class);
 
 
-        // retrieve the test user
+        // retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'User']);
 
-        // simulate $testUser being logged in
+        // simulate $testUser being logged in.
         $client->loginUser($testUser);
 
         $client->request('GET', '/login');
@@ -55,7 +55,7 @@ class SecurityControllerTest extends WebTestCase
 
         $client->followRedirect();
 
-        // Check if on page homepage
+        // Check if on page homepage.
         $this->assertRouteSame('homepage');
 
         $this->assertResponseIsSuccessful();
@@ -67,19 +67,19 @@ class SecurityControllerTest extends WebTestCase
         $userRepository = static::getContainer()->get(UserRepository::class);
 
 
-        // retrieve the test user
+        // retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'User']);
 
-        // simulate $testUser being logged in
+        // simulate $testUser being logged in.
         $client->loginUser($testUser);
 
-        // Disconnect
+        // Disconnect.
         $client->request('GET', '/logout');
 
-        // Follow redirect
+        // Follow redirect.
         $client->followRedirect();
 
-        // Check if on page login
+        // Check if on page login.
         $this->assertRouteSame('login');
 
         $this->assertResponseIsSuccessful();

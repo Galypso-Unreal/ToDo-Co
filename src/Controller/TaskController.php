@@ -66,7 +66,7 @@ class TaskController extends AbstractController
             if ($form->isValid()) {
                 $em = $managerRegistry->getManager();
 
-                /* Check if user exist and add this user to the task*/
+                // Check if user exist and add this user to the task.
 
                 if ($this->getUser()->getId()) {
                     $user_id = $this->getUser();

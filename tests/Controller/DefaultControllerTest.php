@@ -12,10 +12,10 @@ class DefaultControllerTest extends WebTestCase
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
 
-        // retrieve the test user
+        // retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'User']);
 
-        // simulate $testUser being logged in
+        // simulate $testUser being logged in.
         $client->loginUser($testUser);
 
         $client->request('GET', '/');

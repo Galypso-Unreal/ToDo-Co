@@ -19,5 +19,5 @@ class UserRepository extends ServiceEntityRepository
         parent::__construct($registry, User::class);
     }
 
-    // Ajouter des méthodes personnalisées ici si nécessaire
+    // Ajouter des méthodes personnalisées ici si nécessaire.
 }

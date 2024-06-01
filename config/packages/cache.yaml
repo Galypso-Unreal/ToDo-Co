@@ -1,5 +1,16 @@
 framework:
     cache:
+        # Utiliser le système de fichiers pour le cache d'application
+        app: cache.adapter.filesystem
+
+        # Utiliser le système de fichiers pour le cache système
+        system: cache.adapter.filesystem
+
+        # Définir des pools de cache si nécessaire
+        pools:
+            cache.my_custom_pool:
+                adapter: cache.adapter.filesystem
+                default_lifetime: 3600
         # Unique name of your app: used to compute stable namespaces for cache keys.
         #prefix_seed: your_vendor_name/app_name
 

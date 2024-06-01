@@ -2,9 +2,17 @@
 
 namespace App\Tests\Controller;
 
+use App\Controller\TaskController;
+use App\Entity\Task;
 use App\Repository\TaskRepository;
 use App\Repository\UserRepository;
+use Doctrine\Persistence\ManagerRegistry;
+use Psr\Cache\CacheItemInterface;
+use Psr\Cache\CacheItemPoolInterface;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
+use Symfony\Component\BrowserKit\Response;
+use Symfony\Contracts\Cache\CacheInterface;
+use Twig\Environment;
 
 class TaskControllerTest extends WebTestCase
 {
@@ -26,7 +34,7 @@ class TaskControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
     }
 
-    public function testListDoneAction()
+    public function testlistActionDone()
     {
 
         $client = static::createClient();
@@ -42,6 +50,31 @@ class TaskControllerTest extends WebTestCase
 
         // Check if 200 return
         $this->assertResponseIsSuccessful();
+    }
+
+    public function testListDoneActionCache(){
+        $client = static::createClient();
+        $userRepository = static::getContainer()->get(UserRepository::class);
+        $cache = static::getContainer()->get(CacheInterface::class);
+
+        // retrieve the test user
+        $testUser = $userRepository->findOneBy(['username' => 'User']);
+
+        // simulate $testUser being logged in
+        $client->loginUser($testUser);
+
+        $client->request('GET', '/tasks/done');
+
+        // Check if 200 return
+        $this->assertResponseIsSuccessful();
+
+        // Check if the data is stored in cache
+        $cachedData = $cache->get('tasks_list_done', function () {
+            return null;
+        });
+
+        $this->assertNotNull($cachedData, 'Cached data should not be null');
+        $this->assertIsArray($cachedData, 'Cached data should be an array');
     }
 
     public function testCreateAction(): void

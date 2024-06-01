@@ -1,4 +1,5 @@
-<?php 
+<?php
+
 namespace App\DataFixtures;
 
 
@@ -54,29 +55,29 @@ class AppFixtures extends Fixture
         $manager->persist($user_anonym);
         $manager->persist($user_user);
         $manager->persist($user_admin);
-        
+
         // Create Tasks
         $task1 = new Task();
         $task1->setTitle('Tâche User');
         $task1->setContent('Contenu de la tâche User');
         $task1->setUser($user_user); // User for task
         $manager->persist($task1);
-        
+
         $task2 = new Task();
         $task2->setTitle('Tâche Admin');
         $task2->setContent('Contenu de la tâche Admin');
         $task2->setUser($user_admin);
         $manager->persist($task2);
 
-        for ($i=0; $i < 10; $i++) { 
+        for ($i = 0; $i < 10; $i++) {
             $task = new Task();
-            $task->setTitle('Tâche '.$i);
-            $task->setContent('Contenu de la tâche '.$i);
+            $task->setTitle('Tâche ' . $i);
+            $task->setContent('Contenu de la tâche ' . $i);
             $task->setUser($user_anonym);
             $manager->persist($task);
         }
-        
-        
+
+
         $manager->flush();
     }
 }

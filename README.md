@@ -1,4 +1,5 @@
 # Projet Symfony 6.4.7 - README
+
 ## Prérequis technologiques
 
 PHP : Version minimale 8.2
@@ -20,42 +21,43 @@ Pour installer Symfony CLI, vous pouvez suivre les instructions [ici](https://sy
 
 Clonez le projet depuis le dépôt Git :
 
-```git clone https://github.com/Galypso-Unreal/ToDo-Co.git```
+`git clone https://github.com/Galypso-Unreal/ToDo-Co.git`
 
 ## Configuration de l'environnement
 
 Créez un fichier .env.local en copiant le fichier .env fourni :
 
-```cp .env .env.local```
+`cp .env .env.local`
 
 Modifiez le fichier .env.local pour y inclure vos paramètres spécifiques, notamment la connexion à la base de données et le secret token :
 
-```DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name"```
-```APP_SECRET="votre_secret_token"```
+`DATABASE_URL="mysql://db_user:db_password@127.0.0.1:3306/db_name"`
+`APP_SECRET="votre_secret_token"`
 
 ## Installation des dépendances
 
 Installez les dépendances PHP du projet avec Composer :
 
-```composer install```
+`composer install`
 
 ## Mise en place de la base de données
 
 Créez la base de données et exécutez les migrations :
 
-```php bin/console doctrine:database:create```
-```php bin/console doctrine:migrations:migrate```
+`php bin/console doctrine:database:create`
+`php bin/console doctrine:migrations:migrate`
 
 ## Installation des fixtures (données de test)
 
 Pour utiliser des fixtures pour peupler la base de données avec des données de test, exécutez la commande suivante :
 
-```php bin/console doctrine:fixtures:load```
+`php bin/console doctrine:fixtures:load`
 
 ## Tests avec PHPUnit
+
 Si vous voulez exécuter tests unitaires, assurez-vous d'avoir PHPUnit installé et exécutez les tests avec :
 
-```vendor/bin/phpunit```
+`vendor/bin/phpunit`
 
 ## Contribuer au projet
 
@@ -69,8 +71,7 @@ Pour plus d'informations sur la façon d'utiliser Symfony, consultez la document
 
 Serveur de développement : Vous pouvez lancer un serveur de développement local en utilisant la commande :
 
-```symfony serve```
-
+`symfony serve`
 
 Variables d'environnement supplémentaires : Ajoutez toute autre configuration nécessaire dans votre fichier .env.local.
 

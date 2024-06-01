@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 namespace App\Tests\Entity;
@@ -10,9 +10,11 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class TaskRepositoryTest extends KernelTestCase{
+class TaskRepositoryTest extends KernelTestCase
+{
 
-    function testFindTasksByUser(): void{
+    function testFindTasksByUser(): void
+    {
 
         $userRepository = static::getContainer()->get(UserRepository::class);
 
@@ -25,5 +27,4 @@ class TaskRepositoryTest extends KernelTestCase{
 
         $this->assertNotNull($tasks);
     }
-
 }

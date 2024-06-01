@@ -1,4 +1,4 @@
 doctrine:
-    dbal:
-        driver: 'pdo_mysql'
-        url: '%env(resolve:DATABASE_URL)%'
+  dbal:
+    driver: "pdo_mysql"
+    url: "%env(resolve:DATABASE_URL)%"

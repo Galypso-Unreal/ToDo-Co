@@ -14,7 +14,7 @@ class SecurityController extends AbstractController
     #[Route('/login', name: 'login')]
     public function loginAction(Request $request, AuthenticationUtils $authenticationUtils)
     {
-        if($this->isGranted("IS_AUTHENTICATED_FULLY") === false){
+        if ($this->isGranted("IS_AUTHENTICATED_FULLY") === false) {
             $error = $authenticationUtils->getLastAuthenticationError();
             $lastUsername = $authenticationUtils->getLastUsername();
 
@@ -22,16 +22,14 @@ class SecurityController extends AbstractController
                 'last_username' => $lastUsername,
                 'error'         => $error,
             ));
-        }
-        else{
+        } else {
             return $this->redirectToRoute("homepage");
         }
-        
     }
 
     /**
- * @codeCoverageIgnore
- */
+     * @codeCoverageIgnore
+     */
     #[Route('/login_check', name: 'login_check')]
     public function loginCheck(): void
     {
@@ -39,8 +37,8 @@ class SecurityController extends AbstractController
     }
 
     /**
- * @codeCoverageIgnore
- */
+     * @codeCoverageIgnore
+     */
     #[Route('/logout', name: 'logout')]
     public function logoutCheck(): void
     {

@@ -12,7 +12,7 @@ class SecurityControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/login');
+        $client->request('GET', '/login');
 
         $this->assertResponseIsSuccessful();
     }
@@ -21,7 +21,7 @@ class SecurityControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
-        
+
 
         // retrieve the test user
         $testUser = $userRepository->findOneBy(['username' => 'User']);
@@ -29,7 +29,7 @@ class SecurityControllerTest extends WebTestCase
         // simulate $testUser being logged in
         $client->loginUser($testUser);
 
-        $crawler = $client->request('GET', '/login');
+        $client->request('GET', '/login');
 
         $client->followRedirect();
 
@@ -37,7 +37,7 @@ class SecurityControllerTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
     }
-    
+
 
     public function testLoginFormSubmission(): void
     {
@@ -65,7 +65,7 @@ class SecurityControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
-        
+
 
         // retrieve the test user
         $testUser = $userRepository->findOneBy(['username' => 'User']);
@@ -84,5 +84,4 @@ class SecurityControllerTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
     }
-    
 }

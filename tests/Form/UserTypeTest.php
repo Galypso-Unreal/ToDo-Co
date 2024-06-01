@@ -32,7 +32,7 @@ class UserTypeTest extends WebTestCase
 
         // simulate $testUser being logged in
         $client->loginUser($testUser);
-        
+
         // Go to the page create user
         $crawler = $client->request('GET', '/users/create');
 
@@ -49,7 +49,7 @@ class UserTypeTest extends WebTestCase
         }
 
         // Select form
-        
+
         $form = $crawler->selectButton('addUser')->form();
 
         // Add content to form
@@ -68,5 +68,4 @@ class UserTypeTest extends WebTestCase
         // Check if user has been created
         $this->assertResponseIsSuccessful();
     }
-
 }

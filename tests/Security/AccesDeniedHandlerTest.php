@@ -12,7 +12,7 @@ class AccesDeniedHandlerTest extends WebTestCase
     {
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
-        
+
 
         // retrieve the test user
         $testUser = $userRepository->findOneBy(['username' => 'User']);
@@ -20,7 +20,7 @@ class AccesDeniedHandlerTest extends WebTestCase
         // simulate $testUser being logged in
         $client->loginUser($testUser);
 
-        $crawler = $client->request('GET', '/users');
+        $client->request('GET', '/users');
 
         $flashMessages = $client->getRequest()->getSession()->getFlashBag()->get('error');
 
@@ -32,7 +32,7 @@ class AccesDeniedHandlerTest extends WebTestCase
             }
         }
 
-        $this->assertEquals(true,$containsText);
+        $this->assertEquals(true, $containsText);
 
         $client->followRedirect();
 

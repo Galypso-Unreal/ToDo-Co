@@ -9,7 +9,6 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class UserControllerTest extends WebTestCase
 {
-    private ?EntityManagerInterface $entityManager = null;
 
     public function testListAction(): void
     {
@@ -88,7 +87,7 @@ class UserControllerTest extends WebTestCase
 
         $id = $testUser->getId();
 
-        $crawler = $client->request('GET', '/users/'.$id.'/edit');
+        $crawler = $client->request('GET', '/users/' . $id . '/edit');
 
         $form = $crawler->selectButton('modifyUser')->form();
 

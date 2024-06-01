@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 namespace App\Tests\Entity;
@@ -9,7 +9,8 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class UserTest extends KernelTestCase{
+class UserTest extends KernelTestCase
+{
 
     private ?EntityManagerInterface $entityManager = null;
 
@@ -22,7 +23,8 @@ class UserTest extends KernelTestCase{
             ->getManager();
     }
 
-    function testId(): void{
+    function testId(): void
+    {
 
 
         $userRepository = static::getContainer()->get(UserRepository::class);
@@ -41,53 +43,57 @@ class UserTest extends KernelTestCase{
         $user->setPassword('noencodepass');
         $user->setEmail('test-user@gmail.com');
         $user->setUsername('test-user-phpunit');
- 
+
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
- 
+
         // Get task from database
         $taskRepository = $this->entityManager->getRepository(User::class);
         $savedTask = $taskRepository->find($user->getId());
- 
+
         // Check if id is correct
         $this->assertNotNull($savedTask);
         $this->assertIsInt($savedTask->getId());
-     }
+    }
 
-    function testUsername(): void{
+    function testUsername(): void
+    {
         $user = new User();
         $user->setUsername('John');
-        $this->assertEquals('John',$user->getUserIdentifier());
+        $this->assertEquals('John', $user->getUserIdentifier());
     }
 
-    function testSalt(): void{
+    function testSalt(): void
+    {
         $user = new User();
-        $this->assertEquals(null,$user->getSalt());
+        $this->assertEquals(null, $user->getSalt());
     }
 
-    function testPassword(): void{
+    function testPassword(): void
+    {
         $user = new User();
         $user->setPassword('noencodepass');
-        $this->assertEquals('noencodepass',$user->getPassword());
+        $this->assertEquals('noencodepass', $user->getPassword());
     }
 
-    function testMail(): void{
+    function testMail(): void
+    {
         $user = new User();
         $user->setEmail('email@test.com');
-        $this->assertEquals('email@test.com',$user->getEmail());
+        $this->assertEquals('email@test.com', $user->getEmail());
     }
 
-    function testRoles(): void{
+    function testRoles(): void
+    {
         $user = new User();
         $user->setRoles(['ROLE_TEST']);
-        $this->assertEquals(['ROLE_TEST'],$user->getRoles());
+        $this->assertEquals(['ROLE_TEST'], $user->getRoles());
     }
 
-    function testEraseCredentials(): void{
+    function testEraseCredentials(): void
+    {
         $user = new User();
         $this->assertEmpty($user->eraseCredentials());
-    }   
-
-
+    }
 }

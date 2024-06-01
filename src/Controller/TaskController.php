@@ -23,7 +23,7 @@ class TaskController extends AbstractController
 
     #[Route('/tasks', name: 'task_list')]
     public function listAction(ManagerRegistry $managerRegistry)
-    {   
+    {
         $item = $this->cachePool->getItem('tasks_list');
 
         if (!$item->isHit()) {
@@ -34,7 +34,6 @@ class TaskController extends AbstractController
             $tasks = $item->get();
         }
         return $this->render('task/list.html.twig', ['tasks' => $tasks]);
-        
     }
 
     #[Route('/tasks/done', name: 'task_list_done')]
@@ -43,14 +42,13 @@ class TaskController extends AbstractController
         $item = $this->cachePool->getItem('tasks_list_done');
 
         if (!$item->isHit()) {
-            $tasks = $managerRegistry->getRepository(Task::class)->findBy(["isDone"=>"1"]);
+            $tasks = $managerRegistry->getRepository(Task::class)->findBy(["isDone" => "1"]);
             $item->set($tasks);
             $this->cachePool->save($item);
         } else {
             $tasks = $item->get();
         }
         return $this->render('task/list.html.twig', ['tasks' => $tasks]);
-        
     }
 
 
@@ -59,7 +57,7 @@ class TaskController extends AbstractController
     {
 
         $task = new Task();
-        
+
         $form = $this->createForm(TaskType::class, $task);
 
         $form->handleRequest($request);
@@ -91,8 +89,8 @@ class TaskController extends AbstractController
     #[Route('/tasks/{id}/edit', name: 'task_edit')]
     public function editAction(Task $task, Request $request, ManagerRegistry $managerRegistry)
     {
-        
-        if($this->getUser() === $task->getUser()){
+
+        if ($this->getUser() === $task->getUser()) {
             $form = $this->createForm(TaskType::class, $task);
 
             $form->handleRequest($request);
@@ -112,12 +110,10 @@ class TaskController extends AbstractController
                 'form' => $form->createView(),
                 'task' => $task,
             ]);
-        }
-        else{
+        } else {
             $this->addFlash('error', sprintf('La tâche %s ne peux pas être modifier par un autre utilisateur', $task->getTitle()));
             return $this->redirectToRoute('task_list');
         }
-        
     }
 
     #[Route('/tasks/{id}/toggle', name: 'task_toggle')]
@@ -128,10 +124,9 @@ class TaskController extends AbstractController
         $this->cachePool->deleteItem('tasks_list');
         $this->cachePool->deleteItem('tasks_list_done');
 
-        if($task->isDone() == true){
+        if ($task->isDone() == true) {
             $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
-        }
-        else{
+        } else {
             $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme non faite.', $task->getTitle()));
         }
 

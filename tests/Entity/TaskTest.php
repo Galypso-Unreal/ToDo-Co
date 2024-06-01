@@ -8,7 +8,8 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class TaskTest extends KernelTestCase{
+class TaskTest extends KernelTestCase
+{
 
     private ?EntityManagerInterface $entityManager = null;
 
@@ -21,57 +22,64 @@ class TaskTest extends KernelTestCase{
             ->getManager();
     }
 
-    function testConstruct(): void{
+    function testConstruct(): void
+    {
         $task = new Task();
-        $this->assertEquals(false,$task->isDone());
+        $this->assertEquals(false, $task->isDone());
         $this->assertNotNull($task);
     }
 
-    function testId(): void{
-       // Create new task
-       $task = new Task();
-       $task->setTitle('Test Task');
-       $task->setContent('This is a test task description.');
+    function testId(): void
+    {
+        // Create new task
+        $task = new Task();
+        $task->setTitle('Test Task');
+        $task->setContent('This is a test task description.');
 
-       // Save task in database
-       $this->entityManager->persist($task);
-       $this->entityManager->flush();
+        // Save task in database
+        $this->entityManager->persist($task);
+        $this->entityManager->flush();
 
-       // Get task from database
-       $taskRepository = $this->entityManager->getRepository(Task::class);
-       $savedTask = $taskRepository->find($task->getId());
+        // Get task from database
+        $taskRepository = $this->entityManager->getRepository(Task::class);
+        $savedTask = $taskRepository->find($task->getId());
 
-       // Check if id is correct
-       $this->assertNotNull($savedTask);
-       $this->assertIsInt($savedTask->getId());
+        // Check if id is correct
+        $this->assertNotNull($savedTask);
+        $this->assertIsInt($savedTask->getId());
     }
 
-    function testCreatedAt(): void{
+    function testCreatedAt(): void
+    {
         $task = new Task();
         $date = new DateTime('2022-07-03 04:53:53');
         $task->setCreatedAt($date);
-        $this->assertEquals(new DateTime('2022-07-03 04:53:53'),$task->getCreatedAt());
+        $this->assertEquals(new DateTime('2022-07-03 04:53:53'), $task->getCreatedAt());
     }
 
-    function testTitle(): void{
+    function testTitle(): void
+    {
         $task = new Task();
         $task->setTitle('here');
-        $this->assertEquals('here',$task->getTitle());
+        $this->assertEquals('here', $task->getTitle());
     }
 
-    function testContent(): void{
+    function testContent(): void
+    {
         $task = new Task();
         $task->setContent('testContent');
-        $this->assertEquals('testContent',$task->getContent());
+        $this->assertEquals('testContent', $task->getContent());
     }
 
-    function testIsDone(): void{
+    function testIsDone(): void
+    {
         $task = new Task();
         $task->toggle(true);
-        $this->assertEquals(true,$task->isDone());
+        $this->assertEquals(true, $task->isDone());
     }
 
-    function testUser(): void{
+    function testUser(): void
+    {
         $user = new User();
         $user->setUsername('john');
         $user->setEmail('john@gmail.com');
@@ -79,7 +87,6 @@ class TaskTest extends KernelTestCase{
 
         $task = new Task();
         $task->setUser($user);
-        $this->assertEquals($user,$task->getUser());
+        $this->assertEquals($user, $task->getUser());
     }
-
 }

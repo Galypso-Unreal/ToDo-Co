@@ -15,7 +15,7 @@ class TaskTypeTest extends WebTestCase
     {
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
-        
+
 
         // retrieve the test user
         $testUser = $userRepository->findOneBy(['username' => 'User']);
@@ -30,7 +30,7 @@ class TaskTypeTest extends WebTestCase
         $this->assertResponseIsSuccessful();
 
         // Select form
-        
+
         $form = $crawler->selectButton('createTask')->form();
 
         // Add content to form
@@ -45,5 +45,4 @@ class TaskTypeTest extends WebTestCase
         // Check if task has been created
         $this->assertResponseIsSuccessful();
     }
-
 }

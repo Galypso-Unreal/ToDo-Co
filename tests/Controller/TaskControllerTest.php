@@ -52,7 +52,8 @@ class TaskControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
     }
 
-    public function testListDoneActionCache(){
+    public function testListDoneActionCache()
+    {
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
         $cache = static::getContainer()->get(CacheInterface::class);
@@ -123,7 +124,7 @@ class TaskControllerTest extends WebTestCase
 
         $task_id = $taskRepository->findOneTaskByUser($testUser->getId())->getId();
 
-        $crawler = $client->request('GET', '/tasks/'.$task_id.'/edit');
+        $crawler = $client->request('GET', '/tasks/' . $task_id . '/edit');
 
         $this->assertResponseIsSuccessful();
 
@@ -161,7 +162,7 @@ class TaskControllerTest extends WebTestCase
 
         $task = $taskRepository->findOneTaskByUser($testUserAdmin->getId());
 
-        $client->request('GET', '/tasks/'.$task->getId().'/edit');
+        $client->request('GET', '/tasks/' . $task->getId() . '/edit');
 
         $flashMessages = $client->getRequest()->getSession()->getFlashBag()->get('error');
 
@@ -173,14 +174,13 @@ class TaskControllerTest extends WebTestCase
             }
         }
 
-        $this->assertEquals(true,$containsText);
+        $this->assertEquals(true, $containsText);
 
         $client->followRedirect();
 
         $this->assertRouteSame('task_list');
 
         $this->assertResponseIsSuccessful();
-
     }
 
     public function testToggleTaskAction(): void
@@ -199,7 +199,7 @@ class TaskControllerTest extends WebTestCase
         // simulate $testUser being logged in
         $client->loginUser($testUser);
 
-        $client->request('GET', '/tasks/'.$task_id.'/toggle');
+        $client->request('GET', '/tasks/' . $task_id . '/toggle');
 
         $client->followRedirect();
 
@@ -224,7 +224,7 @@ class TaskControllerTest extends WebTestCase
         // simulate $testUser being logged in
         $client->loginUser($testUser);
 
-        $client->request('GET', '/tasks/'.$task_id.'/toggle');
+        $client->request('GET', '/tasks/' . $task_id . '/toggle');
 
         $flashMessages = $client->getRequest()->getSession()->getFlashBag()->get('success');
 
@@ -236,7 +236,7 @@ class TaskControllerTest extends WebTestCase
             }
         }
 
-        $this->assertEquals(true,$containsText);
+        $this->assertEquals(true, $containsText);
 
         $client->followRedirect();
 
@@ -261,7 +261,7 @@ class TaskControllerTest extends WebTestCase
         // simulate $testUser being logged in
         $client->loginUser($testUser);
 
-        $client->request('GET', '/tasks/'.$task_id.'/delete');
+        $client->request('GET', '/tasks/' . $task_id . '/delete');
 
         $this->assertTrue($client->getRequest()->getSession()->getFlashBag()->has('success'));
 
@@ -290,7 +290,7 @@ class TaskControllerTest extends WebTestCase
         // simulate $testUser being logged in
         $client->loginUser($testUserWrong);
 
-        $client->request('GET', '/tasks/'.$task_id.'/delete');
+        $client->request('GET', '/tasks/' . $task_id . '/delete');
 
         $this->assertTrue($client->getRequest()->getSession()->getFlashBag()->has('error'));
 

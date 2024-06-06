@@ -14,7 +14,7 @@ class TaskRepositoryTest extends KernelTestCase
 {
 
     // Test if tasksByUser function get one task by user.
-    function testFindTasksByUser(): void
+    public function testFindTasksByUser(): void
     {
 
         $userRepository = static::getContainer()->get(UserRepository::class);

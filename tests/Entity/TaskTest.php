@@ -25,7 +25,7 @@ class TaskTest extends KernelTestCase
     }// End setUp().
 
     // Test if construct work.
-    function testConstruct(): void
+    public function testConstruct(): void
     {
         $task = new Task();
         $this->assertEquals(false, $task->isDone());
@@ -34,7 +34,7 @@ class TaskTest extends KernelTestCase
     }// End testConstruct().
 
     // Test if get id function work.
-    function testId(): void
+    public function testId(): void
     {
         // Create new task.
         $task = new Task();
@@ -56,7 +56,7 @@ class TaskTest extends KernelTestCase
     }// End testId().
 
     // Test if created at work.
-    function testCreatedAt(): void
+    public function testCreatedAt(): void
     {
         $task = new Task();
         $date = new DateTime('2022-07-03 04:53:53');
@@ -66,7 +66,7 @@ class TaskTest extends KernelTestCase
     }// End testCreatedAt().
 
     // Test set title.
-    function testTitle(): void
+    public function testTitle(): void
     {
         $task = new Task();
         $task->setTitle('here');
@@ -75,7 +75,7 @@ class TaskTest extends KernelTestCase
     }// End testTitle().
 
     // Test set content.
-    function testContent(): void
+    public function testContent(): void
     {
         $task = new Task();
         $task->setContent('testContent');
@@ -84,7 +84,7 @@ class TaskTest extends KernelTestCase
     }// End testContent().
 
     // Test isDone function work.
-    function testIsDone(): void
+    public function testIsDone(): void
     {
         $task = new Task();
         $task->toggle(true);
@@ -93,7 +93,7 @@ class TaskTest extends KernelTestCase
     }// End testIsDone().
 
     // Test linked user to a task.
-    function testUser(): void
+    public function testUser(): void
     {
         $user = new User();
         $user->setUsername('john');

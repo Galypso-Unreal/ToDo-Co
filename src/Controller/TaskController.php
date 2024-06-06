@@ -14,6 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TaskController extends AbstractController
 {
+    // Cache interface system cache
     private CacheItemPoolInterface $cachePool;
 
     /**

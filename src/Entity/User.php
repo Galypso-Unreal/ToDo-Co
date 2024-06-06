@@ -47,8 +47,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
-    }
-    // End __construct().
+
+    }// End __construct().
 
     /**
      * This PHP function returns the value of the "id" property of the object.
@@ -58,8 +58,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getId()
     {
         return $this->id;
-    }
-    // End getId().
+
+    }// End getId().
 
     /**
      * This PHP function returns the username as the user identifier.
@@ -69,8 +69,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUserIdentifier(): string
     {
         return $this->username;
-    }
-    // End getUserIdentifier().
+
+    }// End getUserIdentifier().
 
     /**
      * This PHP function returns the username associated with the current object.
@@ -80,8 +80,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getUsername()
     {
         return $this->username;
-    }
-    // End getUsername().
+
+    }// End getUsername().
 
     /**
      * The function `setUsername` in PHP sets the username property of an object.
@@ -92,8 +92,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setUsername($username): void
     {
         $this->username = $username;
-    }
-    // End setUsername().
+
+    }// End setUsername().
 
     /**
      * The getSalt function in PHP returns a nullable string value.
@@ -103,8 +103,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getSalt(): ?string
     {
         return null;
-    }
-    // End getSalt().
+
+    }// End getSalt().
 
     /**
      * This PHP function returns the password value as a nullable string.
@@ -115,8 +115,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getPassword(): ?string
     {
         return $this->password;
-    }
-    // End getPassword().
+
+    }// End getPassword().
 
     /**
      * The function `setPassword` in PHP sets the password for an object.
@@ -128,8 +128,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setPassword($password): void
     {
         $this->password = $password;
-    }
-    // End setPassword().
+
+    }// End setPassword().
 
     /**
      * This PHP function named getEmail returns the email property of the object it is called on.
@@ -139,8 +139,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function getEmail()
     {
         return $this->email;
-    }
-    // End getEmail().
+
+    }// End getEmail().
 
     /**
      * The setEmail function in PHP sets the email property of an object.
@@ -153,8 +153,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setEmail($email): void
     {
         $this->email = $email;
-    }
-    // End setEmail().
+
+    }// End setEmail().
 
     /**
      * This PHP function named getRoles returns an array of roles.
@@ -167,8 +167,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         $roles = $this->roles;
 
         return $roles;
-    }
-    // End getRoles().
+
+    }// End getRoles().
 
     /**
      * The function `setRoles` in PHP sets the roles of an object based on the provided array.
@@ -179,8 +179,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
-    }
-    // End setRoles().
+        
+    }// End setRoles().
 
     /**
      * The eraseCredentials function in PHP is used to remove sensitive data from the user's
@@ -190,6 +190,5 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      */
     public function eraseCredentials(): void
     {
-    }
-    // End eraseCredentials().
+    }// End eraseCredentials().
 }

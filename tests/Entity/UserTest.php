@@ -22,8 +22,8 @@ class UserTest extends KernelTestCase
         $this->entityManager = $kernel->getContainer()
             ->get('doctrine')
             ->getManager();
-    }
-    // End setUp().
+
+    }// End setUp().
 
     // Test id function.
     function testId(): void
@@ -58,8 +58,8 @@ class UserTest extends KernelTestCase
         // Check if id is correct.
         $this->assertNotNull($savedTask);
         $this->assertIsInt($savedTask->getId());
-    }
-    // End testId().
+
+    }// End testId().
 
     // Test get/set username.
     function testUsername(): void
@@ -67,16 +67,16 @@ class UserTest extends KernelTestCase
         $user = new User();
         $user->setUsername('John');
         $this->assertEquals('John', $user->getUserIdentifier());
-    }
-    // End testUsername().
+
+    }// End testUsername().
 
     // Test salt function (working security).
     function testSalt(): void
     {
         $user = new User();
         $this->assertEquals(null, $user->getSalt());
-    }
-    // End testSalt().
+
+    }// End testSalt().
 
     // Test password managment (not encoded).
     function testPassword(): void
@@ -84,8 +84,8 @@ class UserTest extends KernelTestCase
         $user = new User();
         $user->setPassword('noencodepass');
         $this->assertEquals('noencodepass', $user->getPassword());
-    }
-    // End testPassword().
+
+    }// End testPassword().
 
     // Test mail get/set.
     function testMail(): void
@@ -93,8 +93,8 @@ class UserTest extends KernelTestCase
         $user = new User();
         $user->setEmail('email@test.com');
         $this->assertEquals('email@test.com', $user->getEmail());
-    }
-    // End testMail().
+
+    }// End testMail().
 
     // Test roles of user.
     function testRoles(): void
@@ -102,14 +102,14 @@ class UserTest extends KernelTestCase
         $user = new User();
         $user->setRoles(['ROLE_TEST']);
         $this->assertEquals(['ROLE_TEST'], $user->getRoles());
-    }
-    // End testRoles().
+
+    }// End testRoles().
 
     // Test erase credential (working security).
     function testEraseCredentials(): void
     {
         $user = new User();
         $this->assertEmpty($user->eraseCredentials());
-    }
-    // End testEraseCredentials().
+        
+    }// End testEraseCredentials().
 }

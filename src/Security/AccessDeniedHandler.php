@@ -21,8 +21,7 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
         private UrlGeneratorInterface $urlGenerator,
         private Security $security,
     ) {
-    }
-    // End __construct().
+    }// End __construct().
 
     /**
      * The function checks if the user is fully authenticated and not an admin, then adds an error
@@ -46,6 +45,6 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
             $request->getSession()->getFlashBag()->add('error', 'Vous devez être administrateur pour accéder à cette page.');
         }
         return new RedirectResponse($this->urlGenerator->generate('login'));
-    }
-    // End handle().
+        
+    }// End handle().
 }

@@ -27,8 +27,8 @@ class UserController extends AbstractController
     public function __construct(CacheItemPoolInterface $cachePool)
     {
         $this->cachePool = $cachePool;
-    }
-    // End __construct().
+
+    }// End __construct().
 
     #[Route('/users/', name: 'user_list')]
     /**
@@ -53,8 +53,8 @@ class UserController extends AbstractController
             $users = $item->get();
         }
         return $this->render('user/list.html.twig', ['users' => $users]);
-    }
-    // End listAction().
+
+    }// End listAction().
 
 
     #[Route('/users/create', name: 'user_create')]
@@ -96,8 +96,8 @@ class UserController extends AbstractController
         }
 
         return $this->render('user/create.html.twig', ['form' => $form->createView()]);
-    }
-    // End createAction().
+
+    }// End createAction().
 
     #[Route('/users/{id}/edit', name: 'user_edit')]
     /**
@@ -137,6 +137,6 @@ class UserController extends AbstractController
         }
 
         return $this->render('user/edit.html.twig', ['form' => $form->createView(), 'user' => $user]);
-    }
-    // End editAction().
+        
+    }// End editAction().
 }

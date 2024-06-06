@@ -22,8 +22,8 @@ class UserControllerTest extends WebTestCase
         $this->assertRouteSame('login');
 
         $this->assertResponseIsSuccessful();
-    }
-    // End testListAction().
+
+    }// End testListAction().
 
     // Test if get users not work if not admin.
     public function testListActionAsUser(): void
@@ -41,8 +41,8 @@ class UserControllerTest extends WebTestCase
         $client->request('GET', '/users/');
 
         $this->assertResponseIsSuccessful();
-    }
-    // End testListActionAsUser().
+
+    }// End testListActionAsUser().
 
     // Test if list of users work when admin connected.
     public function testListActionAsAdmin()
@@ -59,8 +59,8 @@ class UserControllerTest extends WebTestCase
         $client->request('GET', '/users/');
 
         $this->assertResponseIsSuccessful();
-    }
-    // End testListActionAsAdmin().
+
+    }// End testListActionAsAdmin().
 
     // Test create user.
     public function testCreateAction(): void
@@ -77,8 +77,8 @@ class UserControllerTest extends WebTestCase
         $client->request('GET', '/users/create');
 
         $this->assertResponseIsSuccessful();
-    }
-    // End testCreateAction().
+
+    }// End testCreateAction().
 
     // Test edit user.
     public function testEditAction(): void
@@ -113,6 +113,6 @@ class UserControllerTest extends WebTestCase
 
         // Check if user has been created.
         $this->assertResponseIsSuccessful();
-    }
-    // End testEditAction().
+        
+    }// End testEditAction().
 }

@@ -67,6 +67,6 @@ class UserTypeTest extends WebTestCase
 
         // Check if user has been created.
         $this->assertResponseIsSuccessful();
-    }
-    // End testSubmitValidData().
+        
+    }// End testSubmitValidData().
 }

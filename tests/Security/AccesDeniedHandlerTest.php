@@ -45,6 +45,6 @@ class AccesDeniedHandlerTest extends WebTestCase
         $this->assertRouteSame('homepage');
 
         $this->assertResponseIsSuccessful();
-    }
-    // End testPageAdminAsUser().
+        
+    }// End testPageAdminAsUser().
 }

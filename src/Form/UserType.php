@@ -60,6 +60,6 @@ class UserType extends AbstractType
                     return [$rolesString];
                 }
             ));
-    }
-    // End buildForm().
+            
+    }// End buildForm().
 }

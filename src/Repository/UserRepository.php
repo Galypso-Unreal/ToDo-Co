@@ -19,8 +19,8 @@ class UserRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, User::class);
-    }
-    // End __construct().
+        
+    }// End __construct().
 
     // Ajouter des méthodes personnalisées ici si nécessaire.
 }

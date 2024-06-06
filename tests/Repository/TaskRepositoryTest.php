@@ -27,6 +27,6 @@ class TaskRepositoryTest extends KernelTestCase
         $tasks = $taskRepository->findTasksByUser($testUser->getId());
 
         $this->assertNotNull($tasks);
-    }
-    // End testFindTasksByUser().
+        
+    }// End testFindTasksByUser().
 }

@@ -34,20 +34,20 @@ class TaskTest extends KernelTestCase
     // Test if get id function work.
     function testId(): void
     {
-        // Create new task
+        // Create new task.
         $task = new Task();
         $task->setTitle('Test Task');
         $task->setContent('This is a test task description.');
 
-        // Save task in database
+        // Save task in database.
         $this->entityManager->persist($task);
         $this->entityManager->flush();
 
-        // Get task from database
+        // Get task from database.
         $taskRepository = $this->entityManager->getRepository(Task::class);
         $savedTask = $taskRepository->find($task->getId());
 
-        // Check if id is correct
+        // Check if id is correct.
         $this->assertNotNull($savedTask);
         $this->assertIsInt($savedTask->getId());
     }

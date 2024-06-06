@@ -21,7 +21,7 @@ class TaskRepositoryTest extends KernelTestCase
 
         $taskRepository = static::getContainer()->get(TaskRepository::class);
 
-        // Retrieve the test user
+        // Retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'User']);
 
         $tasks = $taskRepository->findTasksByUser($testUser->getId());

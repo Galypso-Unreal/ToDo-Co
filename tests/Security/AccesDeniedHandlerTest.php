@@ -16,10 +16,10 @@ class AccesDeniedHandlerTest extends WebTestCase
         $userRepository = static::getContainer()->get(UserRepository::class);
 
 
-        // Retrieve the test user
+        // Retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'User']);
 
-        // Simulate $testUser being logged in
+        // Simulate $testUser being logged in.
         $client->loginUser($testUser);
 
         $client->request('GET', '/users');

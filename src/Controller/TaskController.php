@@ -38,6 +38,8 @@ class TaskController extends AbstractController
      * @return `listAction` function returns a rendered template 'task/list.html.twig' with an
      * array of tasks passed as a parameter.
      */
+
+
     public function listAction(ManagerRegistry $managerRegistry)
     {
         $item = $this->cachePool->getItem('tasks_list');

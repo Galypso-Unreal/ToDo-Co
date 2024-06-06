@@ -15,10 +15,11 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 
 class User implements UserInterface, PasswordAuthenticatedUserInterface
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "AUTO")]
     #[ORM\Column(type: "integer")]
-    private $id;
+    private $identifier;
 
     #[ORM\Column(type: "string", length: 25, unique: true)]
     #[Assert\NotBlank(message: "Vous devez saisir un nom d'utilisateur.")]
@@ -62,7 +63,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     public function getId()
     {
-        return $this->id;
+        return $this->identifier;
 
     }// End getId().
 

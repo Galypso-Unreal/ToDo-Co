@@ -37,7 +37,7 @@ class UserTest extends KernelTestCase
         $testUser = $userRepository->findOneBy(['username' => 'test-user-phpunit']);
 
         // If test-user-phpunit exists, delete him.
-        if ($testUser) {
+        if (empty($testUser) === false) {
             $this->entityManager->remove($testUser);
             $this->entityManager->flush();
         }

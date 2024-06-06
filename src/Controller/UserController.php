@@ -50,7 +50,7 @@ class UserController extends AbstractController
     {
         $item = $this->cachePool->getItem('users_list');
 
-        if (!$item->isHit() === true) {
+        if ($item->isHit() === false) {
             $users = $managerRegistry->getRepository(User::class)->findAll();
             $item->set($users);
             $this->cachePool->save($item);
@@ -90,11 +90,11 @@ class UserController extends AbstractController
 
         if ($form->isSubmitted() === true) {
             if ($form->isValid() === true) {
-                $em = $managerRegistry->getManager();
+                $entityManager = $managerRegistry->getManager();
                 $password = $userPasswordHasher->hashPassword($user, $user->getPassword());
                 $user->setPassword($password);
-                $em->persist($user);
-                $em->flush();
+                $entityManager->persist($user);
+                $entityManager->flush();
 
                 $this->addFlash('success', "L'utilisateur a bien été ajouté.");
                 $this->cachePool->deleteItem('users_list');

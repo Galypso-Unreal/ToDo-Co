@@ -138,7 +138,7 @@ class TaskControllerTest extends WebTestCase
 
         $task_id = $taskRepository->findOneTaskByUser($testUser->getId())->getId();
 
-        $crawler = $client->request('GET', '/tasks/' . $task_id . '/edit');
+        $crawler = $client->request('GET', '/tasks/'.$task_id.'/edit');
 
         $this->assertResponseIsSuccessful();
 
@@ -179,7 +179,7 @@ class TaskControllerTest extends WebTestCase
 
         $task = $taskRepository->findOneTaskByUser($testUserAdmin->getId());
 
-        $client->request('GET', '/tasks/' . $task->getId() . '/edit');
+        $client->request('GET', '/tasks/'.$task->getId().'/edit');
 
         $flashMessages = $client->getRequest()->getSession()->getFlashBag()->get('error');
 
@@ -219,7 +219,7 @@ class TaskControllerTest extends WebTestCase
         // Simulate $testUser being logged in.
         $client->loginUser($testUser);
 
-        $client->request('GET', '/tasks/' . $task_id . '/toggle');
+        $client->request('GET', '/tasks/'.$task_id.'/toggle');
 
         $client->followRedirect();
 
@@ -247,7 +247,7 @@ class TaskControllerTest extends WebTestCase
         // Simulate $testUser being logged in.
         $client->loginUser($testUser);
 
-        $client->request('GET', '/tasks/' . $task_id . '/toggle');
+        $client->request('GET', '/tasks/'.$task_id.'/toggle');
 
         $flashMessages = $client->getRequest()->getSession()->getFlashBag()->get('success');
 
@@ -287,7 +287,7 @@ class TaskControllerTest extends WebTestCase
         // Simulate $testUser being logged in.
         $client->loginUser($testUser);
 
-        $client->request('GET', '/tasks/' . $task_id . '/delete');
+        $client->request('GET', '/tasks/'.$task_id.'/delete');
 
         $this->assertTrue($client->getRequest()->getSession()->getFlashBag()->has('success'));
 
@@ -319,7 +319,7 @@ class TaskControllerTest extends WebTestCase
         // Simulate $testUser being logged in.
         $client->loginUser($testUserWrong);
 
-        $client->request('GET', '/tasks/' . $task_id . '/delete');
+        $client->request('GET', '/tasks/'.$task_id.'/delete');
 
         $this->assertTrue($client->getRequest()->getSession()->getFlashBag()->has('error'));
 

@@ -14,7 +14,7 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class TaskController extends AbstractController
 {
-    // Cache interface system cache
+
     private CacheItemPoolInterface $cachePool;
 
     /**
@@ -47,7 +47,7 @@ class TaskController extends AbstractController
     {
         $item = $this->cachePool->getItem('tasks_list');
 
-        if (!$item->isHit() === true) {
+        if ($item->isHit() === false) {
             $tasks = $managerRegistry->getRepository(Task::class)->findAll();
             $item->set($tasks);
             $this->cachePool->save($item);
@@ -77,7 +77,7 @@ class TaskController extends AbstractController
     {
         $item = $this->cachePool->getItem('tasks_list_done');
 
-        if (!$item->isHit() === true) {
+        if ($item->isHit() === false) {
             $tasks = $managerRegistry->getRepository(Task::class)->findBy(["isDone" => "1"]);
             $item->set($tasks);
             $this->cachePool->save($item);
@@ -116,16 +116,16 @@ class TaskController extends AbstractController
 
         if ($form->isSubmitted() === true) {
             if ($form->isValid() === true) {
-                $em = $managerRegistry->getManager();
+                $entityManager = $managerRegistry->getManager();
 
                 // Check if user exist and add this user to the task.
-                if (!empty($this->getUser()->getId()) === true) {
+                if (empty($this->getUser()->getId()) === false) {
                     $user_id = $this->getUser();
                     $task->setUser($user_id);
                 }
 
-                $em->persist($task);
-                $em->flush();
+                $entityManager->persist($task);
+                $entityManager->flush();
                 $this->cachePool->deleteItem('tasks_list');
 
                 $this->addFlash('success', 'La tâche a été bien été ajoutée.');
@@ -208,7 +208,7 @@ class TaskController extends AbstractController
         $this->cachePool->deleteItem('tasks_list');
         $this->cachePool->deleteItem('tasks_list_done');
 
-        if ($task->isDone() == true) {
+        if ($task->isDone() === true) {
             $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme faite.', $task->getTitle()));
         } else {
             $this->addFlash('success', sprintf('La tâche %s a bien été marquée comme non faite.', $task->getTitle()));
@@ -238,9 +238,9 @@ class TaskController extends AbstractController
     public function deleteTaskAction(Task $task, ManagerRegistry $managerRegistry)
     {
         if ($this->getUser() === $task->getUser() || $this->getUser()->getRoles() === ['ROLE_ADMIN'] && $task->getUser()->getRoles() === ['ROLE_ANONYM']) {
-            $em = $managerRegistry->getManager();
-            $em->remove($task);
-            $em->flush();
+            $entityManager = $managerRegistry->getManager();
+            $entityManager->remove($task);
+            $entityManager->flush();
 
             $this->addFlash('success', 'La tâche a bien été supprimée.');
             $this->cachePool->deleteItem('tasks_list');

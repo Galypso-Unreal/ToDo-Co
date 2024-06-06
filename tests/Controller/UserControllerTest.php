@@ -98,9 +98,9 @@ class UserControllerTest extends WebTestCase
 
         $testUser = $userRepository->findOneBy(['username' => 'AnonymeUser']);
 
-        $id = $testUser->getId();
+        $identifier = $testUser->getId();
 
-        $crawler = $client->request('GET', '/users/' . $id . '/edit');
+        $crawler = $client->request('GET', '/users/'.$identifier.'/edit');
 
         $form = $crawler->selectButton('modifyUser')->form();
 

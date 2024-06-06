@@ -15,6 +15,7 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  */
 class AppFixtures extends Fixture
 {
+    
     protected $container;
 
     /**
@@ -97,8 +98,8 @@ class AppFixtures extends Fixture
 
         for ($i = 0; $i < 10; $i++) {
             $task = new Task();
-            $task->setTitle('Tâche ' . $i);
-            $task->setContent('Contenu de la tâche ' . $i);
+            $task->setTitle('Tâche '.$i);
+            $task->setContent('Contenu de la tâche '.$i);
             $task->setUser($user_anonym);
             $manager->persist($task);
         }

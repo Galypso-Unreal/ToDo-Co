@@ -9,10 +9,11 @@ use Symfony\Component\Validator\Constraints as Assert;
 #[ORM\Table]
 class Task
 {
+
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "AUTO")]
     #[ORM\Column(type: "integer")]
-    private $id;
+    private $identifier;
 
     #[ORM\Column(type: "datetime")]
     private $createdAt;
@@ -57,7 +58,7 @@ class Task
 
     public function getId()
     {
-        return $this->id;
+        return $this->identifier;
 
     }// End getId().
 

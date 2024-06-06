@@ -29,5 +29,5 @@ class TaskType extends AbstractType
             ->add('content', TextareaType::class)
         ;
     }
-    //end buildForm()
+    // End buildForm().
 }

@@ -43,7 +43,7 @@ class Task
         $this->createdAt = new \Datetime();
         $this->isDone = false;
     }
-    //end __construct()
+    // End __construct().
 
     /**
      * This PHP function returns the value of the "id" property of the object.
@@ -54,7 +54,7 @@ class Task
     {
         return $this->id;
     }
-    //end getId()
+    // End getId().
 
     /**
      * This PHP function returns the value of the createdAt property.
@@ -65,7 +65,7 @@ class Task
     {
         return $this->createdAt;
     }
-    //end getCreatedAt()
+    // End getCreatedAt().
 
     /**
      * The function `setCreatedAt` sets the value of the `createdAt` property in a PHP class.
@@ -79,7 +79,7 @@ class Task
     {
         $this->createdAt = $createdAt;
     }
-    //end setCreatedAt()
+    // End setCreatedAt().
 
     /**
      * This PHP function getTitle() returns the title property of the object it is called on.
@@ -90,7 +90,7 @@ class Task
     {
         return $this->title;
     }
-    //end getTitle()
+    // End getTitle().
 
     /**
      * The function `setTitle` in PHP sets the title of an object.
@@ -104,7 +104,7 @@ class Task
     {
         $this->title = $title;
     }
-    //end setTitle()
+    // End setTitle().
 
     /**
      * This PHP function named `getContent` returns the content stored in the class property
@@ -115,7 +115,7 @@ class Task
     {
         return $this->content;
     }
-    //end getContent()
+    // End getContent().
 
     /**
      * The function `setContent` in PHP sets the content of an object.
@@ -129,7 +129,7 @@ class Task
     {
         $this->content = $content;
     }
-    //end setContent()
+    // End setContent().
 
     /**
      * The function isDone() in PHP returns the value of the isDone property of the object.
@@ -140,7 +140,7 @@ class Task
     {
         return $this->isDone;
     }
-    //end isDone()
+    // End isDone().
 
     /**
      * The function `toggle` in PHP sets the value of the `isDone` property to the provided flag value.
@@ -154,7 +154,7 @@ class Task
     {
         $this->isDone = $flag;
     }
-    //end toggle()
+    // End toggle().
 
     /**
      * This PHP function named `getUser` returns the value of the `user` property of the current
@@ -166,7 +166,7 @@ class Task
     {
         return $this->user;
     }
-    //end getUser()
+    // End getUser().
 
     /**
      * The setUser function in PHP sets the user property of an object.
@@ -180,5 +180,5 @@ class Task
     {
         $this->user = $user;
     }
-    //end setUser()
+    // End setUser().
 }

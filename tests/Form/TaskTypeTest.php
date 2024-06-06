@@ -47,5 +47,5 @@ class TaskTypeTest extends WebTestCase
         // Check if task has been created.
         $this->assertResponseIsSuccessful();
     }
-    //end testSubmitValidData()
+    // End testSubmitValidData().
 }

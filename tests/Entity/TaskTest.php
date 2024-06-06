@@ -22,7 +22,7 @@ class TaskTest extends KernelTestCase
             ->get('doctrine')
             ->getManager();
     }
-    //end setUp()
+    // End setUp().
 
     // Test if construct work.
     function testConstruct(): void
@@ -31,7 +31,7 @@ class TaskTest extends KernelTestCase
         $this->assertEquals(false, $task->isDone());
         $this->assertNotNull($task);
     }
-    //end testConstruct()
+    // End testConstruct().
 
     // Test if get id function work.
     function testId(): void
@@ -53,7 +53,7 @@ class TaskTest extends KernelTestCase
         $this->assertNotNull($savedTask);
         $this->assertIsInt($savedTask->getId());
     }
-    //end testId()
+    // End testId().
 
     // Test if created at work.
     function testCreatedAt(): void
@@ -63,7 +63,7 @@ class TaskTest extends KernelTestCase
         $task->setCreatedAt($date);
         $this->assertEquals(new DateTime('2022-07-03 04:53:53'), $task->getCreatedAt());
     }
-    //end testCreatedAt()
+    // End testCreatedAt().
 
     // Test set title.
     function testTitle(): void
@@ -72,7 +72,7 @@ class TaskTest extends KernelTestCase
         $task->setTitle('here');
         $this->assertEquals('here', $task->getTitle());
     }
-    //end testTitle()
+    // End testTitle().
 
     // Test set content.
     function testContent(): void
@@ -81,7 +81,7 @@ class TaskTest extends KernelTestCase
         $task->setContent('testContent');
         $this->assertEquals('testContent', $task->getContent());
     }
-    //end testContent()
+    // End testContent().
 
     // Test isDone function work.
     function testIsDone(): void
@@ -90,7 +90,7 @@ class TaskTest extends KernelTestCase
         $task->toggle(true);
         $this->assertEquals(true, $task->isDone());
     }
-    //end testIsDone()
+    // End testIsDone().
 
     // Test linked user to a task.
     function testUser(): void
@@ -104,5 +104,5 @@ class TaskTest extends KernelTestCase
         $task->setUser($user);
         $this->assertEquals($user, $task->getUser());
     }
-    //end testUser()
+    // End testUser().
 }

@@ -37,8 +37,8 @@ class SecurityController extends AbstractController
         } else {
             return $this->redirectToRoute("homepage");
         }
-    }
-    //end loginAction()
+    }//end loginAction()
+    
 
     /**
      * @codeCoverageIgnore

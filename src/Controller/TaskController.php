@@ -24,8 +24,7 @@ class TaskController extends AbstractController
     public function __construct(CacheItemPoolInterface $cachePool)
     {
         $this->cachePool = $cachePool;
-    }
-    // End __construct().
+    }// End __construct().
 
     #[Route('/tasks', name: 'task_list')]
     /**
@@ -49,8 +48,7 @@ class TaskController extends AbstractController
             $tasks = $item->get();
         }
         return $this->render('task/list.html.twig', ['tasks' => $tasks]);
-    }
-    // End listAction().
+    }// End listAction().
 
     #[Route('/tasks/done', name: 'task_list_done')]
     /**
@@ -76,8 +74,7 @@ class TaskController extends AbstractController
             $tasks = $item->get();
         }
         return $this->render('task/list.html.twig', ['tasks' => $tasks]);
-    }
-    // End listActionDone().
+    }// End listActionDone().
 
 
     #[Route('/tasks/create', name: 'task_create')]
@@ -124,8 +121,7 @@ class TaskController extends AbstractController
         }
 
         return $this->render('task/create.html.twig', ['form' => $form->createView()]);
-    }
-    // End createAction().
+    }// End createAction().
 
     #[Route('/tasks/{id}/edit', name: 'task_edit')]
     /**
@@ -170,8 +166,7 @@ class TaskController extends AbstractController
             $this->addFlash('error', sprintf('La tâche %s ne peux pas être modifier par un autre utilisateur', $task->getTitle()));
             return $this->redirectToRoute('task_list');
         }
-    }
-    // End editAction().
+    }// End editAction().
 
     #[Route('/tasks/{id}/toggle', name: 'task_toggle')]
     /**
@@ -198,8 +193,7 @@ class TaskController extends AbstractController
         }
 
         return $this->redirectToRoute('task_list');
-    }
-    // End toggleTaskAction().
+    }// End toggleTaskAction().
 
     #[Route('/tasks/{id}/delete', name: 'task_delete')]
     /**
@@ -230,6 +224,5 @@ class TaskController extends AbstractController
             $this->addFlash('error', 'Vous ne pouvez pas supprimer la tâche d\'un autre utilisateur');
             return $this->redirectToRoute('task_list');
         }
-    }
-    // End deleteTaskAction().
+    }// End deleteTaskAction().
 }

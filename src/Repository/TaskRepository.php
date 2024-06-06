@@ -18,6 +18,8 @@ class TaskRepository extends ServiceEntityRepository
 {
 
     // Construct base managerRegistry for task.
+
+
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Task::class);
@@ -29,6 +31,8 @@ class TaskRepository extends ServiceEntityRepository
      * @param int $userId
      * @return Task[]
      */
+
+
     public function findTasksByUser(int $userId): array
     {
         return $this->createQueryBuilder('t')
@@ -44,6 +48,8 @@ class TaskRepository extends ServiceEntityRepository
      * @param int $userId
      * @return Task|null
      */
+
+
     public function findOneTaskByUser(int $userId): ?Task
     {
         return $this->createQueryBuilder('t')

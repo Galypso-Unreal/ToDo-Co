@@ -15,7 +15,8 @@ class DefaultController extends AbstractController
      *
      * @return The `index` function is returning the rendered template `default/index.html.twig`.
      */
-    
+
+
     public function index()
     {
         return $this->render('default/index.html.twig');

@@ -32,6 +32,8 @@ class UserType extends AbstractType
      * RepeatedType (PasswordType), 'email' of type EmailType, and 'roles' of type ChoiceType with
      * options for 'User' and 'Admin'. Additionally, a model transformer is being added to
      */
+
+
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

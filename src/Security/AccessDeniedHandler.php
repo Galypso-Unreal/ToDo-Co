@@ -39,6 +39,8 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
      * @return ?Response A RedirectResponse is being returned with the URL generated for the 'login'
      * route.
      */
+
+
     public function handle(Request $request, AccessDeniedException $accessDeniedException): ?Response
     {
         if ($this->security->isGranted('IS_AUTHENTICATED_FULLY') === true && $this->security->isGranted('ROLE_ADMIN') === false) {

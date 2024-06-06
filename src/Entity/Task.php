@@ -38,6 +38,8 @@ class Task
      *
      * @return void
      */
+
+
     public function __construct()
     {
         $this->createdAt = new \Datetime();
@@ -51,6 +53,8 @@ class Task
      *
      * @return mixed
      */
+
+
     public function getId()
     {
         return $this->id;
@@ -63,6 +67,8 @@ class Task
      *
      * @return mixed
      */
+
+
     public function getCreatedAt()
     {
         return $this->createdAt;
@@ -78,6 +84,8 @@ class Task
      * value that will be assigned to the `createdAt` property of the object.
      * @return void
      */
+
+
     public function setCreatedAt($createdAt): void
     {
         $this->createdAt = $createdAt;
@@ -90,6 +98,8 @@ class Task
      *
      * @return mixed `title` property of the object is being returned.
      */
+
+
     public function getTitle()
     {
         return $this->title;
@@ -105,6 +115,8 @@ class Task
      * be assigned to the object.
      * @return void
      */
+
+
     public function setTitle($title): void
     {
         $this->title = $title;
@@ -117,6 +129,8 @@ class Task
      *
      * @return mixed
      */
+
+
     public function getContent()
     {
         return $this->content;
@@ -132,6 +146,8 @@ class Task
      * to the object's `content` property.
      * @return void
      */
+
+
     public function setContent($content): void
     {
         $this->content = $content;
@@ -144,6 +160,8 @@ class Task
      *
      * @return void
      */
+
+
     public function isDone()
     {
         return $this->isDone;
@@ -159,6 +177,8 @@ class Task
      * parameter, it will set the `isDone` property of the object to that boolean value
      * @return void
      */
+
+
     public function toggle($flag): void
     {
         $this->isDone = $flag;
@@ -172,6 +192,8 @@ class Task
      *
      * @return mixed The `getUser()` function is returning the `user` property of the current object.
      */
+
+
     public function getUser()
     {
         return $this->user;
@@ -187,6 +209,8 @@ class Task
      * assigned to the `user` property.
      * @return void
      */
+
+
     public function setUser($user): void
     {
         $this->user = $user;

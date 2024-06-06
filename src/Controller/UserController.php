@@ -24,6 +24,8 @@ class UserController extends AbstractController
      * implementation into the class. This allows the class to interact with the cache pool to store
      * and retrieve cached data.
      */
+
+
     public function __construct(CacheItemPoolInterface $cachePool)
     {
         $this->cachePool = $cachePool;
@@ -42,6 +44,8 @@ class UserController extends AbstractController
      * variable 'users' containing the list of users fetched from the cache or database using the
      * ManagerRegistry.
      */
+
+
     public function listAction(ManagerRegistry $managerRegistry)
     {
         $item = $this->cachePool->getItem('users_list');
@@ -74,6 +78,8 @@ class UserController extends AbstractController
      * submitted and valid, it adds the user to the database, flashes a success message, deletes an
      * item from the cache, and redirects to the `user_list` route.
      */
+
+
     public function createAction(Request $request, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $managerRegistry)
     {
 
@@ -119,6 +125,8 @@ class UserController extends AbstractController
      * the user's password, update the user entity in the database, add a success flash message, delete
      * an item from the cache, and then redirect to the `user_list` route.
      */
+
+
     public function editAction(User $user, Request $request, UserPasswordHasherInterface $userPasswordHasher, ManagerRegistry $managerRegistry)
     {
         $form = $this->createForm(UserType::class, $user);

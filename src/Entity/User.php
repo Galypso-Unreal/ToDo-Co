@@ -44,6 +44,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return void
      */
+
+
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
@@ -56,6 +58,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return mixed value of the property `id` of the object
      */
+
+
     public function getId()
     {
         return $this->id;
@@ -68,6 +72,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return mixed The `username` property of the object is being returned as a string.
      */
+
+
     public function getUserIdentifier(): string
     {
         return $this->username;
@@ -80,6 +86,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return mixed The `getUsername()` function is returning the value of the `username` property of the object
      */
+
+
     public function getUsername()
     {
         return $this->username;
@@ -93,6 +101,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @param mixed $username setUsername parameter
      * @return void value username of the object
      */
+
+
     public function setUsername($username): void
     {
         $this->username = $username;
@@ -105,6 +115,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * 
      * @return ?string The `getSalt()` function is returning a `null` value.
      */
+
+
     public function getSalt(): ?string
     {
         return null;
@@ -118,6 +130,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @return ?string The `getPassword()` function is returning a nullable string value, which means
      * it can return either a string or `null`.
      */
+
+
     public function getPassword(): ?string
     {
         return $this->password;
@@ -132,6 +146,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * function takes one parameter, which is the new password that you want to set for the object.
      * @return void
      */
+
+
     public function setPassword($password): void
     {
         $this->password = $password;
@@ -144,6 +160,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * 
      * @return void getEmail() function is returning the value of the email property of the object.
      */
+
+
     public function getEmail()
     {
         return $this->email;
@@ -159,6 +177,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * address that you want to set for the object.
      * @return void
      */
+
+
     public function setEmail($email): void
     {
         $this->email = $email;
@@ -172,6 +192,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @return array The `getRoles()` function is returning an array of roles stored in the ``
      * property of the object.
      */
+
+
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -187,6 +209,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @param array $roles setRoles parameter. The `setRoles` function is a method that sets the roles of an object. It
      * takes an array of roles as a parameter and assigns it to the `roles` property of the object.
      */
+
+
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
@@ -200,6 +224,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return void
      */
+
+
     public function eraseCredentials(): void
     {
     }// End eraseCredentials().

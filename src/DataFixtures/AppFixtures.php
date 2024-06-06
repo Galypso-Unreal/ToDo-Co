@@ -22,6 +22,8 @@ class AppFixtures extends Fixture
      * 
      * @param ContainerInterface
      */
+
+
     public function setContainer(ContainerInterface $container = null): void
     {
         $this->container = $container;
@@ -37,6 +39,8 @@ class AppFixtures extends Fixture
      * 
      * @param UserPasswordHasherInterface
      */
+
+
     public function __construct(UserPasswordHasherInterface $userPasswordHasher)
     {
         $this->passwordEncoder = $userPasswordHasher;
@@ -49,6 +53,8 @@ class AppFixtures extends Fixture
      * 
      * @param ObjectManager
      */
+
+
     public function load(ObjectManager $manager): void
     {
 

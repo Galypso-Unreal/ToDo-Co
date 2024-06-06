@@ -22,6 +22,7 @@ class TaskTest extends KernelTestCase
             ->get('doctrine')
             ->getManager();
     }
+    //end setUp()
 
     // Test if construct work.
     function testConstruct(): void
@@ -30,6 +31,7 @@ class TaskTest extends KernelTestCase
         $this->assertEquals(false, $task->isDone());
         $this->assertNotNull($task);
     }
+    //end testConstruct()
 
     // Test if get id function work.
     function testId(): void
@@ -51,6 +53,7 @@ class TaskTest extends KernelTestCase
         $this->assertNotNull($savedTask);
         $this->assertIsInt($savedTask->getId());
     }
+    //end testId()
 
     // Test if created at work.
     function testCreatedAt(): void
@@ -60,6 +63,7 @@ class TaskTest extends KernelTestCase
         $task->setCreatedAt($date);
         $this->assertEquals(new DateTime('2022-07-03 04:53:53'), $task->getCreatedAt());
     }
+    //end testCreatedAt()
 
     // Test set title.
     function testTitle(): void
@@ -68,6 +72,7 @@ class TaskTest extends KernelTestCase
         $task->setTitle('here');
         $this->assertEquals('here', $task->getTitle());
     }
+    //end testTitle()
 
     // Test set content.
     function testContent(): void
@@ -76,6 +81,7 @@ class TaskTest extends KernelTestCase
         $task->setContent('testContent');
         $this->assertEquals('testContent', $task->getContent());
     }
+    //end testContent()
 
     // Test isDone function work.
     function testIsDone(): void
@@ -84,6 +90,7 @@ class TaskTest extends KernelTestCase
         $task->toggle(true);
         $this->assertEquals(true, $task->isDone());
     }
+    //end testIsDone()
 
     // Test linked user to a task.
     function testUser(): void
@@ -97,4 +104,5 @@ class TaskTest extends KernelTestCase
         $task->setUser($user);
         $this->assertEquals($user, $task->getUser());
     }
+    //end testUser()
 }

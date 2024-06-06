@@ -35,6 +35,7 @@ class TaskControllerTest extends WebTestCase
         // Check if 200 return.
         $this->assertResponseIsSuccessful();
     }
+    //end testListAction
 
     // Test list of tasks done.
     public function testlistActionDone()
@@ -54,6 +55,7 @@ class TaskControllerTest extends WebTestCase
         // Check if 200 return.
         $this->assertResponseIsSuccessful();
     }
+    //end testlistActionDone
 
     // Test if cache list done work.
     public function testListDoneActionCache()
@@ -81,6 +83,7 @@ class TaskControllerTest extends WebTestCase
         $this->assertNotNull($cachedData, 'Cached data should not be null');
         $this->assertIsArray($cachedData, 'Cached data should be an array');
     }
+    //end testListDoneActionCache
 
     // Test if create task work and redirect with success response.
     public function testCreateAction(): void
@@ -112,6 +115,7 @@ class TaskControllerTest extends WebTestCase
         // Check if task has been created.
         $this->assertResponseIsSuccessful();
     }
+    //end testCreateAction
 
     // Test if can edit task.
     public function testEditAction(): void
@@ -148,6 +152,7 @@ class TaskControllerTest extends WebTestCase
         // Check if task has been created.
         $this->assertResponseIsSuccessful();
     }
+    //end testEditAction
 
     // Test if edit with wrong user is not working (not admin).
     public function testEditAsWrongUserAction(): void
@@ -189,6 +194,7 @@ class TaskControllerTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
     }
+    //end testEditAsWrongUserAction
 
     // Test if change status of task work.
     public function testToggleTaskAction(): void
@@ -215,6 +221,7 @@ class TaskControllerTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
     }
+    //end testToggleTaskAction
 
     // Test status has not done work.
     public function testToggleTaskActionAsNotDone(): void
@@ -253,6 +260,7 @@ class TaskControllerTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
     }
+    //end testToggleTaskActionAsNotDone
 
     // Test if can delete task.
     public function testDeleteTaskAction(): void
@@ -281,6 +289,7 @@ class TaskControllerTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
     }
+    //end testDeleteTaskAction
 
     // Test if delete task with wrong user not working.
     public function testDeleteTaskActionWrongUser(): void
@@ -309,4 +318,5 @@ class TaskControllerTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
     }
+    //end testDeleteTaskActionWrongUser
 }

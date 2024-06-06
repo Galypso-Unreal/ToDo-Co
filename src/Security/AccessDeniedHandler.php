@@ -22,6 +22,7 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
         private Security $security,
     ) {
     }
+    //end __construct()
 
     /**
      * The function checks if the user is fully authenticated and not an admin, then adds an error
@@ -46,4 +47,5 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
         }
         return new RedirectResponse($this->urlGenerator->generate('login'));
     }
+    //end handle()
 }

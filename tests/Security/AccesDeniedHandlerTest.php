@@ -46,4 +46,5 @@ class AccesDeniedHandlerTest extends WebTestCase
 
         $this->assertResponseIsSuccessful();
     }
+    //end testPageAdminAsUser()
 }

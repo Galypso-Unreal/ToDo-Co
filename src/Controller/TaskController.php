@@ -25,6 +25,7 @@ class TaskController extends AbstractController
     {
         $this->cachePool = $cachePool;
     }
+    //end __construct()
 
     #[Route('/tasks', name: 'task_list')]
     /**
@@ -49,6 +50,7 @@ class TaskController extends AbstractController
         }
         return $this->render('task/list.html.twig', ['tasks' => $tasks]);
     }
+    //end listAction()
 
     #[Route('/tasks/done', name: 'task_list_done')]
     /**
@@ -75,6 +77,7 @@ class TaskController extends AbstractController
         }
         return $this->render('task/list.html.twig', ['tasks' => $tasks]);
     }
+    //end listActionDone()
 
 
     #[Route('/tasks/create', name: 'task_create')]
@@ -122,6 +125,7 @@ class TaskController extends AbstractController
 
         return $this->render('task/create.html.twig', ['form' => $form->createView()]);
     }
+    //end createAction()
 
     #[Route('/tasks/{id}/edit', name: 'task_edit')]
     /**
@@ -167,6 +171,7 @@ class TaskController extends AbstractController
             return $this->redirectToRoute('task_list');
         }
     }
+    //end editAction()
 
     #[Route('/tasks/{id}/toggle', name: 'task_toggle')]
     /**
@@ -194,6 +199,7 @@ class TaskController extends AbstractController
 
         return $this->redirectToRoute('task_list');
     }
+    //end toggleTaskAction()
 
     #[Route('/tasks/{id}/delete', name: 'task_delete')]
     /**
@@ -225,4 +231,5 @@ class TaskController extends AbstractController
             return $this->redirectToRoute('task_list');
         }
     }
+    //end deleteTaskAction()
 }

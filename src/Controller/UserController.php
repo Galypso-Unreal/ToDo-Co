@@ -28,6 +28,7 @@ class UserController extends AbstractController
     {
         $this->cachePool = $cachePool;
     }
+    //end __construct()
 
     #[Route('/users/', name: 'user_list')]
     /**
@@ -53,6 +54,7 @@ class UserController extends AbstractController
         }
         return $this->render('user/list.html.twig', ['users' => $users]);
     }
+    //end listAction()
 
 
     #[Route('/users/create', name: 'user_create')]
@@ -95,6 +97,7 @@ class UserController extends AbstractController
 
         return $this->render('user/create.html.twig', ['form' => $form->createView()]);
     }
+    //end createAction()
 
     #[Route('/users/{id}/edit', name: 'user_edit')]
     /**
@@ -135,4 +138,5 @@ class UserController extends AbstractController
 
         return $this->render('user/edit.html.twig', ['form' => $form->createView(), 'user' => $user]);
     }
+    //end editAction()
 }

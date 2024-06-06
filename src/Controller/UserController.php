@@ -50,7 +50,7 @@ class UserController extends AbstractController
     {
         $item = $this->cachePool->getItem('users_list');
 
-        if (!$item->isHit()) {
+        if (!$item->isHit() === true) {
             $users = $managerRegistry->getRepository(User::class)->findAll();
             $item->set($users);
             $this->cachePool->save($item);
@@ -88,8 +88,8 @@ class UserController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
+        if ($form->isSubmitted() === true) {
+            if ($form->isValid() === true) {
                 $em = $managerRegistry->getManager();
                 $password = $userPasswordHasher->hashPassword($user, $user->getPassword());
                 $user->setPassword($password);
@@ -133,8 +133,8 @@ class UserController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
+        if ($form->isSubmitted() === true) {
+            if ($form->isValid() === true) {
                 $password = $userPasswordHasher->hashPassword($user, $user->getPassword());
                 $user->setPassword($password);
 

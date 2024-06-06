@@ -46,7 +46,7 @@ class TaskController extends AbstractController
     {
         $item = $this->cachePool->getItem('tasks_list');
 
-        if (!$item->isHit()) {
+        if (!$item->isHit() === true) {
             $tasks = $managerRegistry->getRepository(Task::class)->findAll();
             $item->set($tasks);
             $this->cachePool->save($item);
@@ -76,7 +76,7 @@ class TaskController extends AbstractController
     {
         $item = $this->cachePool->getItem('tasks_list_done');
 
-        if (!$item->isHit()) {
+        if (!$item->isHit() === true) {
             $tasks = $managerRegistry->getRepository(Task::class)->findBy(["isDone" => "1"]);
             $item->set($tasks);
             $this->cachePool->save($item);
@@ -113,12 +113,12 @@ class TaskController extends AbstractController
 
         $form->handleRequest($request);
 
-        if ($form->isSubmitted()) {
-            if ($form->isValid()) {
+        if ($form->isSubmitted() === true) {
+            if ($form->isValid() === true) {
                 $em = $managerRegistry->getManager();
 
                 // Check if user exist and add this user to the task.
-                if ($this->getUser()->getId()) {
+                if (!empty($this->getUser()->getId()) === true) {
                     $user_id = $this->getUser();
                     $task->setUser($user_id);
                 }
@@ -164,8 +164,8 @@ class TaskController extends AbstractController
 
             $form->handleRequest($request);
 
-            if ($form->isSubmitted()) {
-                if ($form->isValid()) {
+            if ($form->isSubmitted() === true) {
+                if ($form->isValid() === true) {
                     $managerRegistry->getManager()->flush();
 
                     $this->addFlash('success', 'La tâche a bien été modifiée.');

@@ -27,6 +27,7 @@ class AppFixtures extends Fixture
         $this->container = $container;
 
     }// End setContainer().
+    
 
     private $passwordEncoder;
     
@@ -41,6 +42,7 @@ class AppFixtures extends Fixture
         $this->passwordEncoder = $userPasswordHasher;
 
     }// End __construct().
+
 
     /**
      * The function creates users with different roles and tasks assigned to them in a PHP application.
@@ -99,4 +101,6 @@ class AppFixtures extends Fixture
         $manager->flush();
         
     }// End load().
+
+
 }

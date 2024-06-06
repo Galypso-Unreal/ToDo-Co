@@ -21,7 +21,9 @@ class TaskRepository extends ServiceEntityRepository
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Task::class);
+
     }// End __construct().
+
 
     /**
      * @param int $userId
@@ -37,6 +39,7 @@ class TaskRepository extends ServiceEntityRepository
 
     }// End findTasksByUser().
 
+
     /**
      * @param int $userId
      * @return Task|null
@@ -51,4 +54,6 @@ class TaskRepository extends ServiceEntityRepository
             ->getOneOrNullResult();
             
     }// End findOneTaskByUser().
+
+    
 }

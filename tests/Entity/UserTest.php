@@ -25,6 +25,7 @@ class UserTest extends KernelTestCase
 
     }// End setUp().
 
+
     // Test id function.
     public function testId(): void
     {
@@ -61,6 +62,7 @@ class UserTest extends KernelTestCase
 
     }// End testId().
 
+
     // Test get/set username.
     public function testUsername(): void
     {
@@ -70,6 +72,7 @@ class UserTest extends KernelTestCase
 
     }// End testUsername().
 
+
     // Test salt function (working security).
     public function testSalt(): void
     {
@@ -77,6 +80,7 @@ class UserTest extends KernelTestCase
         $this->assertEquals(null, $user->getSalt());
 
     }// End testSalt().
+
 
     // Test password managment (not encoded).
     public function testPassword(): void
@@ -87,6 +91,7 @@ class UserTest extends KernelTestCase
 
     }// End testPassword().
 
+
     // Test mail get/set.
     public function testMail(): void
     {
@@ -95,6 +100,7 @@ class UserTest extends KernelTestCase
         $this->assertEquals('email@test.com', $user->getEmail());
 
     }// End testMail().
+
 
     // Test roles of user.
     public function testRoles(): void
@@ -105,6 +111,7 @@ class UserTest extends KernelTestCase
 
     }// End testRoles().
 
+
     // Test erase credential (working security).
     public function testEraseCredentials(): void
     {
@@ -112,4 +119,6 @@ class UserTest extends KernelTestCase
         $this->assertEmpty($user->eraseCredentials());
         
     }// End testEraseCredentials().
+
+    
 }

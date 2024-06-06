@@ -47,4 +47,6 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
         return new RedirectResponse($this->urlGenerator->generate('login'));
         
     }// End handle().
+
+    
 }

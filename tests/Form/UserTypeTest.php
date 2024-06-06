@@ -69,4 +69,6 @@ class UserTypeTest extends WebTestCase
         $this->assertResponseIsSuccessful();
         
     }// End testSubmitValidData().
+
+    
 }

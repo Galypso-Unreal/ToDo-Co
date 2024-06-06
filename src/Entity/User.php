@@ -50,6 +50,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     }// End __construct().
 
+
     /**
      * This PHP function returns the value of the "id" property of the object.
      *
@@ -60,6 +61,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->id;
 
     }// End getId().
+
 
     /**
      * This PHP function returns the username as the user identifier.
@@ -72,6 +74,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     }// End getUserIdentifier().
 
+
     /**
      * This PHP function returns the username associated with the current object.
      *
@@ -82,6 +85,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->username;
 
     }// End getUsername().
+
 
     /**
      * The function `setUsername` in PHP sets the username property of an object.
@@ -95,6 +99,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     }// End setUsername().
 
+
     /**
      * The getSalt function in PHP returns a nullable string value.
      * 
@@ -105,6 +110,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return null;
 
     }// End getSalt().
+
 
     /**
      * This PHP function returns the password value as a nullable string.
@@ -117,6 +123,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->password;
 
     }// End getPassword().
+
 
     /**
      * The function `setPassword` in PHP sets the password for an object.
@@ -131,6 +138,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     }// End setPassword().
 
+
     /**
      * This PHP function named getEmail returns the email property of the object it is called on.
      * 
@@ -141,6 +149,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this->email;
 
     }// End getEmail().
+
 
     /**
      * The setEmail function in PHP sets the email property of an object.
@@ -156,6 +165,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     }// End setEmail().
 
+
     /**
      * This PHP function named getRoles returns an array of roles.
      * 
@@ -170,6 +180,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     }// End getRoles().
 
+
     /**
      * The function `setRoles` in PHP sets the roles of an object based on the provided array.
      * 
@@ -182,6 +193,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         
     }// End setRoles().
 
+
     /**
      * The eraseCredentials function in PHP is used to remove sensitive data from the user's
      * authentication credentials.
@@ -191,4 +203,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function eraseCredentials(): void
     {
     }// End eraseCredentials().
+
+    
 }

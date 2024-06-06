@@ -30,6 +30,7 @@ class UserController extends AbstractController
 
     }// End __construct().
 
+
     #[Route('/users/', name: 'user_list')]
     /**
      * The function retrieves a list of users from the cache if available, otherwise fetches it from
@@ -99,6 +100,7 @@ class UserController extends AbstractController
 
     }// End createAction().
 
+
     #[Route('/users/{id}/edit', name: 'user_edit')]
     /**
      * This PHP function edits a user entity, hashes the password, updates the user in the database,
@@ -139,4 +141,6 @@ class UserController extends AbstractController
         return $this->render('user/edit.html.twig', ['form' => $form->createView(), 'user' => $user]);
         
     }// End editAction().
+
+    
 }

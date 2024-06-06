@@ -20,6 +20,7 @@ class SecurityControllerTest extends WebTestCase
 
     }// End testLoginPage().
 
+
     // Test if login page redirect on homepage if already connected.
     public function testLoginPageAsConnected(): void
     {
@@ -42,6 +43,7 @@ class SecurityControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
 
     }// End testLoginPageAsConnected().
+
 
     // Test login submission page redirect to homepage with success response.
     public function testLoginFormSubmission(): void
@@ -66,6 +68,7 @@ class SecurityControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
 
     }// End testLoginFormSubmission().
+
 
     // Test if logout work when user connected.
     public function testLogoutCheck(): void
@@ -92,4 +95,6 @@ class SecurityControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
         
     }// End testLogoutCheck().
+
+    
 }

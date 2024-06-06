@@ -27,6 +27,7 @@ class TaskController extends AbstractController
 
     }// End __construct().
 
+
     #[Route('/tasks', name: 'task_list')]
     /**
      * The listAction function retrieves a list of tasks from the cache if available, otherwise fetches
@@ -51,6 +52,7 @@ class TaskController extends AbstractController
         return $this->render('task/list.html.twig', ['tasks' => $tasks]);
 
     }// End listAction().
+
 
     #[Route('/tasks/done', name: 'task_list_done')]
     /**
@@ -127,6 +129,7 @@ class TaskController extends AbstractController
 
     }// End createAction().
 
+
     #[Route('/tasks/{id}/edit', name: 'task_edit')]
     /**
      * This PHP function edits a task if the current user is the owner, otherwise it displays an error
@@ -173,6 +176,7 @@ class TaskController extends AbstractController
 
     }// End editAction().
 
+
     #[Route('/tasks/{id}/toggle', name: 'task_toggle')]
     /**
      * The function toggles the status of a task between done and not done, updates the cache, displays
@@ -200,6 +204,7 @@ class TaskController extends AbstractController
         return $this->redirectToRoute('task_list');
 
     }// End toggleTaskAction().
+
 
     #[Route('/tasks/{id}/delete', name: 'task_delete')]
     /**
@@ -232,4 +237,6 @@ class TaskController extends AbstractController
         }
         
     }// End deleteTaskAction().
+
+    
 }

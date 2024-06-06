@@ -37,8 +37,9 @@ class SecurityController extends AbstractController
         } else {
             return $this->redirectToRoute("homepage");
         }
-    }//end loginAction()
-    
+    }
+    // end loginAction()
+
 
     /**
      * @codeCoverageIgnore
@@ -53,7 +54,7 @@ class SecurityController extends AbstractController
     {
         // This code is never executed.
     }
-    //end loginCheck()
+    // end loginCheck()
 
     /**
      * @codeCoverageIgnore
@@ -68,5 +69,5 @@ class SecurityController extends AbstractController
     {
         // This code is never executed.
     }
-    //end logoutCheck()
+    // end logoutCheck()
 }

@@ -14,6 +14,7 @@ class UserTest extends KernelTestCase
 
     private ?EntityManagerInterface $entityManager = null;
 
+    
     /**
      * Set up doctrine for entity manager.
      */

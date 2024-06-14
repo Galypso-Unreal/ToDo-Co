@@ -12,6 +12,7 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 class TaskTypeTest extends WebTestCase
 {
 
+    
     /**
      * Test if submit data work on task form.
      */
@@ -34,7 +35,6 @@ class TaskTypeTest extends WebTestCase
         $this->assertResponseIsSuccessful();
 
         // Select form.
-
         $form = $crawler->selectButton('createTask')->form();
 
         // Add content to form.

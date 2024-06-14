@@ -9,6 +9,7 @@ class AccesDeniedHandlerTest extends WebTestCase
 
 {
 
+
     /**
      * Test user redirect if not admin.
      */

@@ -13,6 +13,7 @@ class Task
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "AUTO")]
     #[ORM\Column(type: "integer")]
+
     /**
      * The line `private ;` in the PHP code snippet is declaring a private property named @var `$id`
      * within the `Task` class. This property is intended to store the unique identifier of a task
@@ -21,6 +22,7 @@ class Task
     private $id;
 
     #[ORM\Column(type: "datetime")]
+
     /**
      * The line `private ;` in the PHP code snippet is declaring a private property named
      * @var `$createdAt` within the `Task` class. This property is intended to store the datetime when a
@@ -30,6 +32,7 @@ class Task
 
     #[ORM\Column(type: "string")]
     #[Assert\NotBlank(message: "Vous devez saisir un titre.")]
+
     /**
      * The line `private ;` in the PHP code snippet is declaring a private property named
      * @var `$title` within the `Task` class. This property is intended to store the title of a task object.
@@ -38,6 +41,7 @@ class Task
 
     #[ORM\Column(type: "text")]
     #[Assert\NotBlank(message: "Vous devez saisir du contenu.")]
+
     /**
      * The line `private ;` in the PHP code snippet is declaring a private property named
      * @var `$content` within the `Task` class. This property is intended to store the content of a task
@@ -46,6 +50,7 @@ class Task
     private $content;
 
     #[ORM\Column(type: "boolean")]
+
     /**
      * The line `private ;` in the PHP code snippet is declaring a private property named
      * @var `$isDone` within the `Task` class. This property is intended to store the status of whether a
@@ -55,6 +60,7 @@ class Task
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "tasks")]
     #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id")]
+    
     /** 
      * The line `private ;` in the PHP code snippet is declaring a private property named @var `$user`
      * within the `Task` class. This property is intended to store the relationship to a `User` entity

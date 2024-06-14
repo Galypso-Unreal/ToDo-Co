@@ -24,6 +24,7 @@ class UserTypeTest extends WebTestCase
      */
     private ?EntityManagerInterface $entityManager = null;
 
+
     /**
      * Test if submit data work on user form.
      */
@@ -55,7 +56,6 @@ class UserTypeTest extends WebTestCase
         }
 
         // Select form.
-
         $form = $crawler->selectButton('addUser')->form();
 
         // Add content to form.

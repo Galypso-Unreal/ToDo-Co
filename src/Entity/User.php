@@ -19,6 +19,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "AUTO")]
     #[ORM\Column(type: "integer")]
+
     /**
      * The line `private ;` in the PHP code snippet is declaring a private property named `$id`
      * within the `User` class. This property is used to store the unique identifier (ID) of a user
@@ -28,6 +29,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
 
     #[ORM\Column(type: "string", length: 25, unique: true)]
     #[Assert\NotBlank(message: "Vous devez saisir un nom d'utilisateur.")]
+
     /**
      * The line `private ;` in the PHP code snippet is declaring a private property named
      * @var `$username` within the `User` class. This property is used to store the username of a user
@@ -36,6 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $username;
 
     #[ORM\Column(type: "string", length: 64)]
+
     /**
      * The line `private ;` in the PHP code snippet is declaring a private property named
      * @var `$password` within the `User` class. This property is used to store the password of a user
@@ -46,6 +49,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: "string", length: 60, unique: true)]
     #[Assert\NotBlank(message: "Vous devez saisir une adresse email.")]
     #[Assert\Email(message: "Le format de l'adresse n'est pas correcte.")]
+
     /**
      * The line `private ;` in the PHP code snippet is declaring a private property named
      * @var `$email` within the `User` class. This property is used to store the email of a user
@@ -54,6 +58,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $email;
 
     #[ORM\OneToMany(targetEntity: Task::class, mappedBy: "user")]
+
     /**
      * The line `private ;` in the PHP code snippet is declaring a private property named
      * @var `$tasks` within the `User` class. This property is used to related $tasks with user.
@@ -61,6 +66,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     private $tasks;
 
     #[ORM\Column(type: "json")]
+    
     /**
      * The line `private ;` in the PHP code snippet is declaring a private property named
      * @var `$roles` within the `User` class. This property is used to store the role of a user

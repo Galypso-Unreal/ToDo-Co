@@ -10,7 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
 class TaskTest extends KernelTestCase
 {
-
+    /* The line `private ;` in the PHP code snippet is declaring a private property named
+    `$entityManager` within the `TaskTest` class. This property is used create entitymanager
+    symfony for database interaction like persist, flush, ect.*/
     private ?EntityManagerInterface $entityManager = null;
 
     // Get doctrine for managing entities.

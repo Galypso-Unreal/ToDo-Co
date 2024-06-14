@@ -13,24 +13,41 @@ class Task
     #[ORM\Id]
     #[ORM\GeneratedValue(strategy: "AUTO")]
     #[ORM\Column(type: "integer")]
-    private $identifier;
+    /* The line `private ;` in the PHP code snippet is declaring a private property named `$id`
+    within the `Task` class. This property is intended to store the unique identifier of a task
+    object.*/
+    private $id;
 
     #[ORM\Column(type: "datetime")]
+    /* The line `private ;` in the PHP code snippet is declaring a private property named
+    `$createdAt` within the `Task` class. This property is intended to store the datetime when a
+    task object is created.*/
     private $createdAt;
 
     #[ORM\Column(type: "string")]
     #[Assert\NotBlank(message: "Vous devez saisir un titre.")]
+    /* The line `private ;` in the PHP code snippet is declaring a private property named
+    `$title` within the `Task` class. This property is intended to store the title of a task object.*/
     private $title;
 
     #[ORM\Column(type: "text")]
     #[Assert\NotBlank(message: "Vous devez saisir du contenu.")]
+    /* The line `private ;` in the PHP code snippet is declaring a private property named
+    `$content` within the `Task` class. This property is intended to store the content of a task
+    object.*/
     private $content;
 
     #[ORM\Column(type: "boolean")]
+    /* The line `private ;` in the PHP code snippet is declaring a private property named
+    `$isDone` within the `Task` class. This property is intended to store the status of whether a
+    task is done or not.*/
     private $isDone;
 
     #[ORM\ManyToOne(targetEntity: User::class, inversedBy: "tasks")]
     #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id")]
+    /* The line `private ;` in the PHP code snippet is declaring a private property named `$user`
+    within the `Task` class. This property is intended to store the relationship to a `User` entity
+    in the context of a task.*/
     private $user;
 
     /**
@@ -58,7 +75,7 @@ class Task
 
     public function getId()
     {
-        return $this->identifier;
+        return $this->id;
 
     }// End getId().
 

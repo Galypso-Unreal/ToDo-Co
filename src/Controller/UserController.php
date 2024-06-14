@@ -14,6 +14,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class UserController extends AbstractController
 {
 
+    /* The line `private CacheItemPoolInterface ;` in the PHP code snippet is declaring a
+    private property named `$cachePool` of type `CacheItemPoolInterface` within the `UserController`
+    class. */
     private CacheItemPoolInterface $cachePool;
 
     /**

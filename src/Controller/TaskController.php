@@ -15,6 +15,9 @@ use Symfony\Component\Routing\Annotation\Route;
 class TaskController extends AbstractController
 {
 
+    /* The line `private CacheItemPoolInterface ` in the PHP code snippet is declaring a
+    private property named `$cachePool` of type `CacheItemPoolInterface`. This property is then
+    initialized in the constructor of the `TaskController` class using dependency injection. */
     private CacheItemPoolInterface $cachePool;
 
     /**

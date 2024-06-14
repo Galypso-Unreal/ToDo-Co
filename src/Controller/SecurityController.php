@@ -12,6 +12,8 @@ use Symfony\Component\Routing\Annotation\Route;
 class SecurityController extends AbstractController
 {
     #[Route('/login', name: 'login')]
+
+
     /**
      * The loginAction function checks if the user is authenticated fully and displays login form with
      * error message if not.
@@ -24,8 +26,6 @@ class SecurityController extends AbstractController
      * login form with the last username and any authentication error. If the user is already
      * authenticated, it will redirect to the homepage.
      */
-
-
     public function loginAction(AuthenticationUtils $authenticationUtils)
     {
         if ($this->isGranted("IS_AUTHENTICATED_FULLY") === false) {
@@ -47,13 +47,13 @@ class SecurityController extends AbstractController
      * @codeCoverageIgnore
      */
     #[Route('/login_check', name: 'login_check')]
+
+
     /**
      * Code for checking if user is correctly logged.
      *
      * @return void
      */
-
-
     public function loginCheck(): void
     {
         // This code is never executed.
@@ -64,13 +64,13 @@ class SecurityController extends AbstractController
      * @codeCoverageIgnore
      */
     #[Route('/logout', name: 'logout')]
+
+    
     /**
      * Function for logout url user.
      *
      * @return void
      */
-
-
     public function logoutCheck(): void
     {
         // This code is never executed.

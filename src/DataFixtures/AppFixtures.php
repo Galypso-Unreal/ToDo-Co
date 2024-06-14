@@ -15,7 +15,12 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
  */
 class AppFixtures extends Fixture
 {
-    
+    /**
+     * The line `private ;` declares a private property named @var `$container` in the
+     * `AppFixtures` class. key part of the framework's Dependency Injection (DI) mechanism.
+     * It holds an instance of the service container,
+     * which is responsible for managing the lifecycle of services and their dependencies within a Symfony application. 
+     */
     protected $container;
 
     /**
@@ -33,7 +38,7 @@ class AppFixtures extends Fixture
     
 
     /**
-     * The line `private ;` declares a private property named `$passwordEncoder` in the
+     * The line `private ;` declares a private property named @var `$passwordEncoder` in the
      * `AppFixtures` class. This property is used to store an instance of the
      * `UserPasswordHasherInterface` object, which is responsible for hashing passwords in Symfony
      * applications. This property is initialized in the constructor of the class using dependency

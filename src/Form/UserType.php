@@ -14,6 +14,7 @@ use Symfony\Component\Form\Extension\Core\Type\RepeatedType;
 class UserType extends AbstractType
 {
 
+
     /**
      * The function builds a form with fields for username, password, email, and roles with a model
      * transformer for roles.
@@ -32,8 +33,6 @@ class UserType extends AbstractType
      * RepeatedType (PasswordType), 'email' of type EmailType, and 'roles' of type ChoiceType with
      * options for 'User' and 'Admin'. Additionally, a model transformer is being added to
      */
-
-
     public function buildForm(FormBuilderInterface $builder, array $options): void
     {
         $builder

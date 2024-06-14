@@ -14,7 +14,9 @@ class UserTest extends KernelTestCase
 
     private ?EntityManagerInterface $entityManager = null;
 
-    // Set up doctrine for entity manager.
+    /**
+     * Set up doctrine for entity manager.
+     */
     protected function setUp(): void
     {
         $kernel = self::bootKernel();
@@ -26,7 +28,9 @@ class UserTest extends KernelTestCase
     }// End setUp().
 
 
-    // Test id function.
+    /**
+     * Test id function.
+     */
     public function testId(): void
     {
 
@@ -63,7 +67,9 @@ class UserTest extends KernelTestCase
     }// End testId().
 
 
-    // Test get/set username.
+    /**
+     * Test get/set username.
+     */
     public function testUsername(): void
     {
         $user = new User();
@@ -73,7 +79,9 @@ class UserTest extends KernelTestCase
     }// End testUsername().
 
 
-    // Test salt function (working security).
+    /**
+     * Test salt function (working security).
+     */
     public function testSalt(): void
     {
         $user = new User();
@@ -82,7 +90,9 @@ class UserTest extends KernelTestCase
     }// End testSalt().
 
 
-    // Test password managment (not encoded).
+    /**
+     * Test password managment (not encoded).
+     */
     public function testPassword(): void
     {
         $user = new User();
@@ -92,7 +102,9 @@ class UserTest extends KernelTestCase
     }// End testPassword().
 
 
-    // Test mail get/set.
+    /**
+     * Test mail get/set.
+     */
     public function testMail(): void
     {
         $user = new User();
@@ -102,7 +114,9 @@ class UserTest extends KernelTestCase
     }// End testMail().
 
 
-    // Test roles of user.
+    /**
+     * Test roles of user.
+     */
     public function testRoles(): void
     {
         $user = new User();
@@ -112,7 +126,9 @@ class UserTest extends KernelTestCase
     }// End testRoles().
 
 
-    // Test erase credential (working security).
+    /**
+     * Test erase credential (working security).
+     */
     public function testEraseCredentials(): void
     {
         $user = new User();

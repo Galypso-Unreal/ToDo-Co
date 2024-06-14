@@ -17,7 +17,9 @@ class TaskTest extends KernelTestCase
      */
     private ?EntityManagerInterface $entityManager = null;
 
-    // Get doctrine for managing entities.
+    /**
+     * Get doctrine for managing entities.
+     */
     protected function setUp(): void
     {
         $kernel = self::bootKernel();
@@ -29,7 +31,9 @@ class TaskTest extends KernelTestCase
     }// End setUp().
 
 
-    // Test if construct work.
+    /**
+     * Test if construct work.
+     */
     public function testConstruct(): void
     {
         $task = new Task();
@@ -39,7 +43,9 @@ class TaskTest extends KernelTestCase
     }// End testConstruct().
 
 
-    // Test if get id function work.
+    /**
+     * Test if get id function work.
+     */
     public function testId(): void
     {
         // Create new task.
@@ -62,7 +68,9 @@ class TaskTest extends KernelTestCase
     }// End testId().
 
 
-    // Test if created at work.
+    /**
+     * Test if created at work.
+     */
     public function testCreatedAt(): void
     {
         $task = new Task();
@@ -73,7 +81,9 @@ class TaskTest extends KernelTestCase
     }// End testCreatedAt().
 
 
-    // Test set title.
+    /**
+     * Test set title.
+     */
     public function testTitle(): void
     {
         $task = new Task();
@@ -83,7 +93,9 @@ class TaskTest extends KernelTestCase
     }// End testTitle().
 
 
-    // Test set content.
+    /**
+     * Test set content.
+     */
     public function testContent(): void
     {
         $task = new Task();
@@ -93,7 +105,9 @@ class TaskTest extends KernelTestCase
     }// End testContent().
 
 
-    // Test isDone function work.
+    /**
+     * Test isDone function work.
+     */
     public function testIsDone(): void
     {
         $task = new Task();
@@ -103,7 +117,9 @@ class TaskTest extends KernelTestCase
     }// End testIsDone().
 
 
-    // Test linked user to a task.
+    /**
+     * Test linked user to a task.
+     */
     public function testUser(): void
     {
         $user = new User();

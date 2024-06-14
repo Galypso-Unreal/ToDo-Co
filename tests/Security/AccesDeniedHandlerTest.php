@@ -9,7 +9,9 @@ class AccesDeniedHandlerTest extends WebTestCase
 
 {
 
-    // Test user redirect if not admin.
+    /**
+     * Test user redirect if not admin.
+     */
     public function testPageAdminAsUser(): void
     {
         $client = static::createClient();

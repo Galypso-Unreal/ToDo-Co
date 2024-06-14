@@ -10,7 +10,9 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class UserControllerTest extends WebTestCase
 {
 
-    // Test if get users redirect when not connected.
+    /**
+     * Test if get users redirect when not connected.
+     */
     public function testListAction(): void
     {
         $client = static::createClient();
@@ -26,7 +28,9 @@ class UserControllerTest extends WebTestCase
     }// End testListAction().
 
 
-    // Test if get users not work if not admin.
+    /**
+     * Test if get users not work if not admin.
+     */
     public function testListActionAsUser(): void
     {
         $client = static::createClient();
@@ -46,7 +50,9 @@ class UserControllerTest extends WebTestCase
     }// End testListActionAsUser().
 
 
-    // Test if list of users work when admin connected.
+    /**
+     * Test if list of users work when admin connected.
+     */
     public function testListActionAsAdmin()
     {
         $client = static::createClient();
@@ -65,7 +71,9 @@ class UserControllerTest extends WebTestCase
     }// End testListActionAsAdmin().
 
 
-    // Test create user.
+    /**
+     * Test create user.
+     */
     public function testCreateAction(): void
     {
         $client = static::createClient();
@@ -84,7 +92,9 @@ class UserControllerTest extends WebTestCase
     }// End testCreateAction().
 
 
-    // Test edit user.
+    /**
+     * Test edit user.
+     */
     public function testEditAction(): void
     {
         $client = static::createClient();

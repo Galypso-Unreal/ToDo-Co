@@ -17,7 +17,9 @@ use Twig\Environment;
 class TaskControllerTest extends WebTestCase
 {
 
-    // Test if 200 response with tasks list.
+    /**
+     * Test if 200 response with tasks list.
+     */
     public function testListAction()
     {
 
@@ -38,7 +40,9 @@ class TaskControllerTest extends WebTestCase
     }// End testListAction().
 
 
-    // Test list of tasks done.
+    /**
+     * Test list of tasks done.
+     */
     public function testlistActionDone()
     {
 
@@ -59,7 +63,9 @@ class TaskControllerTest extends WebTestCase
     }// End testlistActionDone().
 
 
-    // Test if cache list done work.
+    /**
+     * Test if cache list done work.
+     */
     public function testListDoneActionCache()
     {
         $client = static::createClient();
@@ -88,7 +94,9 @@ class TaskControllerTest extends WebTestCase
     }// End testListDoneActionCache().
 
 
-    // Test if create task work and redirect with success response.
+    /**
+     * Test if create task work and redirect with success response.
+     */
     public function testCreateAction(): void
     {
         $client = static::createClient();
@@ -121,7 +129,9 @@ class TaskControllerTest extends WebTestCase
     }// End testCreateAction().
 
 
-    // Test if can edit task.
+    /**
+     * Test if can edit task.
+     */
     public function testEditAction(): void
     {
         $client = static::createClient();
@@ -159,7 +169,9 @@ class TaskControllerTest extends WebTestCase
     }// End testEditAction().
 
 
-    // Test if edit with wrong user is not working (not admin).
+    /**
+     * Test if edit with wrong user is not working (not admin).
+     */
     public function testEditAsWrongUserAction(): void
     {
         $client = static::createClient();
@@ -202,7 +214,9 @@ class TaskControllerTest extends WebTestCase
     }// End testEditAsWrongUserAction().
 
 
-    // Test if change status of task work.
+    /**
+     * Test if change status of task work.
+     */
     public function testToggleTaskAction(): void
     {
         $client = static::createClient();
@@ -230,7 +244,9 @@ class TaskControllerTest extends WebTestCase
     }// End testToggleTaskAction().
 
 
-    // Test status has not done work.
+    /**
+     * Test status has not done work.
+     */
     public function testToggleTaskActionAsNotDone(): void
     {
         $client = static::createClient();
@@ -270,7 +286,9 @@ class TaskControllerTest extends WebTestCase
     }// End testToggleTaskActionAsNotDone().
 
 
-    // Test if can delete task.
+    /**
+     * Test if can delete task.
+     */
     public function testDeleteTaskAction(): void
     {
         $client = static::createClient();
@@ -300,7 +318,9 @@ class TaskControllerTest extends WebTestCase
     }// End testDeleteTaskAction().
 
 
-    // Test if delete task with wrong user not working.
+    /**
+     * Test if delete task with wrong user not working.
+     */
     public function testDeleteTaskActionWrongUser(): void
     {
         $client = static::createClient();

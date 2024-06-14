@@ -27,11 +27,11 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
      * The function checks if the user is fully authenticated and not an admin, then adds an error
      * message and redirects to the login page.
      * 
-     * @param Request request The `$request` parameter in the `handle` function is an instance of the
+     * @param Request $request The `$request` parameter in the `handle` function is an instance of the
      * `Request` class in Symfony. It represents an HTTP request that is being handled by the
      * application. This object contains all the information about the request, such as the request
      * method, headers, parameters, and more.
-     * @param AccessDeniedException accessDeniedException The `AccessDeniedException` is an exception
+     * @param AccessDeniedException $accessDeniedException The `AccessDeniedException` is an exception
      * that is thrown when a user tries to access a resource or perform an action for which they do not
      * have the necessary permissions or authorization. In the context of the `handle` function you
      * provided, it is used to handle cases where access is denied to a

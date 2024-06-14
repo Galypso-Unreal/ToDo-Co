@@ -13,7 +13,7 @@ class TaskType extends AbstractType
      * The function builds a form with fields for title and content using Symfony's
      * FormBuilderInterface.
      * 
-     * @param FormBuilderInterface builder The `$builder` parameter in the `buildForm` method is an
+     * @param FormBuilderInterface $builder The `$builder` parameter in the `buildForm` method is an
      * instance of `FormBuilderInterface` class. It is used to define the structure and behavior of the
      * form being built. You can use methods provided by the `FormBuilderInterface` class to add form
      * fields, configure options, and handle form

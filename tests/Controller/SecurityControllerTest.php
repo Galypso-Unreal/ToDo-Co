@@ -9,7 +9,9 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class SecurityControllerTest extends WebTestCase
 {
 
-    // Test if login page have 200 response.
+    /**
+     * Test if login page have 200 response.
+     */
     public function testLoginPage(): void
     {
         $client = static::createClient();
@@ -21,7 +23,9 @@ class SecurityControllerTest extends WebTestCase
     }// End testLoginPage().
 
 
-    // Test if login page redirect on homepage if already connected.
+    /**
+     * Test if login page redirect on homepage if already connected.
+     */
     public function testLoginPageAsConnected(): void
     {
         $client = static::createClient();
@@ -45,7 +49,9 @@ class SecurityControllerTest extends WebTestCase
     }// End testLoginPageAsConnected().
 
 
-    // Test login submission page redirect to homepage with success response.
+    /**
+     * Test login submission page redirect to homepage with success response.
+     */
     public function testLoginFormSubmission(): void
     {
         $client = static::createClient();
@@ -70,7 +76,9 @@ class SecurityControllerTest extends WebTestCase
     }// End testLoginFormSubmission().
 
 
-    // Test if logout work when user connected.
+    /**
+     * Test if logout work when user connected.
+     */
     public function testLogoutCheck(): void
     {
         $client = static::createClient();

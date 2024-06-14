@@ -26,7 +26,7 @@ class AppFixtures extends Fixture
     /**
      * The function `setContainer` sets the container property of an object to a specified value.
      * 
-     * @param ContainerInterface
+     * @param ContainerInterface $container The Symfony service container instance.
      */
 
 
@@ -51,7 +51,7 @@ class AppFixtures extends Fixture
      * The constructor function initializes the password encoder with a UserPasswordHasherInterface
      * object.
      * 
-     * @param UserPasswordHasherInterface
+     * @param UserPasswordHasherInterface $userPasswordHasher The password interface for hashing user password.
      */
 
 
@@ -65,7 +65,7 @@ class AppFixtures extends Fixture
     /**
      * The function creates users with different roles and tasks assigned to them in a PHP application.
      * 
-     * @param ObjectManager
+     * @param ObjectManager $manager The Doctrine ObjectManager instance.
      */
 
 

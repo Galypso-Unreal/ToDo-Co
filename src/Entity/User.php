@@ -30,7 +30,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank(message: "Vous devez saisir un nom d'utilisateur.")]
     /**
      * The line `private ;` in the PHP code snippet is declaring a private property named
-     * `$username` within the `User` class. This property is used to store the username of a user
+     * @var `$username` within the `User` class. This property is used to store the username of a user
      * entity.
      */
     private $username;
@@ -38,7 +38,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: "string", length: 64)]
     /**
      * The line `private ;` in the PHP code snippet is declaring a private property named
-     * `$password` within the `User` class. This property is used to store the password of a user
+     * @var `$password` within the `User` class. This property is used to store the password of a user
      * entity. This password is hash before add in database.
      */
     private $password;
@@ -48,7 +48,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Email(message: "Le format de l'adresse n'est pas correcte.")]
     /**
      * The line `private ;` in the PHP code snippet is declaring a private property named
-     * `$email` within the `User` class. This property is used to store the email of a user
+     * @var `$email` within the `User` class. This property is used to store the email of a user
      * entity.
      */
     private $email;
@@ -56,14 +56,14 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\OneToMany(targetEntity: Task::class, mappedBy: "user")]
     /**
      * The line `private ;` in the PHP code snippet is declaring a private property named
-     * `$tasks` within the `User` class. This property is used to related $tasks with user.
+     * @var `$tasks` within the `User` class. This property is used to related $tasks with user.
      */
     private $tasks;
 
     #[ORM\Column(type: "json")]
     /**
      * The line `private ;` in the PHP code snippet is declaring a private property named
-     * `$roles` within the `User` class. This property is used to store the role of a user
+     * @var `$roles` within the `User` class. This property is used to store the role of a user
      * entity. User can have only one role at the same time.
      */
     private $roles = [];

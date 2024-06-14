@@ -19,7 +19,7 @@ class UserTypeTest extends WebTestCase
 {
     /**
      * The line `private ;` in the PHP code snippet is declaring a private property named
-     * `$entityManager` within the `TaskTest` class. This property is used create entitymanager
+     * @var `$entityManager` within the `TaskTest` class. This property is used create entitymanager
      * symfony for database interaction like persist, flush, ect.
      */
     private ?EntityManagerInterface $entityManager = null;

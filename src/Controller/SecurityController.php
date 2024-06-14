@@ -16,17 +16,17 @@ class SecurityController extends AbstractController
      * The loginAction function checks if the user is authenticated fully and displays login form with
      * error message if not.
      * 
-     * @param Request $request
+     * @param Request $request the request of HTTP foundation component.
      * 
-     * @param AuthenticationUtils $authenticationUtils
+     * @param AuthenticationUtils $authenticationUtils used for authentication user.
      * 
-     * @return If the user is not authenticated fully, the method will return a rendered view of the
+     * @return Response the user is not authenticated fully, the method will return a rendered view of the
      * login form with the last username and any authentication error. If the user is already
      * authenticated, it will redirect to the homepage.
      */
 
 
-    public function loginAction(Request $request, AuthenticationUtils $authenticationUtils)
+    public function loginAction(AuthenticationUtils $authenticationUtils)
     {
         if ($this->isGranted("IS_AUTHENTICATED_FULLY") === false) {
             $error = $authenticationUtils->getLastAuthenticationError();

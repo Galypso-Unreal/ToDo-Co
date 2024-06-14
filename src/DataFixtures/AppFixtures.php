@@ -32,12 +32,14 @@ class AppFixtures extends Fixture
     }// End setContainer().
     
 
-    /* The line `private ;` declares a private property named `$passwordEncoder` in the
-    `AppFixtures` class. This property is used to store an instance of the
-    `UserPasswordHasherInterface` object, which is responsible for hashing passwords in Symfony
-    applications. This property is initialized in the constructor of the class using dependency
-    injection to ensure that the `UserPasswordHasherInterface` object is available for use
-    throughout the class methods. */
+    /**
+     * The line `private ;` declares a private property named `$passwordEncoder` in the
+     * `AppFixtures` class. This property is used to store an instance of the
+     * `UserPasswordHasherInterface` object, which is responsible for hashing passwords in Symfony
+     * applications. This property is initialized in the constructor of the class using dependency
+     * injection to ensure that the `UserPasswordHasherInterface` object is available for use
+     * throughout the class methods. 
+     */
     private $passwordEncoder;
     
     /**

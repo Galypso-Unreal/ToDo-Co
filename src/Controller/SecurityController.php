@@ -24,8 +24,6 @@ class SecurityController extends AbstractController
      * login form with the last username and any authentication error. If the user is already
      * authenticated, it will redirect to the homepage.
      */
-
-
     public function loginAction(AuthenticationUtils $authenticationUtils)
     {
         if ($this->isGranted("IS_AUTHENTICATED_FULLY") === false) {
@@ -76,5 +74,5 @@ class SecurityController extends AbstractController
         // This code is never executed.
     }// End logoutCheck().
     
-    
+
 }

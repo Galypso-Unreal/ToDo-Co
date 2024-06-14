@@ -37,6 +37,8 @@ class TaskController extends AbstractController
 
 
     #[Route('/tasks', name: 'task_list')]
+
+    
     /**
      * The listAction function retrieves a list of tasks from the cache if available, otherwise fetches
      * them from the database and stores them in the cache.
@@ -65,6 +67,8 @@ class TaskController extends AbstractController
 
 
     #[Route('/tasks/done', name: 'task_list_done')]
+
+
     /**
      * This PHP function retrieves a list of tasks marked as done from the cache or database and
      * renders them in a Twig template.
@@ -94,6 +98,8 @@ class TaskController extends AbstractController
 
 
     #[Route('/tasks/create', name: 'task_create')]
+
+
     /**
      * The function `createAction` creates a new task, associates it with a user if the user exists,
      * persists it to the database, and redirects to the task list page with a success message.
@@ -144,6 +150,8 @@ class TaskController extends AbstractController
 
 
     #[Route('/tasks/{id}/edit', name: 'task_edit')]
+
+
     /**
      * This PHP function edits a task if the current user is the owner, otherwise it displays an error
      * message.
@@ -188,12 +196,14 @@ class TaskController extends AbstractController
         } else {
             $this->addFlash('error', sprintf('La tâche %s ne peux pas être modifier par un autre utilisateur', $task->getTitle()));
             return $this->redirectToRoute('task_list');
-        }// End if.
+        }//
 
     }// End editAction().
 
 
     #[Route('/tasks/{id}/toggle', name: 'task_toggle')]
+
+
     /**
      * The function toggles the status of a task between done and not done, updates the cache, displays
      * a success message, and redirects to the task list page.
@@ -225,6 +235,8 @@ class TaskController extends AbstractController
 
 
     #[Route('/tasks/{id}/delete', name: 'task_delete')]
+
+
     /**
      * The function `deleteTaskAction` deletes a task if the current user is the owner of the task or
      * has admin role and the task belongs to an anonymous user, otherwise it displays an error

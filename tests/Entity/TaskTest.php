@@ -8,10 +8,20 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class TaskTest extends KernelTestCase{
+class TaskTest extends KernelTestCase
+{
 
+
+    /**
+     * @var `$entityManager` within the `TaskTest` class. This property is used create entitymanager
+     * symfony for database interaction like persist, flush, ect.
+     */
     private ?EntityManagerInterface $entityManager = null;
 
+
+    /**
+     * Get doctrine for managing entities.
+     */
     protected function setUp(): void
     {
         $kernel = self::bootKernel();
@@ -19,59 +29,101 @@ class TaskTest extends KernelTestCase{
         $this->entityManager = $kernel->getContainer()
             ->get('doctrine')
             ->getManager();
-    }
 
-    function testConstruct(): void{
+    }// End setUp().
+
+
+    /**
+     * Test if construct work.
+     */
+    public function testConstruct(): void
+    {
         $task = new Task();
-        $this->assertEquals(false,$task->isDone());
+        $this->assertEquals(false, $task->isDone());
         $this->assertNotNull($task);
-    }
 
-    function testId(): void{
-       // Create new task
-       $task = new Task();
-       $task->setTitle('Test Task');
-       $task->setContent('This is a test task description.');
+    }// End testConstruct().
 
-       // Save task in database
-       $this->entityManager->persist($task);
-       $this->entityManager->flush();
 
-       // Get task from database
-       $taskRepository = $this->entityManager->getRepository(Task::class);
-       $savedTask = $taskRepository->find($task->getId());
+    /**
+     * Test if get id function work.
+     */
+    public function testId(): void
+    {
+        // Create new task.
+        $task = new Task();
+        $task->setTitle('Test Task');
+        $task->setContent('This is a test task description.');
 
-       // Check if id is correct
-       $this->assertNotNull($savedTask);
-       $this->assertIsInt($savedTask->getId());
-    }
+        // Save task in database.
+        $this->entityManager->persist($task);
+        $this->entityManager->flush();
 
-    function testCreatedAt(): void{
+        // Get task from database.
+        $taskRepository = $this->entityManager->getRepository(Task::class);
+        $savedTask = $taskRepository->find($task->getId());
+
+        // Check if id is correct.
+        $this->assertNotNull($savedTask);
+        $this->assertIsInt($savedTask->getId());
+
+    }// End testId().
+
+
+    /**
+     * Test if created at work.
+     */
+    public function testCreatedAt(): void
+    {
         $task = new Task();
         $date = new DateTime('2022-07-03 04:53:53');
         $task->setCreatedAt($date);
-        $this->assertEquals(new DateTime('2022-07-03 04:53:53'),$task->getCreatedAt());
-    }
+        $this->assertEquals(new DateTime('2022-07-03 04:53:53'), $task->getCreatedAt());
 
-    function testTitle(): void{
+    }// End testCreatedAt().
+
+
+    /**
+     * Test set title.
+     */
+    public function testTitle(): void
+    {
         $task = new Task();
         $task->setTitle('here');
-        $this->assertEquals('here',$task->getTitle());
-    }
+        $this->assertEquals('here', $task->getTitle());
 
-    function testContent(): void{
+    }// End testTitle().
+
+
+    /**
+     * Test set content.
+     */
+    public function testContent(): void
+    {
         $task = new Task();
         $task->setContent('testContent');
-        $this->assertEquals('testContent',$task->getContent());
-    }
+        $this->assertEquals('testContent', $task->getContent());
 
-    function testIsDone(): void{
+    }// End testContent().
+
+
+    /**
+     * Test isDone function work.
+     */
+    public function testIsDone(): void
+    {
         $task = new Task();
         $task->toggle(true);
-        $this->assertEquals(true,$task->isDone());
-    }
+        $this->assertEquals(true, $task->isDone());
 
-    function testUser(): void{
+    }// End testIsDone().
+
+
+    /**
+     * Test linked user to a task.
+     */
+    public function testUser(): void
+    {
         $user = new User();
         $user->setUsername('john');
         $user->setEmail('john@gmail.com');
@@ -79,7 +131,9 @@ class TaskTest extends KernelTestCase{
 
         $task = new Task();
         $task->setUser($user);
-        $this->assertEquals($user,$task->getUser());
-    }
+        $this->assertEquals($user, $task->getUser());
+        
+    }// End testUser().
 
+    
 }

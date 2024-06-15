@@ -8,37 +8,51 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class SecurityControllerTest extends WebTestCase
 {
+
+
+    /**
+     * Test if login page have 200 response.
+     */
     public function testLoginPage(): void
     {
         $client = static::createClient();
 
-        $crawler = $client->request('GET', '/login');
+        $client->request('GET', '/login');
 
         $this->assertResponseIsSuccessful();
-    }
 
+    }// End testLoginPage().
+
+
+    /**
+     * Test if login page redirect on homepage if already connected.
+     */
     public function testLoginPageAsConnected(): void
     {
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
-        
 
-        // retrieve the test user
+
+        // Retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'User']);
 
-        // simulate $testUser being logged in
+        // Simulate $testUser being logged in.
         $client->loginUser($testUser);
 
-        $crawler = $client->request('GET', '/login');
+        $client->request('GET', '/login');
 
         $client->followRedirect();
 
         $this->assertRouteSame('homepage');
 
         $this->assertResponseIsSuccessful();
-    }
-    
 
+    }// End testLoginPageAsConnected().
+
+
+    /**
+     * Test login submission page redirect to homepage with success response.
+     */
     public function testLoginFormSubmission(): void
     {
         $client = static::createClient();
@@ -55,34 +69,41 @@ class SecurityControllerTest extends WebTestCase
 
         $client->followRedirect();
 
-        // Check if on page homepage
+        // Check if on page homepage.
         $this->assertRouteSame('homepage');
 
         $this->assertResponseIsSuccessful();
-    }
 
+    }// End testLoginFormSubmission().
+
+
+    /**
+     * Test if logout work when user connected.
+     */
     public function testLogoutCheck(): void
     {
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
-        
 
-        // retrieve the test user
+
+        // Retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'User']);
 
-        // simulate $testUser being logged in
+        // Simulate $testUser being logged in.
         $client->loginUser($testUser);
 
-        // Disconnect
+        // Disconnect.
         $client->request('GET', '/logout');
 
-        // Follow redirect
+        // Follow redirect.
         $client->followRedirect();
 
-        // Check if on page login
+        // Check if on page login.
         $this->assertRouteSame('login');
 
         $this->assertResponseIsSuccessful();
-    }
+        
+    }// End testLogoutCheck().
+
     
 }

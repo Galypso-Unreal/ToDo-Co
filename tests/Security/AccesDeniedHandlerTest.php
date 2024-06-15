@@ -6,21 +6,25 @@ use App\Repository\UserRepository;
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 
 class AccesDeniedHandlerTest extends WebTestCase
-
 {
+
+
+    /**
+     * Test user redirect if not admin.
+     */
     public function testPageAdminAsUser(): void
     {
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
-        
 
-        // retrieve the test user
+
+        // Retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'User']);
 
-        // simulate $testUser being logged in
+        // Simulate $testUser being logged in.
         $client->loginUser($testUser);
 
-        $crawler = $client->request('GET', '/users');
+        $client->request('GET', '/users');
 
         $flashMessages = $client->getRequest()->getSession()->getFlashBag()->get('error');
 
@@ -32,7 +36,7 @@ class AccesDeniedHandlerTest extends WebTestCase
             }
         }
 
-        $this->assertEquals(true,$containsText);
+        $this->assertEquals(true, $containsText);
 
         $client->followRedirect();
 
@@ -43,5 +47,8 @@ class AccesDeniedHandlerTest extends WebTestCase
         $this->assertRouteSame('homepage');
 
         $this->assertResponseIsSuccessful();
-    }
+        
+    }// End testPageAdminAsUser().
+
+    
 }

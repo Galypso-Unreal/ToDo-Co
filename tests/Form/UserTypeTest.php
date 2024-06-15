@@ -17,56 +17,63 @@ use Symfony\Component\Form\CallbackTransformer;
 
 class UserTypeTest extends WebTestCase
 {
-
+    /**
+     * @var `$entityManager` within the `TaskTest` class. This property is used create entitymanager
+     * symfony for database interaction like persist, flush, ect.
+     */
     private ?EntityManagerInterface $entityManager = null;
 
 
+    /**
+     * Test if submit data work on user form.
+     */
     public function testSubmitValidData(): void
     {
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
         $this->entityManager = static::getContainer()->get(EntityManagerInterface::class);
 
-        // retrieve the test user
+        // Retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'Admin']);
 
-        // simulate $testUser being logged in
+        // Simulate $testUser being logged in.
         $client->loginUser($testUser);
-        
-        // Go to the page create user
+
+        // Go to the page create user.
         $crawler = $client->request('GET', '/users/create');
 
-        // Check if page is correctlyh loaded
+        // Check if page is correctlyh loaded.
         $this->assertResponseIsSuccessful();
 
-        // Query for a user named "test-user-phpunit"
+        // Query for a user named "test-user-phpunit".
         $testUser = $userRepository->findOneBy(['username' => 'testuser-phpunit']);
 
-        // If test-user-phpunit exists, delete him
-        if ($testUser) {
+        // If test-user-phpunit exists, delete him.
+        if (empty($testUser) === false) {
             $this->entityManager->remove($testUser);
             $this->entityManager->flush();
         }
 
-        // Select form
-        
+        // Select form.
         $form = $crawler->selectButton('addUser')->form();
 
-        // Add content to form
+        // Add content to form.
         $form['user[username]'] = 'testuser-phpunit';
         $form['user[email]'] = 'testuser-phpunit@example.com';
         $form['user[password][first]'] = 'password123';
         $form['user[password][second]'] = 'password123';
         $form['user[roles]'] = 'ROLE_USER';
 
-        // Submit form
+        // Submit form.
         $client->submit($form);
 
-        // Follow redirection
+        // Follow redirection.
         $client->followRedirect();
 
-        // Check if user has been created
+        // Check if user has been created.
         $this->assertResponseIsSuccessful();
-    }
+        
+    }// End testSubmitValidData().
 
+    
 }

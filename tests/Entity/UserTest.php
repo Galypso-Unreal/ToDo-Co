@@ -1,4 +1,4 @@
-<?php 
+<?php
 
 
 namespace App\Tests\Entity;
@@ -9,10 +9,19 @@ use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 
-class UserTest extends KernelTestCase{
+class UserTest extends KernelTestCase
+{
 
+    /**
+     * @var `$entityManager` within the `TaskTest` class. This property is used create entitymanager
+     * symfony for database interaction like persist, flush, ect.
+     */
     private ?EntityManagerInterface $entityManager = null;
 
+    
+    /**
+     * Set up doctrine for entity manager.
+     */
     protected function setUp(): void
     {
         $kernel = self::bootKernel();
@@ -20,18 +29,24 @@ class UserTest extends KernelTestCase{
         $this->entityManager = $kernel->getContainer()
             ->get('doctrine')
             ->getManager();
-    }
 
-    function testId(): void{
+    }// End setUp().
+
+
+    /**
+     * Test id function.
+     */
+    public function testId(): void
+    {
 
 
         $userRepository = static::getContainer()->get(UserRepository::class);
 
-        // Query for a user named "test-user-phpunit"
+        // Query for a user named "test-user-phpunit".
         $testUser = $userRepository->findOneBy(['username' => 'test-user-phpunit']);
 
-        // If test-user-phpunit exists, delete him
-        if ($testUser) {
+        // If test-user-phpunit exists, delete him.
+        if (empty($testUser) === false) {
             $this->entityManager->remove($testUser);
             $this->entityManager->flush();
         }
@@ -41,53 +56,90 @@ class UserTest extends KernelTestCase{
         $user->setPassword('noencodepass');
         $user->setEmail('test-user@gmail.com');
         $user->setUsername('test-user-phpunit');
- 
+
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
- 
-        // Get task from database
+
+        // Get task from database.
         $taskRepository = $this->entityManager->getRepository(User::class);
         $savedTask = $taskRepository->find($user->getId());
- 
-        // Check if id is correct
+
+        // Check if id is correct.
         $this->assertNotNull($savedTask);
         $this->assertIsInt($savedTask->getId());
-     }
 
-    function testUsername(): void{
+    }// End testId().
+
+
+    /**
+     * Test get/set username.
+     */
+    public function testUsername(): void
+    {
         $user = new User();
         $user->setUsername('John');
-        $this->assertEquals('John',$user->getUserIdentifier());
-    }
+        $this->assertEquals('John', $user->getUserIdentifier());
 
-    function testSalt(): void{
+    }// End testUsername().
+
+
+    /**
+     * Test salt function (working security).
+     */
+    public function testSalt(): void
+    {
         $user = new User();
-        $this->assertEquals(null,$user->getSalt());
-    }
+        $this->assertEquals(null, $user->getSalt());
 
-    function testPassword(): void{
+    }// End testSalt().
+
+
+    /**
+     * Test password managment (not encoded).
+     */
+    public function testPassword(): void
+    {
         $user = new User();
         $user->setPassword('noencodepass');
-        $this->assertEquals('noencodepass',$user->getPassword());
-    }
+        $this->assertEquals('noencodepass', $user->getPassword());
 
-    function testMail(): void{
+    }// End testPassword().
+
+
+    /**
+     * Test mail get/set.
+     */
+    public function testMail(): void
+    {
         $user = new User();
         $user->setEmail('email@test.com');
-        $this->assertEquals('email@test.com',$user->getEmail());
-    }
+        $this->assertEquals('email@test.com', $user->getEmail());
 
-    function testRoles(): void{
+    }// End testMail().
+
+
+    /**
+     * Test roles of user.
+     */
+    public function testRoles(): void
+    {
         $user = new User();
         $user->setRoles(['ROLE_TEST']);
-        $this->assertEquals(['ROLE_TEST'],$user->getRoles());
-    }
+        $this->assertEquals(['ROLE_TEST'], $user->getRoles());
 
-    function testEraseCredentials(): void{
+    }// End testRoles().
+
+
+    /**
+     * Test erase credential (working security).
+     */
+    public function testEraseCredentials(): void
+    {
         $user = new User();
         $this->assertEmpty($user->eraseCredentials());
-    }   
+        
+    }// End testEraseCredentials().
 
-
+    
 }

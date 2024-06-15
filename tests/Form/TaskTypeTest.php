@@ -11,39 +11,45 @@ use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 class TaskTypeTest extends WebTestCase
 {
+
+    
+    /**
+     * Test if submit data work on task form.
+     */
     public function testSubmitValidData()
     {
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
-        
 
-        // retrieve the test user
+
+        // Retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'User']);
 
-        // simulate $testUser being logged in
+        // Simulate $testUser being logged in.
         $client->loginUser($testUser);
 
-        // Go to the page create user
+        // Go to the page create user.
         $crawler = $client->request('GET', '/tasks/create');
 
-        // Check if page is correctlyh loaded
+        // Check if page is correctlyh loaded.
         $this->assertResponseIsSuccessful();
 
-        // Select form
-        
+        // Select form.
         $form = $crawler->selectButton('createTask')->form();
 
-        // Add content to form
+        // Add content to form.
         $form['task[title]'] = 'Test Task';
         $form['task[content]'] = 'This is a Test Task';
 
         $client->submit($form);
 
-        // Follow redirection
+        // Follow redirection.
         $client->followRedirect();
 
-        // Check if task has been created
+        // Check if task has been created.
         $this->assertResponseIsSuccessful();
-    }
+        
+    }// End testSubmitValidData().
 
+    
 }

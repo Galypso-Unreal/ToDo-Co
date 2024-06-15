@@ -13,6 +13,7 @@ use Symfony\Component\Security\Http\Authorization\AccessDeniedHandlerInterface;
 class AccessDeniedHandler implements AccessDeniedHandlerInterface
 {
 
+
     /**
      * The above PHP function is a constructor that takes in an instance of UrlGeneratorInterface and
      * Security as dependencies.
@@ -52,6 +53,7 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
         if ($this->security->isGranted('IS_AUTHENTICATED_FULLY') === true && $this->security->isGranted('ROLE_ADMIN') === false) {
             $request->getSession()->getFlashBag()->add('error', 'Vous devez être administrateur pour accéder à cette page.');
         }
+
         return new RedirectResponse($this->urlGenerator->generate('login'));
         
     }// End handle().

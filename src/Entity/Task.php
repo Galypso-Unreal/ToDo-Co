@@ -162,8 +162,6 @@ class Task
      * 
      * @return void
      */
-
-
     public function setContent($content): void
     {
         $this->content = $content;

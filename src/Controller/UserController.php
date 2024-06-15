@@ -42,7 +42,7 @@ class UserController extends AbstractController
      * The function retrieves a list of users from the cache if available, otherwise fetches it from
      * the database and stores it in the cache.
      * 
-     * @param ManagerRegistry $managerRegistry  interface is part of the Doctrine ORM (Object-Relational Mapping) integration.
+     * @param ManagerRegistry $managerRegistry interface is part of the Doctrine ORM (Object-Relational Mapping) integration.
      * It provides a way to manage and access the different Doctrine entity managers and connections.
      * The ManagerRegistry is often used for dependency injection into services or controllers where database operations are required.
      * 
@@ -61,6 +61,7 @@ class UserController extends AbstractController
         } else {
             $users = $item->get();
         }
+
         return $this->render('user/list.html.twig', ['users' => $users]);
 
     }// End listAction().
@@ -77,7 +78,7 @@ class UserController extends AbstractController
      * 
      * @param UserPasswordHasherInterface $userPasswordHasher The PasswordHasherInterface service, used to hash the password.
      * 
-     * @param ManagerRegistry $managerRegistry  interface is part of the Doctrine ORM (Object-Relational Mapping) integration.
+     * @param ManagerRegistry $managerRegistry interface is part of the Doctrine ORM (Object-Relational Mapping) integration.
      * It provides a way to manage and access the different Doctrine entity managers and connections.
      * The ManagerRegistry is often used for dependency injection into services or controllers where database operations are required.
      * 
@@ -126,7 +127,7 @@ class UserController extends AbstractController
      * 
      * @param UserPasswordHasherInterface $userPasswordHasher The PasswordHasherInterface service, used to hash the password.
      * 
-     * @param ManagerRegistry $managerRegistry  interface is part of the Doctrine ORM (Object-Relational Mapping) integration.
+     * @param ManagerRegistry $managerRegistry interface is part of the Doctrine ORM (Object-Relational Mapping) integration.
      * It provides a way to manage and access the different Doctrine entity managers and connections.
      * The ManagerRegistry is often used for dependency injection into services or controllers where database operations are required.
      * 

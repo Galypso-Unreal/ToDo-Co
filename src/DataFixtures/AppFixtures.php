@@ -35,7 +35,6 @@ class AppFixtures extends Fixture
 
     }// End setContainer().
 
-
     /**
      * @var $passwordEncoder in the `AppFixtures` class. This property is used to store an instance of the
      * `UserPasswordHasherInterface` object, which is responsible for hashing passwords in Symfony
@@ -95,7 +94,8 @@ class AppFixtures extends Fixture
         $task1 = new Task();
         $task1->setTitle('Tâche User');
         $task1->setContent('Contenu de la tâche User');
-        $task1->setUser($user_user); // User for task.
+        // User for task.
+        $task1->setUser($user_user);
         $manager->persist($task1);
 
         $task2 = new Task();

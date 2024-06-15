@@ -32,15 +32,17 @@ class SecurityController extends AbstractController
             $error = $authenticationUtils->getLastAuthenticationError();
             $lastUsername = $authenticationUtils->getLastUsername();
 
-            return $this->render('security/login.html.twig', array(
-                'last_username' => $lastUsername,
-                'error'         => $error,
-            ));
+            return $this->render(
+                'security/login.html.twig',
+                [
+                    'last_username' => $lastUsername,
+                    'error'         => $error,
+                ]
+            );
         } else {
             return $this->redirectToRoute("homepage");
         }
-
-    }// End loginAction().
+    } // End loginAction().
 
 
     /**
@@ -56,8 +58,9 @@ class SecurityController extends AbstractController
      */
     public function loginCheck(): void
     {
+
         // This code is never executed.
-    }// End loginCheck().
+    } // End loginCheck().
 
 
     /**
@@ -65,7 +68,7 @@ class SecurityController extends AbstractController
      */
     #[Route('/logout', name: 'logout')]
 
-    
+
     /**
      * Function for logout url user.
      *
@@ -73,8 +76,9 @@ class SecurityController extends AbstractController
      */
     public function logoutCheck(): void
     {
+        
         // This code is never executed.
-    }// End logoutCheck().
-    
+    } // End logoutCheck().
+
 
 }

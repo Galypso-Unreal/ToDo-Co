@@ -19,7 +19,7 @@ jobs:
           - 3306:3306
         env:
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: test_database
+          MYSQL_DATABASE: todoco
         options: >-
           --health-cmd "mysqladmin ping --silent"
           --health-interval 10s
@@ -42,10 +42,16 @@ jobs:
         run: cp .env.test .env
 
       - name: Wait for MySQL
-        run: sleep 30s
+        run: sleep 10s
 
-      - name: Run database migrations
-        run: php bin/console doctrine:migrations:migrate --no-interaction
+      - name: Run create database
+        run: php bin/console doctrine:database:create
+
+      - name: Run create schema
+        run: php bin/console doctrine:schema:create
+
+      - name: Run fixtures
+        run: php bin/console doctrine:fixtures:load --no-interaction
 
       - name: Run tests
         run: php bin/phpunit

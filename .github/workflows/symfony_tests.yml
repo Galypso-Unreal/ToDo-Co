@@ -44,9 +44,6 @@ jobs:
       - name: Wait for MySQL
         run: sleep 10s
 
-      - name: Run create database
-        run: php bin/console doctrine:database:create
-
       - name: Run create schema
         run: php bin/console doctrine:schema:create
 

@@ -51,4 +51,4 @@ jobs:
         run: php bin/console doctrine:fixtures:load --no-interaction
 
       - name: Run tests
-        run: php bin/phpunit
+        run: ./vendor/bin/phpunit

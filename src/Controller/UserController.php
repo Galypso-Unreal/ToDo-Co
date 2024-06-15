@@ -58,10 +58,10 @@ class UserController extends AbstractController
             $users = $managerRegistry->getRepository(User::class)->findAll();
             $item->set($users);
             $this->cachePool->save($item);
-        } else {
-            $users = $item->get();
         }
 
+        $users = $item->get();
+        
         return $this->render('user/list.html.twig', ['users' => $users]);
 
     }// End listAction().

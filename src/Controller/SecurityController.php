@@ -39,9 +39,9 @@ class SecurityController extends AbstractController
                     'error'         => $error,
                 ]
             );
-        } else {
-            return $this->redirectToRoute("homepage");
         }
+        
+        return $this->redirectToRoute("homepage");
 
     } // End loginAction().
 

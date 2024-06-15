@@ -197,10 +197,10 @@ class TaskController extends AbstractController
                     'task' => $task,
                 ]
             );
-        } else {
-            $this->addFlash('error', sprintf('La tâche %s ne peux pas être modifier par un autre utilisateur', $task->getTitle()));
-            return $this->redirectToRoute('task_list');
-        } //end if
+        }//end if
+
+        $this->addFlash('error', sprintf('La tâche %s ne peux pas être modifier par un autre utilisateur', $task->getTitle()));
+        return $this->redirectToRoute('task_list');
 
     } // End editAction().
 

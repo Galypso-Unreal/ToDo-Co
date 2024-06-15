@@ -41,9 +41,6 @@ jobs:
       - name: Copy .env.test
         run: cp .env.test .env
 
-      - name: Wait for MySQL
-        run: sleep 10s
-
       - name: Run create schema
         run: php bin/console doctrine:schema:create
 

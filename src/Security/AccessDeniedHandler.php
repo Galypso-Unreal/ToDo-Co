@@ -28,6 +28,7 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
         private UrlGeneratorInterface $urlGenerator,
         private Security $security,
     ) {
+        
     }// End __construct().
 
 

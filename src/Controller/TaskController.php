@@ -32,6 +32,7 @@ class TaskController extends AbstractController
     public function __construct(CacheItemPoolInterface $cachePool)
     {
         $this->cachePool = $cachePool;
+
     } // End __construct().
 
 
@@ -61,6 +62,7 @@ class TaskController extends AbstractController
         }
 
         return $this->render('task/list.html.twig', ['tasks' => $tasks]);
+
     } // End listAction().
 
 
@@ -90,8 +92,9 @@ class TaskController extends AbstractController
         } else {
             $tasks = $item->get();
         }
-        
+
         return $this->render('task/list.html.twig', ['tasks' => $tasks]);
+
     } // End listActionDone().
 
 
@@ -143,6 +146,7 @@ class TaskController extends AbstractController
         }
 
         return $this->render('task/create.html.twig', ['form' => $form->createView()]);
+
     } // End createAction().
 
 
@@ -230,6 +234,7 @@ class TaskController extends AbstractController
         }
 
         return $this->redirectToRoute('task_list');
+
     } // End toggleTaskAction().
 
 
@@ -266,6 +271,7 @@ class TaskController extends AbstractController
             $this->addFlash('error', 'Vous ne pouvez pas supprimer la tâche d\'un autre utilisateur');
             return $this->redirectToRoute('task_list');
         }
+        
     } // End deleteTaskAction().
 
 

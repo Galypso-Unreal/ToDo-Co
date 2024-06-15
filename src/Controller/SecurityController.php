@@ -42,6 +42,7 @@ class SecurityController extends AbstractController
         } else {
             return $this->redirectToRoute("homepage");
         }
+
     } // End loginAction().
 
 
@@ -76,7 +77,7 @@ class SecurityController extends AbstractController
      */
     public function logoutCheck(): void
     {
-        
+
         // This code is never executed.
     } // End logoutCheck().
 

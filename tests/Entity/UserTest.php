@@ -12,6 +12,10 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 class UserTest extends KernelTestCase
 {
 
+    /**
+     * @var `$entityManager` within the `TaskTest` class. This property is used create entitymanager
+     * symfony for database interaction like persist, flush, ect.
+     */
     private ?EntityManagerInterface $entityManager = null;
 
     

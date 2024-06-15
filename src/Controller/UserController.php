@@ -15,10 +15,10 @@ class UserController extends AbstractController
 {
 
     /**
-     * @var `$cachePool` of type `CacheItemPoolInterface` within the `UserController`
-     * class.
+     * @var CacheItemPoolInterface $cachePool of type `CacheItemPoolInterface` within the `UserController` class.
      */
     private CacheItemPoolInterface $cachePool;
+
 
     /**
      * The function is a constructor that initializes a cache pool object.

@@ -21,7 +21,7 @@ class TaskRepository extends ServiceEntityRepository
     /**
      * Construct base managerRegistry for task.
      * 
-     * @param ManagerRegistry $registry  interface is part of the Doctrine ORM (Object-Relational Mapping) integration.
+     * @param ManagerRegistry $registry interface is part of the Doctrine ORM (Object-Relational Mapping) integration.
      * It provides a way to manage and access the different Doctrine entity managers and connections.
      * The ManagerRegistry is often used for dependency injection into services or controllers where database operations are required.
      * 
@@ -38,10 +38,9 @@ class TaskRepository extends ServiceEntityRepository
      * Retrieves tasks assigned to a specific user.
      * 
      * @param int $userId The ID of the user whose tasks are to be retrieved.
+     * 
      * @return Task[] Returns an array of Task objects assigned to the specified user.
      */
-
-
     public function findTasksByUser(int $userId): array
     {
         return $this->createQueryBuilder('t')
@@ -57,10 +56,9 @@ class TaskRepository extends ServiceEntityRepository
      * Retrieves ONE task assigned to a specific user.
      * 
      * @param int $userId The ID of the user whose tasks are to be retrieved.
+     * 
      * @return Task[] Returns an array of Task objects assigned to the specified user.
      */
-
-
     public function findOneTaskByUser(int $userId): ?Task
     {
         return $this->createQueryBuilder('t')

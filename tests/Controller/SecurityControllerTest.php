@@ -9,6 +9,7 @@ use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;
 class SecurityControllerTest extends WebTestCase
 {
 
+
     /**
      * Test if login page have 200 response.
      */

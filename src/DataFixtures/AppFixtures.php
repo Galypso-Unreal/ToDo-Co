@@ -17,44 +17,41 @@ class AppFixtures extends Fixture
 {
     
     /**
-     * The line `private ;` declares a private property named @var `$container` in the
-     * `AppFixtures` class. key part of the framework's Dependency Injection (DI) mechanism.
+     * @var $container in the `AppFixtures` class. key part of the framework's Dependency Injection (DI) mechanism.
      * It holds an instance of the service container,
      * which is responsible for managing the lifecycle of services and their dependencies within a Symfony application. 
      */
     protected $container;
+
 
     /**
      * The function `setContainer` sets the container property of an object to a specified value.
      * 
      * @param ContainerInterface $container The Symfony service container instance.
      */
-
-
     public function setContainer(ContainerInterface $container = null): void
     {
         $this->container = $container;
 
     }// End setContainer().
 
+
     /**
-     * The line `private ;` declares a private property named @var `$passwordEncoder` in the
-     * `AppFixtures` class. This property is used to store an instance of the
+     * @var $passwordEncoder in the `AppFixtures` class. This property is used to store an instance of the
      * `UserPasswordHasherInterface` object, which is responsible for hashing passwords in Symfony
      * applications. This property is initialized in the constructor of the class using dependency
      * injection to ensure that the `UserPasswordHasherInterface` object is available for use
      * throughout the class methods. 
      */
     private $passwordEncoder;
-    
+
+
     /**
      * The constructor function initializes the password encoder with a UserPasswordHasherInterface
      * object.
      * 
      * @param UserPasswordHasherInterface $userPasswordHasher The password interface for hashing user password.
      */
-
-
     public function __construct(UserPasswordHasherInterface $userPasswordHasher)
     {
         $this->passwordEncoder = $userPasswordHasher;
@@ -67,8 +64,6 @@ class AppFixtures extends Fixture
      * 
      * @param ObjectManager $manager The Doctrine ObjectManager instance.
      */
-
-
     public function load(ObjectManager $manager): void
     {
 

@@ -16,11 +16,11 @@ class TaskController extends AbstractController
 {
 
     /**
-     * The line `private CacheItemPoolInterface ` in the PHP code snippet is declaring a
-     * private property named @var `$cachePool` of type `CacheItemPoolInterface`. This property is then
+     * @var CacheItemPoolInterface $cachePool private property of type `CacheItemPoolInterface`. This property is then
      * initialized in the constructor of the `TaskController` class using dependency injection.
      */
     private CacheItemPoolInterface $cachePool;
+
 
     /**
      * The function is a constructor that initializes a cache pool object.
@@ -248,7 +248,7 @@ class TaskController extends AbstractController
      * @param ManagerRegistry $managerRegistry, used to push data to the database.
      * After summited the form, all data is stocked to the database in table Task.
      * 
-     * @return The function `deleteTaskAction` is returning a redirection to the route named
+     * @return Response function `deleteTaskAction` is returning a redirection to the route named
      * 'task_list' after deleting a task if the conditions are met. If the conditions are not met, it
      * returns a redirection to the route 'task_list' with an error flash message.
      */

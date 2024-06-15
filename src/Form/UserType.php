@@ -19,11 +19,12 @@ class UserType extends AbstractType
      * The function builds a form with fields for username, password, email, and roles with a model
      * transformer for roles.
      * 
-     * @param FormBuilderInterface builder The `$builder` parameter in the `buildForm` method is an
+     * @param FormBuilderInterface $builder parameter in the `buildForm` method is an
      * instance of `FormBuilderInterface` class. It is used to define the structure and behavior of the
      * form. You can add form fields, configure options, and apply transformations using the methods
      * provided by the `FormBuilderInterface` class.
-     * @param array options The `$options` parameter in the `buildForm` method is an array that can
+     * 
+     * @param array $options parameter in the `buildForm` method is an array that can
      * contain various configuration options for the form. These options can be used to customize the
      * behavior and appearance of the form fields. In the provided code snippet, the ``
      * parameter is not being used directly within the `

@@ -15,10 +15,11 @@ use Doctrine\Persistence\ManagerRegistry;
 class UserRepository extends ServiceEntityRepository
 {
 
+
     /**
      * Construct base managerRegistry for User.
      * 
-     * @param ManagerRegistry $registry  interface is part of the Doctrine ORM (Object-Relational Mapping) integration.
+     * @param ManagerRegistry $registry interface is part of the Doctrine ORM (Object-Relational Mapping) integration.
      * It provides a way to manage and access the different Doctrine entity managers and connections.
      * The ManagerRegistry is often used for dependency injection into services or controllers where database operations are required.
      * 

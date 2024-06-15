@@ -21,9 +21,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: "integer")]
 
     /**
-     * The line `private ;` in the PHP code snippet is declaring a private property named `$id`
-     * within the `User` class. This property is used to store the unique identifier (ID) of a user
-     * entity in the database.
+     * @var $id within the `User` class. This property is used to store the unique identifier (ID) of a user entity in the database.
      */
     private $id;
 
@@ -31,18 +29,15 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\NotBlank(message: "Vous devez saisir un nom d'utilisateur.")]
 
     /**
-     * The line `private ;` in the PHP code snippet is declaring a private property named
-     * @var `$username` within the `User` class. This property is used to store the username of a user
-     * entity.
+     * @var $username within the `User` class. This property is used to store the username of a user entity.
      */
     private $username;
 
     #[ORM\Column(type: "string", length: 64)]
 
     /**
-     * The line `private ;` in the PHP code snippet is declaring a private property named
-     * @var `$password` within the `User` class. This property is used to store the password of a user
-     * entity. This password is hash before add in database.
+     * @var $password within the `User` class. This property is used to store the password of a user entity.
+     * This password is hash before add in database.
      */
     private $password;
 
@@ -51,16 +46,13 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[Assert\Email(message: "Le format de l'adresse n'est pas correcte.")]
 
     /**
-     * The line `private ;` in the PHP code snippet is declaring a private property named
-     * @var `$email` within the `User` class. This property is used to store the email of a user
-     * entity.
+     * @var $email within the `User` class. This property is used to store the email of a user entity.
      */
     private $email;
 
     #[ORM\OneToMany(targetEntity: Task::class, mappedBy: "user")]
 
     /**
-     * The line `private ;` in the PHP code snippet is declaring a private property named
      * @var `$tasks` within the `User` class. This property is used to related $tasks with user.
      */
     private $tasks;
@@ -68,11 +60,11 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: "json")]
     
     /**
-     * The line `private ;` in the PHP code snippet is declaring a private property named
-     * @var `$roles` within the `User` class. This property is used to store the role of a user
-     * entity. User can have only one role at the same time.
+     * @var `$roles` within the `User` class. This property is used to store the role of a user entity.
+     * User can have only one role at the same time.
      */
     private $roles = [];
+
 
     /**
      * The above PHP function is a constructor that initializes a new ArrayCollection for the tasks
@@ -80,8 +72,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return void
      */
-
-
     public function __construct()
     {
         $this->tasks = new ArrayCollection();
@@ -94,8 +84,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return mixed value of the property `id` of the object
      */
-
-
     public function getId()
     {
         return $this->id;
@@ -108,8 +96,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return mixed The `username` property of the object is being returned as a string.
      */
-
-
     public function getUserIdentifier(): string
     {
         return $this->username;
@@ -120,10 +106,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * This PHP function returns the username associated with the current object.
      *
-     * @return mixed The `getUsername()` function is returning the value of the `username` property of the object
+     * @return mixed The `getUsername()` function is returning the value of the `username` property of the object.
      */
-
-
     public function getUsername()
     {
         return $this->username;
@@ -134,11 +118,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * The function `setUsername` in PHP sets the username property of an object.
      *
-     * @param mixed $username setUsername parameter
-     * @return void value username of the object
+     * @param mixed $username setUsername parameter.
+     * 
+     * @return void value username of the object.
      */
-
-
     public function setUsername($username): void
     {
         $this->username = $username;
@@ -151,8 +134,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * 
      * @return ?string The `getSalt()` function is returning a `null` value.
      */
-
-
     public function getSalt(): ?string
     {
         return null;
@@ -166,8 +147,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @return ?string The `getPassword()` function is returning a nullable string value, which means
      * it can return either a string or `null`.
      */
-
-
     public function getPassword(): ?string
     {
         return $this->password;
@@ -180,10 +159,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @param mixed $password setPassword parameter The `setPassword` function is a method that sets the password for an object. The
      * function takes one parameter, which is the new password that you want to set for the object.
+     * 
      * @return void
      */
-
-
     public function setPassword($password): void
     {
         $this->password = $password;
@@ -196,8 +174,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * 
      * @return void getEmail() function is returning the value of the email property of the object.
      */
-
-
     public function getEmail()
     {
         return $this->email;
@@ -211,10 +187,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @param mixed $email setEmail parameter. The `setEmail` function is a method that sets the email property of an object to
      * the value passed as a parameter. In this case, the parameter is ``, which is the email
      * address that you want to set for the object.
+     * 
      * @return void
      */
-
-
     public function setEmail($email): void
     {
         $this->email = $email;
@@ -228,8 +203,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @return array The `getRoles()` function is returning an array of roles stored in the ``
      * property of the object.
      */
-
-
     public function getRoles(): array
     {
         $roles = $this->roles;
@@ -245,8 +218,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * @param array $roles setRoles parameter. The `setRoles` function is a method that sets the roles of an object. It
      * takes an array of roles as a parameter and assigns it to the `roles` property of the object.
      */
-
-
     public function setRoles(array $roles): void
     {
         $this->roles = $roles;
@@ -260,8 +231,6 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      *
      * @return void
      */
-
-
     public function eraseCredentials(): void
     {
     }// End eraseCredentials().

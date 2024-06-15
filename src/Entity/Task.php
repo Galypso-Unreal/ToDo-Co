@@ -15,18 +15,14 @@ class Task
     #[ORM\Column(type: "integer")]
 
     /**
-     * The line `private ;` in the PHP code snippet is declaring a private property named @var `$id`
-     * within the `Task` class. This property is intended to store the unique identifier of a task
-     * object.
+     * @var $id within the `Task` class. This property is intended to store the unique identifier of a task object.
      */
     private $id;
 
     #[ORM\Column(type: "datetime")]
 
     /**
-     * The line `private ;` in the PHP code snippet is declaring a private property named
-     * @var `$createdAt` within the `Task` class. This property is intended to store the datetime when a
-     * task object is created.
+     * @var $createdAt within the `Task` class. This property is intended to store the datetime when a task object is created.
      */
     private $createdAt;
 
@@ -34,8 +30,7 @@ class Task
     #[Assert\NotBlank(message: "Vous devez saisir un titre.")]
 
     /**
-     * The line `private ;` in the PHP code snippet is declaring a private property named
-     * @var `$title` within the `Task` class. This property is intended to store the title of a task object.
+     * @var $title within the `Task` class. This property is intended to store the title of a task object.
      */
     private $title;
 
@@ -43,18 +38,14 @@ class Task
     #[Assert\NotBlank(message: "Vous devez saisir du contenu.")]
 
     /**
-     * The line `private ;` in the PHP code snippet is declaring a private property named
-     * @var `$content` within the `Task` class. This property is intended to store the content of a task
-     * object.
+     * @var $content within the `Task` class. This property is intended to store the content of a task object.
      */
     private $content;
 
     #[ORM\Column(type: "boolean")]
 
     /**
-     * The line `private ;` in the PHP code snippet is declaring a private property named
-     * @var `$isDone` within the `Task` class. This property is intended to store the status of whether a
-     * task is done or not.
+     * @var $isDone within the `Task` class. This property is intended to store the status of whether a task is done or not.
      */
     private $isDone;
 
@@ -62,9 +53,7 @@ class Task
     #[ORM\JoinColumn(name: "user_id", referencedColumnName: "id")]
     
     /** 
-     * The line `private ;` in the PHP code snippet is declaring a private property named @var `$user`
-     * within the `Task` class. This property is intended to store the relationship to a `User` entity
-     * in the context of a task.
+     * @var `$user` within the `Task` class. This property is intended to store the relationship to a `User` entity in the context of a task.
      */
     private $user;
 
@@ -89,8 +78,6 @@ class Task
      *
      * @return mixed
      */
-
-
     public function getId()
     {
         return $this->id;
@@ -103,8 +90,6 @@ class Task
      *
      * @return mixed
      */
-
-
     public function getCreatedAt()
     {
         return $this->createdAt;
@@ -118,10 +103,9 @@ class Task
      * @param mixed $createdAt setCreatedAt parameter. The `setCreatedAt` function is a method that sets the value of the `createdAt`
      * property of an object to the value passed as a parameter. The parameter `$createdAt` is the
      * value that will be assigned to the `createdAt` property of the object.
+     * 
      * @return void
      */
-
-
     public function setCreatedAt($createdAt): void
     {
         $this->createdAt = $createdAt;
@@ -134,8 +118,6 @@ class Task
      *
      * @return mixed `title` property of the object is being returned.
      */
-
-
     public function getTitle()
     {
         return $this->title;
@@ -149,10 +131,9 @@ class Task
      * @param mixed $title setTitle parameter. The `setTitle` function is a method that sets the title of an object to the value
      * passed as a parameter. In this case, the parameter is `$title`, which is the new title that will
      * be assigned to the object.
+     * 
      * @return void
      */
-
-
     public function setTitle($title): void
     {
         $this->title = $title;
@@ -165,8 +146,6 @@ class Task
      *
      * @return mixed
      */
-
-
     public function getContent()
     {
         return $this->content;
@@ -180,6 +159,7 @@ class Task
      * @param mixed $content setContent parameter. The `setContent` function is a method that sets the content of an object to the
      * value passed as a parameter. The parameter `$content` is the new content that will be assigned
      * to the object's `content` property.
+     * 
      * @return void
      */
 
@@ -196,8 +176,6 @@ class Task
      *
      * @return void
      */
-
-
     public function isDone()
     {
         return $this->isDone;
@@ -210,11 +188,10 @@ class Task
      *
      * @param string $flag toggle parameter. The `flag` parameter in the `toggle` function is used to determine the value of the
      * `isDone` property. When the `toggle` function is called with a boolean value for the `$flag`
-     * parameter, it will set the `isDone` property of the object to that boolean value
+     * parameter, it will set the `isDone` property of the object to that boolean value.
+     * 
      * @return void
      */
-
-
     public function toggle($flag): void
     {
         $this->isDone = $flag;
@@ -228,8 +205,6 @@ class Task
      *
      * @return mixed The `getUser()` function is returning the `user` property of the current object.
      */
-
-
     public function getUser()
     {
         return $this->user;
@@ -243,10 +218,9 @@ class Task
      * @param string $user setUser parameter. The `setUser` function is a method that sets the value of the `user` property in the
      * class to the value passed as an argument. The parameter `$user` is the value that will be
      * assigned to the `user` property.
+     * 
      * @return void
      */
-
-
     public function setUser($user): void
     {
         $this->user = $user;

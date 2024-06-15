@@ -9,56 +9,43 @@ on:
       - main
 
 jobs:
-  build:
+  test:
     runs-on: ubuntu-latest
 
     services:
       mysql:
-        image: mysql:8.0
-        options: --health-cmd='mysqladmin ping --silent' --health-interval=10s --health-timeout=5s --health-retries=3
+        image: mysql:5.7
         ports:
           - 3306:3306
         env:
           MYSQL_ROOT_PASSWORD: root
-          MYSQL_DATABASE: test_db
+          MYSQL_DATABASE: test_database
+        options: >-
+          --health-cmd "mysqladmin ping --silent"
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 3
 
     steps:
-      - name: Check out the repository
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v2
 
-      - name: Set up PHP 8.2
+      - name: Set up PHP
         uses: shivammathur/setup-php@v2
         with:
-          php-version: '8.2'
-
-      - name: Get Composer Cache Directory
-        id: composer-cache
-        run: |
-          echo "::set-output name=dir::$(composer config cache-files-dir)"
-
-      - name: Cache Composer dependencies
-        uses: actions/cache@v3
-        with:
-          path: ${{ steps.composer-cache.outputs.dir }}
-          key: ${{ runner.os }}-composer-${{ hashFiles('**/composer.lock') }}
-          restore-keys: ${{ runner.os }}-composer-
+          php-version: 8.0
 
       - name: Install dependencies
-        run: |
-          composer install --prefer-dist --no-progress --no-suggest
+        run: composer install
 
-      - name: Wait for MySQL to be ready
-        run: |
-          docker-compose up -d
-          until mysqladmin ping -h"127.0.0.1" --silent; do
-            echo 'waiting for mysql to be connectable...'
-            sleep 1
-          done
+      - name: Copy .env.test
+        run: cp .env.test .env
 
-      - name: Set up .env.test.local
-        run: |
-          echo "DATABASE_URL=mysql://root:root@127.0.0.1:3306/test_db" > .env.test.local
+      - name: Wait for MySQL
+        run: sleep 30s
 
-      - name: Run PHPUnit
-        run: |
-          ./vendor/bin/phpunit
+      - name: Run database migrations
+        run: php bin/console doctrine:migrations:migrate --no-interaction
+
+      - name: Run tests
+        run: php bin/phpunit

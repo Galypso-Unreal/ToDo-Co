@@ -58,8 +58,7 @@ class UserType extends AbstractType
                 function ($rolesArray) {
                     if (count($rolesArray) === 0) {
                         return null;
-                    }
-                    else{
+                    } else {
                         return $rolesArray[0];
                     }
                 },

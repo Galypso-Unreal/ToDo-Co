@@ -57,14 +57,13 @@ class Task
      */
     private $user;
 
+
     /**
      * The above PHP function is a constructor that initializes the createdAt property with the current
      * datetime and sets the isDone property to false.
      *
      * @return void
      */
-
-
     public function __construct()
     {
         $this->createdAt = new \Datetime();

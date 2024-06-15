@@ -200,7 +200,7 @@ class TaskController extends AbstractController
         } else {
             $this->addFlash('error', sprintf('La tâche %s ne peux pas être modifier par un autre utilisateur', $task->getTitle()));
             return $this->redirectToRoute('task_list');
-        } //
+        } //end if
 
     } // End editAction().
 
@@ -271,7 +271,7 @@ class TaskController extends AbstractController
             $this->addFlash('error', 'Vous ne pouvez pas supprimer la tâche d\'un autre utilisateur');
             return $this->redirectToRoute('task_list');
         }
-        
+
     } // End deleteTaskAction().
 
 

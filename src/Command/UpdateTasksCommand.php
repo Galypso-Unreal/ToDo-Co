@@ -15,13 +15,15 @@ class UpdateTasksCommand extends Command
 {
 
     /**
+     * @var string $defaultName within the `UpdateTasksCommand` class. This static protected variable is defined default name of command.
+     * 
      * Exemple command with id : php bin/console app:update-tasks-anonym 1.
      */
     protected static $defaultName = 'app:update-tasks-anonym';
 
     /** 
      * The line `private EntityManagerInterface ;` is declaring a private property named
-     * `` of type `EntityManagerInterface`. This property is used to store an instance of
+     * `$entityManager` of type `EntityManagerInterface`. This property is used to store an instance of
      * the `EntityManagerInterface` class, which is typically used for managing entities in an ORM
      * (Object-Relational Mapping) system like Doctrine in PHP.
      */
@@ -34,6 +36,7 @@ class UpdateTasksCommand extends Command
      * verifying passwords in Symfony applications.
      */
     private UserPasswordHasherInterface $passwordEncoder;
+
 
     /**
      * The function is a constructor that initializes an EntityManagerInterface object and calls the
@@ -132,6 +135,5 @@ class UpdateTasksCommand extends Command
         $output->writeln(sprintf('%d tâches ont été mises à jour avec l\'utilisateur anonyme.', count($tasks)));
 
         return Command::SUCCESS;
-
     }
 }

@@ -13,9 +13,21 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UpdateTasksCommandTest extends KernelTestCase
 {
+
+    /**
+     * @var EntityManagerInterface $entityManager of type `EntityManagerInterface` within the `UpdateTasksCommandTest` class need to defined to access passwordHasher.
+     */
     private ?EntityManagerInterface $entityManager = null;
+
+    /**
+     * @var UserPasswordHasherInterface $passwordHasher of type `UserPasswordHasherInterface` within the `UpdateTasksCommandTest` class need to defined to access passwordHasher.
+     */
     private ?UserPasswordHasherInterface $passwordHasher = null;
 
+
+    /**
+     * SetUp current test for access to EntityManager and PasswordHasher.
+     */
     protected function setUp(): void
     {
         $kernel = self::bootKernel();
@@ -28,13 +40,17 @@ class UpdateTasksCommandTest extends KernelTestCase
             $this->passwordHasher = static::getContainer()->get(UserPasswordHasherInterface::class);
     }
 
+
+    /**
+     * Test to create anonymousUser if no id is submit.
+     */
     public function testCreateAnonymousUserWhenNoneExists(): void
     {
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => 'anonymous']);
         // Get all tasks linked to anonym user.
         $tasks = $this->entityManager->getRepository(Task::class)->findBy(['user' => $user]);
 
-        if(empty($tasks) === false && empty($user) === false){
+        if (empty($tasks) === false && empty($user) === false) {
             // Delete all tasks of anonym user.
             foreach ($tasks as $task) {
                 $this->entityManager->remove($task);
@@ -59,6 +75,10 @@ class UpdateTasksCommandTest extends KernelTestCase
         $this->assertTrue(strlen($user->getPassword()) > 0, 'Le mot de passe devrait être haché.');
     }
 
+
+    /**
+     * Test to user exisiting anonymous user.
+     */
     public function testUseExistingAnonymousUser(): void
     {
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => 'anonymous']);
@@ -72,10 +92,14 @@ class UpdateTasksCommandTest extends KernelTestCase
         $this->assertEquals(Command::SUCCESS, $statusCode);
     }
 
+    
+    /**
+     * Test if anonymous user is already exists.
+     */
     public function testErrorIfAnonymousUserAlreadyExists(): void
     {
         $command = new UpdateTasksCommand($this->entityManager, $this->passwordHasher);
-        $input = new ArrayInput([]); // Pas d'argument
+        $input = new ArrayInput([]); // no id.
         $output = new BufferedOutput();
         
         $statusCode = $command->run($input, $output);
@@ -84,6 +108,10 @@ class UpdateTasksCommandTest extends KernelTestCase
         $this->assertStringContainsString('Un utilisateur anonyme est déjà présent ID :', $output->fetch());
     }
 
+
+    /**
+     * Test to update task and asigned to anonymous user.
+     */
     public function testUpdateTasksWithAnonymousUser(): void
     {
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => 'anonymous']);
@@ -108,6 +136,10 @@ class UpdateTasksCommandTest extends KernelTestCase
 
     }
 
+
+    /**
+     * Test if no tasks need to be updated.
+     */
     public function testNoTasksToUpdate(): void
     {
         $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => 'anonymous']);
@@ -122,6 +154,10 @@ class UpdateTasksCommandTest extends KernelTestCase
         $this->assertStringContainsString('Aucune tâche sans utilisateur trouvé.', $output->fetch());
     }
 
+
+    /**
+     * Test if anonymous user is not find.
+     */
     public function testNoAnonymousUserFind(): void
     {
         $command = new UpdateTasksCommand($this->entityManager, $this->passwordHasher);

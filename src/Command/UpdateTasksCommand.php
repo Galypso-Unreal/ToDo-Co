@@ -13,19 +13,26 @@ use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UpdateTasksCommand extends Command
 {
-    // Exemple command with id : php bin/console app:update-tasks-anonym 1
+
+    /**
+     * Exemple command with id : php bin/console app:update-tasks-anonym 1.
+     */
     protected static $defaultName = 'app:update-tasks-anonym';
 
-    /* The line `private EntityManagerInterface ;` is declaring a private property named
-    `` of type `EntityManagerInterface`. This property is used to store an instance of
-    the `EntityManagerInterface` class, which is typically used for managing entities in an ORM
-    (Object-Relational Mapping) system like Doctrine in PHP. */
+    /* 
+     * The line `private EntityManagerInterface ;` is declaring a private property named
+     * `` of type `EntityManagerInterface`. This property is used to store an instance of
+     * the `EntityManagerInterface` class, which is typically used for managing entities in an ORM
+     * (Object-Relational Mapping) system like Doctrine in PHP.
+     */
     private EntityManagerInterface $entityManager;
 
-    /* The line `private UserPasswordHasherInterface ;` is declaring a private property
-    named `` of type `UserPasswordHasherInterface`. This property is used to store
-    an instance of the `UserPasswordHasherInterface` class, which is typically used for hashing and
-    verifying passwords in Symfony applications. */
+    /* 
+     * The line `private UserPasswordHasherInterface ;` is declaring a private property
+     * named `` of type `UserPasswordHasherInterface`. This property is used to store
+     * an instance of the `UserPasswordHasherInterface` class, which is typically used for hashing and
+     * verifying passwords in Symfony applications.
+     */
     private UserPasswordHasherInterface $passwordEncoder;
 
     /**
@@ -44,6 +51,7 @@ class UpdateTasksCommand extends Command
         parent::__construct();
     }
 
+
     /**
      * The function configures a command to associate old tasks with an anonymous user in PHP.
      */
@@ -53,6 +61,7 @@ class UpdateTasksCommand extends Command
             ->setDescription('Associe les anciennes tâches à un utilisateur anonyme.')
             ->addArgument('anonymousUserId', InputArgument::OPTIONAL, 'L\'ID de l\'utilisateur anonyme');
     }
+
 
     /**
      * This PHP function assigns an anonymous user to tasks that do not have any user associated with
@@ -72,8 +81,9 @@ class UpdateTasksCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $anonymousUserId = $input->getArgument('anonymousUserId');
+        $anonymousUser = $this->entityManager->getRepository(User::class)->findOneBy(['username'=>'anonymous']);
 
-        if ($anonymousUserId === null) {
+        if ($anonymousUserId === null && $anonymousUser === null) {
             // Create anonym user if not one
             $user = new User();
             $user->setUsername('anonymous');
@@ -87,19 +97,25 @@ class UpdateTasksCommand extends Command
 
             $anonymousUserId = $user->getId();
             $output->writeln(sprintf('Utilisateur anonyme créé avec l\'ID %d.', $anonymousUserId));
-        } else {
-            $user = $this->entityManager->getRepository(User::class)->find($anonymousUserId);
+        }//end if
+    
+        if (empty($anonymousUser) === false && $anonymousUserId === null) {
+            $output->writeln(sprintf('Un utilisateur anonyme est déjà présent ID : %d ', $anonymousUser->getId()));
+            return Command::INVALID;
+            
+        }
+        
+        $user = $this->entityManager->getRepository(User::class)->find($anonymousUserId);
 
-            if (!$user) {
-                $output->writeln('Utilisateur anonyme non trouvé.');
-                return Command::FAILURE;
-            }
+        if ($user === null) {
+            $output->writeln('Utilisateur anonyme non trouvé.');
+            return Command::FAILURE;
         }
 
-        // Only check tasks with null user
+        // Only check tasks with null user.
         $tasks = $this->entityManager->getRepository(Task::class)->findBy(['user' => null]);
 
-        if (empty($tasks)) {
+        if (empty($tasks) === true) {
             $output->writeln('Aucune tâche sans utilisateur trouvé.');
             return Command::SUCCESS;
         }

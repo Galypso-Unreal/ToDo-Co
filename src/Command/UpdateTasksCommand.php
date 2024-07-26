@@ -42,7 +42,7 @@ class UpdateTasksCommand extends Command
      * @param EntityManagerInterface entityManager The `$entityManager` parameter in the constructor is
      * an instance of the `EntityManagerInterface` class. This parameter is typically used for managing
      * entities in an ORM (Object-Relational Mapping) system, such as Doctrine in PHP. It allows you to
-     * perform database operations like persisting, updating, and deleting
+     * perform database operations like persisting, updating, and deleting.
      */
     public function __construct(EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordEncoder)
     {
@@ -81,10 +81,10 @@ class UpdateTasksCommand extends Command
     protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $anonymousUserId = $input->getArgument('anonymousUserId');
-        $anonymousUser = $this->entityManager->getRepository(User::class)->findOneBy(['username'=>'anonymous']);
+        $anonymousUser = $this->entityManager->getRepository(User::class)->findOneBy(['username' => 'anonymous']);
 
         if ($anonymousUserId === null && $anonymousUser === null) {
-            // Create anonym user if not one
+            // Create anonym user if not one.
             $user = new User();
             $user->setUsername('anonymous');
             $password = 'password123';

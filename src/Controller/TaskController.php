@@ -174,7 +174,7 @@ class TaskController extends AbstractController
     public function editAction(Task $task, Request $request, ManagerRegistry $managerRegistry)
     {
 
-        if ($this->getUser() === $task->getUser() || $this->getUser()->getRoles() === ['ROLE_ADMIN'] && $task->getUser()->getRoles() === ['ROLE_ANONYM']) {
+        if ($this->getUser() === $task->getUser() || ($this->getUser()->getRoles() === ['ROLE_ADMIN'] && $task->getUser()->getRoles() === ['ROLE_ANONYM'])) {
             $form = $this->createForm(TaskType::class, $task);
 
             $form->handleRequest($request);

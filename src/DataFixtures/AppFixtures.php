@@ -108,7 +108,7 @@ class AppFixtures extends Fixture
             $task = new Task();
             $task->setTitle('Tâche '.$i);
             $task->setContent('Contenu de la tâche '.$i);
-            $task->setUser($user_anonym);
+            $task->setUser(null);
             $manager->persist($task);
         }
 

@@ -102,6 +102,7 @@ class TaskControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
+        $taskRepository = static::getContainer()->get(TaskRepository::class);
 
         // Retrieve the test user.
         $testUser = $userRepository->findOneBy(['username' => 'User']);
@@ -116,8 +117,8 @@ class TaskControllerTest extends WebTestCase
         $form = $crawler->selectButton('createTask')->form();
 
         // Add content to form.
-        $form['task[title]'] = 'Test Task';
-        $form['task[content]'] = 'This is a Test Task';
+        $form['task[title]'] = 'Test Task taskControllerTest';
+        $form['task[content]'] = 'This is a Test Task Test Task taskControllerTest';
 
         $client->submit($form);
 
@@ -126,6 +127,12 @@ class TaskControllerTest extends WebTestCase
 
         // Check if task has been created.
         $this->assertResponseIsSuccessful();
+
+        // Retrieve the task that was just created.
+        $createdTask = $taskRepository->findOneBy(['title' => 'Test Task taskControllerTest']);
+        
+        // Assert that the task is assigned to the correct user.
+        $this->assertSame($testUser->getId(), $createdTask->getUser()->getId(), 'The task was not assigned to the correct user.');
 
     }// End testCreateAction().
 
@@ -349,6 +356,69 @@ class TaskControllerTest extends WebTestCase
         $this->assertResponseIsSuccessful();
         
     }// End testDeleteTaskActionWrongUser().
+
+
+    /**
+     * Test if delete task with user to anonym user not working.
+     */
+    public function testDeleteTaskActionAnonymUser(): void
+    {
+        $client = static::createClient();
+
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        $taskRepository = static::getContainer()->get(TaskRepository::class);
+
+        // Retrieve the test user.
+        $testUser = $userRepository->findOneBy(['username' => 'user']);
+
+        $testAnonymUser = $userRepository->findOneBy(['username' => 'AnonymeUser']);
+
+        $task_id = $taskRepository->findOneTaskByUser($testAnonymUser->getId())->getId();
+
+        // Simulate $testUser being logged in.
+        $client->loginUser($testUser);
+
+        $client->request('GET', '/tasks/'.$task_id.'/delete');
+
+        $this->assertTrue($client->getRequest()->getSession()->getFlashBag()->has('error'));
+
+        $client->followRedirect();
+
+        $this->assertResponseIsSuccessful();
+        
+    }// End testDeleteTaskActionAnonymUser().
+
+    /**
+     * Test if delete task with admin to anonym user working.
+     */
+    public function testDeleteTaskActionAnonymAdmin(): void
+    {
+        $client = static::createClient();
+
+        $userRepository = static::getContainer()->get(UserRepository::class);
+
+        $taskRepository = static::getContainer()->get(TaskRepository::class);
+
+        // Retrieve the test user.
+        $testUser = $userRepository->findOneBy(['username' => 'admin']);
+
+        $testAnonymUser = $userRepository->findOneBy(['username' => 'AnonymeUser']);
+
+        $task_id = $taskRepository->findOneTaskByUser($testAnonymUser->getId())->getId();
+
+        // Simulate $testUser being logged in.
+        $client->loginUser($testUser);
+
+        $client->request('GET', '/tasks/'.$task_id.'/delete');
+
+        $this->assertTrue($client->getRequest()->getSession()->getFlashBag()->has('success'));
+
+        $client->followRedirect();
+
+        $this->assertResponseIsSuccessful();
+        
+    }// End testDeleteTaskActionAnonymAdmin().
 
     
 }

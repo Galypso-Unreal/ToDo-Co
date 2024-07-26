@@ -21,19 +21,15 @@ class UpdateTasksCommand extends Command
      */
     protected static $defaultName = 'app:update-tasks-anonym';
 
-    /** 
-     * The line `private EntityManagerInterface ;` is declaring a private property named
-     * `$entityManager` of type `EntityManagerInterface`. This property is used to store an instance of
-     * the `EntityManagerInterface` class, which is typically used for managing entities in an ORM
-     * (Object-Relational Mapping) system like Doctrine in PHP.
+    /**
+     * @var EntityManagerInterface $entityManager private property of type `EntityManagerInterface`. This property is then
+     * initialized in the constructor of the `UpdateTasksCommand` class.
      */
     private EntityManagerInterface $entityManager;
 
-    /** 
-     * The line `private UserPasswordHasherInterface ;` is declaring a private property
-     * named `$passwordEncoder` of type `UserPasswordHasherInterface`. This property is used to store
-     * an instance of the `UserPasswordHasherInterface` class, which is typically used for hashing and
-     * verifying passwords in Symfony applications.
+    /**
+     * @var UserPasswordHasherInterface $passwordEncoder private property of type `UserPasswordHasherInterface`. This property is then
+     * initialized in the constructor of the `UpdateTasksCommand` class.
      */
     private UserPasswordHasherInterface $passwordEncoder;
 
@@ -107,7 +103,6 @@ class UpdateTasksCommand extends Command
         if (empty($anonymousUser) === false && $anonymousUserId === null) {
             $output->writeln(sprintf('Un utilisateur anonyme est déjà présent ID : %d ', $anonymousUser->getId()));
             return Command::INVALID;
-            
         }
         
         $user = $this->entityManager->getRepository(User::class)->find($anonymousUserId);
@@ -136,4 +131,6 @@ class UpdateTasksCommand extends Command
 
         return Command::SUCCESS;
     }
+    
+
 }

@@ -99,7 +99,8 @@ class UpdateTasksCommandTest extends KernelTestCase
     public function testErrorIfAnonymousUserAlreadyExists(): void
     {
         $command = new UpdateTasksCommand($this->entityManager, $this->passwordHasher);
-        $input = new ArrayInput([]); // no id.
+        // No id.
+        $input = new ArrayInput([]);
         $output = new BufferedOutput();
         
         $statusCode = $command->run($input, $output);
@@ -169,4 +170,6 @@ class UpdateTasksCommandTest extends KernelTestCase
         $this->assertEquals(Command::FAILURE, $statusCode);
         $this->assertStringContainsString('Utilisateur anonyme non trouvé.', $output->fetch());
     }
+
+
 }

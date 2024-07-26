@@ -68,11 +68,6 @@ class AppFixtures extends Fixture
 
 
         // Create users.
-        $user_anonym = new User();
-        $user_anonym->setUsername('AnonymeUser');
-        $user_anonym->setEmail('anonym@todo.com');
-        $user_anonym->setPassword($this->passwordEncoder->hashPassword($user_anonym, 'anonym'));
-        $user_anonym->setRoles(['ROLE_ANONYM']);
 
         $user_user = new User();
         $user_user->setUsername('User');
@@ -86,7 +81,6 @@ class AppFixtures extends Fixture
         $user_admin->setEmail('admin@todo.com');
         $user_admin->setRoles(['ROLE_ADMIN']);
 
-        $manager->persist($user_anonym);
         $manager->persist($user_user);
         $manager->persist($user_admin);
 

@@ -370,9 +370,9 @@ class TaskControllerTest extends WebTestCase
         $taskRepository = static::getContainer()->get(TaskRepository::class);
 
         // Retrieve the test user.
-        $testUser = $userRepository->findOneBy(['username' => 'user']);
+        $testUser = $userRepository->findOneBy(['username' => 'User']);
 
-        $testAnonymUser = $userRepository->findOneBy(['username' => 'AnonymeUser']);
+        $testAnonymUser = $userRepository->findOneBy(['username' => 'anonymous']);
 
         $task_id = $taskRepository->findOneTaskByUser($testAnonymUser->getId())->getId();
 
@@ -401,9 +401,9 @@ class TaskControllerTest extends WebTestCase
         $taskRepository = static::getContainer()->get(TaskRepository::class);
 
         // Retrieve the test user.
-        $testUser = $userRepository->findOneBy(['username' => 'admin']);
+        $testUser = $userRepository->findOneBy(['username' => 'Admin']);
 
-        $testAnonymUser = $userRepository->findOneBy(['username' => 'AnonymeUser']);
+        $testAnonymUser = $userRepository->findOneBy(['username' => 'anonymous']);
 
         $task_id = $taskRepository->findOneTaskByUser($testAnonymUser->getId())->getId();
 

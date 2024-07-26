@@ -19,7 +19,7 @@ class UpdateTasksCommand extends Command
      */
     protected static $defaultName = 'app:update-tasks-anonym';
 
-    /* 
+    /** 
      * The line `private EntityManagerInterface ;` is declaring a private property named
      * `` of type `EntityManagerInterface`. This property is used to store an instance of
      * the `EntityManagerInterface` class, which is typically used for managing entities in an ORM
@@ -27,9 +27,9 @@ class UpdateTasksCommand extends Command
      */
     private EntityManagerInterface $entityManager;
 
-    /* 
+    /** 
      * The line `private UserPasswordHasherInterface ;` is declaring a private property
-     * named `` of type `UserPasswordHasherInterface`. This property is used to store
+     * named `$passwordEncoder` of type `UserPasswordHasherInterface`. This property is used to store
      * an instance of the `UserPasswordHasherInterface` class, which is typically used for hashing and
      * verifying passwords in Symfony applications.
      */
@@ -49,17 +49,19 @@ class UpdateTasksCommand extends Command
         $this->entityManager = $entityManager;
         $this->passwordEncoder = $passwordEncoder;
         parent::__construct();
+
     }
 
 
     /**
      * The function configures a command to associate old tasks with an anonymous user in PHP.
      */
-    protected function configure()
+    protected function configure(): void
     {
         $this
             ->setDescription('Associe les anciennes tâches à un utilisateur anonyme.')
             ->addArgument('anonymousUserId', InputArgument::OPTIONAL, 'L\'ID de l\'utilisateur anonyme');
+
     }
 
 
@@ -130,5 +132,6 @@ class UpdateTasksCommand extends Command
         $output->writeln(sprintf('%d tâches ont été mises à jour avec l\'utilisateur anonyme.', count($tasks)));
 
         return Command::SUCCESS;
+
     }
 }

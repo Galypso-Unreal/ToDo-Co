@@ -2,7 +2,7 @@
 <html lang="en">
  <head>
   <meta charset="UTF-8">
-  <title>Dashboard for C:\Computer\Developper\Sites\OpenClassRooms\ToDo\src\Security</title>
+  <title>Dashboard for C:\Computer\Developper\Sites\OpenClassRooms\ToDo\src\Command</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link href="../_css/bootstrap.min.css?v=9.2.31" rel="stylesheet" type="text/css">
   <link href="../_css/nv.d3.min.css?v=9.2.31" rel="stylesheet" type="text/css">
@@ -17,7 +17,7 @@
       <nav aria-label="breadcrumb">
        <ol class="breadcrumb">
          <li class="breadcrumb-item"><a href="../index.html">C:\Computer\Developper\Sites\OpenClassRooms\ToDo\src</a></li>
-         <li class="breadcrumb-item"><a href="index.html">Security</a></li>
+         <li class="breadcrumb-item"><a href="index.html">Command</a></li>
          <li class="breadcrumb-item active">(Dashboard)</li>
 
        </ol>
@@ -173,7 +173,7 @@ $(document).ready(function() {
       .yAxis.tickFormat(d3.format('d'));
 
     d3.select('#methodCoverageDistribution svg')
-      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,2], "Method Coverage"))
+      .datum(getCoverageDistributionData([0,0,0,0,0,0,0,0,0,0,0,3], "Method Coverage"))
       .transition().duration(500).call(chart);
 
     nv.utils.windowResize(chart.update);
@@ -223,7 +223,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Cyclomatic Complexity');
 
     d3.select('#classComplexity svg')
-      .datum(getComplexityData([[100,4,"<a href=\"AccessDeniedHandler.php.html#13\">App\\Security\\AccessDeniedHandler<\/a>"]], 'Class Complexity'))
+      .datum(getComplexityData([[100,10,"<a href=\"UpdateTasksCommand.php.html#14\">App\\Command\\UpdateTasksCommand<\/a>"]], 'Class Complexity'))
       .transition()
       .duration(500)
       .call(chart);
@@ -247,7 +247,7 @@ $(document).ready(function() {
     chart.yAxis.axisLabel('Method Complexity');
 
     d3.select('#methodComplexity svg')
-      .datum(getComplexityData([[100,1,"<a href=\"AccessDeniedHandler.php.html#27\">App\\Security\\AccessDeniedHandler::__construct<\/a>"],[100,3,"<a href=\"AccessDeniedHandler.php.html#52\">App\\Security\\AccessDeniedHandler::handle<\/a>"]], 'Method Complexity'))
+      .datum(getComplexityData([[100,1,"<a href=\"UpdateTasksCommand.php.html#47\">App\\Command\\UpdateTasksCommand::__construct<\/a>"],[100,1,"<a href=\"UpdateTasksCommand.php.html#59\">App\\Command\\UpdateTasksCommand::configure<\/a>"],[100,8,"<a href=\"UpdateTasksCommand.php.html#83\">App\\Command\\UpdateTasksCommand::execute<\/a>"]], 'Method Complexity'))
       .transition()
       .duration(500)
       .call(chart);

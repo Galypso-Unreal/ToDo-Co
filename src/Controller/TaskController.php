@@ -93,7 +93,7 @@ class TaskController extends AbstractController
             $tasks = $item->get();
         }
 
-        return $this->render('task/list.html.twig', ['tasks' => $tasks]);
+        return $this->render('task/list_done.html.twig', ['tasks' => $tasks]);
 
     } // End listActionDone().
 

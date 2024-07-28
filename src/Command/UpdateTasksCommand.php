@@ -42,6 +42,8 @@ class UpdateTasksCommand extends Command
      *                                              an instance of the `EntityManagerInterface` class. This parameter is typically used for managing
      *                                              entities in an ORM (Object-Relational Mapping) system, such as Doctrine in PHP. It allows you to
      *                                              perform database operations like persisting, updating, and deleting.
+     * 
+     * @param UserPasswordHasherInterface $passwordEncoder The PasswordHasherInterface service, used to hash the password.
      */
     public function __construct(EntityManagerInterface $entityManager, UserPasswordHasherInterface $passwordEncoder)
     {
@@ -74,7 +76,7 @@ class UpdateTasksCommand extends Command
      * @param OutputInterface $output The `output` parameter in the `execute` method is an instance of
      *                                OutputInterface which is used to interact with the console output. It allows you to write
      *                                messages, display information, and control the output of your command when it is executed in the
-     * console.
+     *                                console.
      * 
      * @return int The function `execute` returns an integer value, either `Command::FAILURE` or
      *             `Command::SUCCESS` based on the outcome of the task.

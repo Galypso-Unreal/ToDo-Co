@@ -49,24 +49,22 @@ class UserControllerTest extends WebTestCase
         // Follow redirection.
         $client->followRedirect();
 
-        // Check if redirection is login
+        // Check if redirection is login.
         $this->assertRouteSame('login');
 
         // Follow redirection.
         $crawler = $client->followRedirect();
 
-        // Check if redirection is login
+        // Check if redirection is login.
         $this->assertRouteSame('homepage');
 
 
-        // Assert that the response contains the expected message
+        // Assert that the response contains the expected message.
         $this->assertGreaterThan(
             0,
             $crawler->filter('div.alert-danger:contains("Vous devez être administrateur pour accéder à cette page.")')->count(),
             'The expected access denied message was not found in a div with class alert-danger.'
         );
-
-        
 
     }// End testListActionAsUser().
 
@@ -134,11 +132,6 @@ class UserControllerTest extends WebTestCase
 
         $this->assertNotNull($newUser, 'New user was not created.');
 
-        
-        
-
-        
-
     }// End testCreateAction().
 
 
@@ -186,7 +179,7 @@ class UserControllerTest extends WebTestCase
         // Assert that the user has the role ROLE_ADMIN.
         $this->assertContains('ROLE_ADMIN', $testUser->getRoles(), 'The user does not have the ROLE_ADMIN.');
 
-        // Remove entity
+        // Remove entity.
         $entityManager->remove($entityManager->getRepository(User::class)->find($testUser->getId()));
         $entityManager->flush();
         

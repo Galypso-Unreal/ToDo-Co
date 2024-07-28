@@ -38,7 +38,7 @@ class AppFixtures extends Fixture
      * 
      * @param ContainerInterface $container The Symfony service container instance.
      */
-    public function setContainer(ContainerInterface $container = null): void
+    public function setContainer(ContainerInterface $container= null): void
     {
         $this->container = $container;
 
@@ -68,7 +68,6 @@ class AppFixtures extends Fixture
 
 
         // Create users.
-
         $user_user = new User();
         $user_user->setUsername('User');
         $user_user->setPassword($this->passwordEncoder->hashPassword($user_user, 'user'));

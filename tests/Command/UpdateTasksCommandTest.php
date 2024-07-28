@@ -38,6 +38,7 @@ class UpdateTasksCommandTest extends KernelTestCase
             ->get('doctrine')
             ->getManager();
             $this->passwordHasher = static::getContainer()->get(UserPasswordHasherInterface::class);
+
     }
 
 
@@ -73,6 +74,7 @@ class UpdateTasksCommandTest extends KernelTestCase
         $this->assertEquals('anonymous@anonym.com', $user->getEmail());
         $this->assertEquals(['ROLE_ANONYM'], $user->getRoles());
         $this->assertTrue(strlen($user->getPassword()) > 0, 'Le mot de passe devrait être haché.');
+
     }
 
 
@@ -90,6 +92,7 @@ class UpdateTasksCommandTest extends KernelTestCase
         $statusCode = $command->run($input, $output);
 
         $this->assertEquals(Command::SUCCESS, $statusCode);
+
     }
 
     
@@ -107,6 +110,7 @@ class UpdateTasksCommandTest extends KernelTestCase
 
         $this->assertEquals(Command::INVALID, $statusCode);
         $this->assertStringContainsString('Un utilisateur anonyme est déjà présent ID :', $output->fetch());
+
     }
 
 
@@ -153,6 +157,7 @@ class UpdateTasksCommandTest extends KernelTestCase
 
         $this->assertEquals(Command::SUCCESS, $statusCode);
         $this->assertStringContainsString('Aucune tâche sans utilisateur trouvé.', $output->fetch());
+
     }
 
 
@@ -169,6 +174,7 @@ class UpdateTasksCommandTest extends KernelTestCase
 
         $this->assertEquals(Command::FAILURE, $statusCode);
         $this->assertStringContainsString('Utilisateur anonyme non trouvé.', $output->fetch());
+        
     }
 
 

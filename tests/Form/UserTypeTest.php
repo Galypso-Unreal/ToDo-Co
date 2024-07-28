@@ -17,6 +17,7 @@ use Symfony\Component\Form\CallbackTransformer;
 
 class UserTypeTest extends WebTestCase
 {
+
     /**
      * @var `$entityManager` within the `TaskTest` class. This property is used create entitymanager
      * symfony for database interaction like persist, flush, ect.

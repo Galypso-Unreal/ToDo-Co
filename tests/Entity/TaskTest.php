@@ -11,7 +11,6 @@ use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
 class TaskTest extends KernelTestCase
 {
 
-
     /**
      * @var `$entityManager` within the `TaskTest` class. This property is used create entitymanager
      * symfony for database interaction like persist, flush, ect.
@@ -50,10 +49,13 @@ class TaskTest extends KernelTestCase
      */
     public function testId(): void
     {
+        $user = $this->entityManager->getRepository(User::class)->findOneBy(['username' => 'anonymous']);
+
         // Create new task.
         $task = new Task();
         $task->setTitle('Test Task');
         $task->setContent('This is a test task description.');
+        $task->setUser($user);
 
         // Save task in database.
         $this->entityManager->persist($task);

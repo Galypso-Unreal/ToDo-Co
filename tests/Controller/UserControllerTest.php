@@ -39,14 +39,32 @@ class UserControllerTest extends WebTestCase
         $userRepository = static::getContainer()->get(UserRepository::class);
 
         // Retrieve the test user.
-        $testUser = $userRepository->findOneBy(['username' => 'Admin']);
+        $testUser = $userRepository->findOneBy(['username' => 'user']);
 
         // Simulate $testUser being logged in.
         $client->loginUser($testUser);
 
         $client->request('GET', '/users/');
 
-        $this->assertResponseIsSuccessful();
+        // Follow redirection.
+        $client->followRedirect();
+
+        // Check if redirection is login.
+        $this->assertRouteSame('login');
+
+        // Follow redirection.
+        $crawler = $client->followRedirect();
+
+        // Check if redirection is login.
+        $this->assertRouteSame('homepage');
+
+
+        // Assert that the response contains the expected message.
+        $this->assertGreaterThan(
+            0,
+            $crawler->filter('div.alert-danger:contains("Vous devez être administrateur pour accéder à cette page.")')->count(),
+            'The expected access denied message was not found in a div with class alert-danger.'
+        );
 
     }// End testListActionAsUser().
 
@@ -60,7 +78,7 @@ class UserControllerTest extends WebTestCase
         $userRepository = static::getContainer()->get(UserRepository::class);
 
         // Retrieve the test user.
-        $testUser = $userRepository->findOneBy(['username' => 'Admin']);
+        $testUser = $userRepository->findOneBy(['username' => 'admin']);
 
         // Simulate $testUser being logged in.
         $client->loginUser($testUser);
@@ -68,6 +86,8 @@ class UserControllerTest extends WebTestCase
         $client->request('GET', '/users/');
 
         $this->assertResponseIsSuccessful();
+
+        $this->assertRouteSame('user_list');
 
     }// End testListActionAsAdmin().
 
@@ -86,9 +106,31 @@ class UserControllerTest extends WebTestCase
         // Simulate $testUser being logged in.
         $client->loginUser($testUser);
 
-        $client->request('GET', '/users/create');
+        $crawler = $client->request('GET', '/users/create');
 
         $this->assertResponseIsSuccessful();
+
+        $form = $crawler->selectButton('addUser')->form();
+
+        // Add content to form for creating a new user.
+        $form['user[username]'] = 'NewUserTestController';
+        $form['user[password][first]'] = 'password123';
+        $form['user[password][second]'] = 'password123';
+        $form['user[email]'] = 'NewUserTestController@example.com';
+        $form['user[roles]'] = 'ROLE_USER';
+
+        $client->submit($form);
+
+        // Follow redirection.
+        $client->followRedirect();
+
+        // Check if user has been created.
+        $this->assertResponseIsSuccessful();
+
+        // Retrieve the newly created user.
+        $newUser = $userRepository->findOneBy(['username' => 'NewUserTestController']);
+
+        $this->assertNotNull($newUser, 'New user was not created.');
 
     }// End testCreateAction().
 
@@ -100,6 +142,8 @@ class UserControllerTest extends WebTestCase
     {
         $client = static::createClient();
         $userRepository = static::getContainer()->get(UserRepository::class);
+        $entityManager = static::getContainer()->get('doctrine')->getManager();
+
 
         // Retrieve the test user.
         $user = $userRepository->findOneBy(['username' => 'Admin']);
@@ -107,7 +151,7 @@ class UserControllerTest extends WebTestCase
         // Simulate $testUser being logged in.
         $client->loginUser($user);
 
-        $testUser = $userRepository->findOneBy(['username' => 'AnonymeUser']);
+        $testUser = $userRepository->findOneBy(['username' => 'NewUserTestController']);
 
         $identifier = $testUser->getId();
 
@@ -119,6 +163,7 @@ class UserControllerTest extends WebTestCase
 
         $form['user[password][first]'] = 'password123';
         $form['user[password][second]'] = 'password123';
+        $form['user[roles]'] = 'ROLE_ADMIN';
 
         // Submit form.
         $client->submit($form);
@@ -126,8 +171,17 @@ class UserControllerTest extends WebTestCase
         // Follow redirection.
         $client->followRedirect();
 
-        // Check if user has been created.
+        // Check if user has been modified.
         $this->assertResponseIsSuccessful();
+
+        $testUser = $userRepository->findOneBy(['username' => 'NewUserTestController']);
+
+        // Assert that the user has the role ROLE_ADMIN.
+        $this->assertContains('ROLE_ADMIN', $testUser->getRoles(), 'The user does not have the ROLE_ADMIN.');
+
+        // Remove entity.
+        $entityManager->remove($entityManager->getRepository(User::class)->find($testUser->getId()));
+        $entityManager->flush();
         
     }// End testEditAction().
 

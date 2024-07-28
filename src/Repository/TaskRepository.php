@@ -21,9 +21,9 @@ class TaskRepository extends ServiceEntityRepository
     /**
      * Construct base managerRegistry for task.
      * 
-     * @param ManagerRegistry $registry interface is part of the Doctrine ORM (Object-Relational Mapping) integration.
-     * It provides a way to manage and access the different Doctrine entity managers and connections.
-     * The ManagerRegistry is often used for dependency injection into services or controllers where database operations are required.
+     * @param ManagerRegistry $registry Interface is part of the Doctrine ORM (Object-Relational Mapping) integration.
+     *                                  It provides a way to manage and access the different Doctrine entity managers and connections.
+     *                                  The ManagerRegistry is often used for dependency injection into services or controllers where database operations are required.
      * 
      * @return void To use in your class, inject the "registry" service and call the parent constructor
      */

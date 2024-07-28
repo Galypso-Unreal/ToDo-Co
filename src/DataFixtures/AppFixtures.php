@@ -17,18 +17,18 @@ class AppFixtures extends Fixture
 {
     
     /**
-     * @var $container in the `AppFixtures` class. key part of the framework's Dependency Injection (DI) mechanism.
-     * It holds an instance of the service container,
-     * which is responsible for managing the lifecycle of services and their dependencies within a Symfony application. 
+     * @var $container In the `AppFixtures` class. key part of the framework's Dependency Injection (DI) mechanism.
+     *                 It holds an instance of the service container,
+     *                 which is responsible for managing the lifecycle of services and their dependencies within a Symfony application. 
      */
     protected $container;
 
     /**
-     * @var $passwordEncoder in the `AppFixtures` class. This property is used to store an instance of the
-     * `UserPasswordHasherInterface` object, which is responsible for hashing passwords in Symfony
-     * applications. This property is initialized in the constructor of the class using dependency
-     * injection to ensure that the `UserPasswordHasherInterface` object is available for use
-     * throughout the class methods. 
+     * @var $passwordEncoder In the `AppFixtures` class. This property is used to store an instance of the
+     *                       `UserPasswordHasherInterface` object, which is responsible for hashing passwords in Symfony
+     *                       applications. This property is initialized in the constructor of the class using dependency
+     *                       injection to ensure that the `UserPasswordHasherInterface` object is available for use
+     *                       throughout the class methods. 
      */
     private $passwordEncoder;
 
@@ -38,7 +38,7 @@ class AppFixtures extends Fixture
      * 
      * @param ContainerInterface $container The Symfony service container instance.
      */
-    public function setContainer(ContainerInterface $container = null): void
+    public function setContainer(ContainerInterface $container= null): void
     {
         $this->container = $container;
 
@@ -68,12 +68,6 @@ class AppFixtures extends Fixture
 
 
         // Create users.
-        $user_anonym = new User();
-        $user_anonym->setUsername('AnonymeUser');
-        $user_anonym->setEmail('anonym@todo.com');
-        $user_anonym->setPassword($this->passwordEncoder->hashPassword($user_anonym, 'anonym'));
-        $user_anonym->setRoles(['ROLE_ANONYM']);
-
         $user_user = new User();
         $user_user->setUsername('User');
         $user_user->setPassword($this->passwordEncoder->hashPassword($user_user, 'user'));
@@ -86,7 +80,6 @@ class AppFixtures extends Fixture
         $user_admin->setEmail('admin@todo.com');
         $user_admin->setRoles(['ROLE_ADMIN']);
 
-        $manager->persist($user_anonym);
         $manager->persist($user_user);
         $manager->persist($user_admin);
 
@@ -108,7 +101,7 @@ class AppFixtures extends Fixture
             $task = new Task();
             $task->setTitle('Tâche '.$i);
             $task->setContent('Contenu de la tâche '.$i);
-            $task->setUser($user_anonym);
+            $task->setUser(null);
             $manager->persist($task);
         }
 

@@ -105,16 +105,16 @@ class TaskController extends AbstractController
      * The function `createAction` creates a new task, associates it with a user if the user exists,
      * persists it to the database, and redirects to the task list page with a success message.
      * 
-     * @param Request $request, request HTTP user for $_POST, $_GETn cookies ect.
-     * This is necessary to get all data from post action.
+     * @param Request $request Request HTTP user for $_POST, $_GETn cookies ect.
+     *                         This is necessary to get all data from post action.
      * 
-     * @param ManagerRegistry $managerRegistry, used to push data to the database.
-     * After summited the form, all data is stocked to the database in table Task.
+     * @param ManagerRegistry $managerRegistry Used to push data to the database.
+     *                                         After summited the form, all data is stocked to the database in table Task.
      * 
-     * @return Response `createAction` function returns a response that renders the `task/create.html.twig`
-     * template with the form view if the form has not been submitted or is not valid. If the form is
-     * submitted and valid, it persists the task entity, adds the user to the task if the user exists,
-     * flushes the entity manager, deletes an item from the cache pool, adds a success flash message,
+     * @return Response CreateAction function returns a response that renders the `task/create.html.twig`
+     *                  template with the form view if the form has not been submitted or is not valid. If the form is
+     *                  submitted and valid, it persists the task entity, adds the user to the task if the user exists,
+     *                  flushes the entity manager, deletes an item from the cache pool, adds a success flash message,
      */
     public function createAction(Request $request, ManagerRegistry $managerRegistry)
     {
@@ -157,19 +157,19 @@ class TaskController extends AbstractController
      * This PHP function edits a task if the current user is the owner, otherwise it displays an error
      * message.
      * 
-     * @param Task $task, this is the entity Task.
-     * It's used to modify Task entity in database with new data from form.
+     * @param Task $task This is the entity Task.
+     *                   It's used to modify Task entity in database with new data from form.
      * 
-     * @param Request $request, request HTTP user for $_POST, $_GETn cookies ect.
-     * This is necessary to get all data from post action.
+     * @param Request $request Request HTTP user for $_POST, $_GETn cookies ect.
+     *                         This is necessary to get all data from post action.
      * 
-     * @param ManagerRegistry $managerRegistry, used to push data to the database.
-     * After summited the form, all data is stocked to the database in table Task.
+     * @param ManagerRegistry $managerRegistry Used to push data to the database.
+     *                                         After summited the form, all data is stocked to the database in table Task.
      * 
-     * @return Response the user editing the task is the same as the task's user, the function will return
-     * the rendered template for editing the task with the form and task data. If the form is submitted
-     * and valid, the task will be updated in the database, a success flash message will be added, and
-     * the cache items for task lists will be deleted before redirecting to the task list page.
+     * @return Response The user editing the task is the same as the task's user, the function will return
+     *                  the rendered template for editing the task with the form and task data. If the form is submitted
+     *                  and valid, the task will be updated in the database, a success flash message will be added, and
+     *                  the cache items for task lists will be deleted before redirecting to the task list page.
      */
     public function editAction(Task $task, Request $request, ManagerRegistry $managerRegistry)
     {
@@ -212,11 +212,11 @@ class TaskController extends AbstractController
      * The function toggles the status of a task between done and not done, updates the cache, displays
      * a success message, and redirects to the task list page.
      * 
-     * @param Task $task, this is the entity Task.
-     * It's used to modify Task entity in database with new data (here get the toggle true/false).
+     * @param Task $task This is the entity Task.
+     *                   It's used to modify Task entity in database with new data (here get the toggle true/false).
      * 
-     * @param ManagerRegistry $managerRegistry, used to push data to the database.
-     * After summited the form, all data is stocked to the database in table Task.
+     * @param ManagerRegistry $managerRegistry Used to push data to the database.
+     *                                         After summited the form, all data is stocked to the database in table Task.
      * 
      * @return Response redirection to the route named 'task_list'.
      */
@@ -246,15 +246,15 @@ class TaskController extends AbstractController
      * has admin role and the task belongs to an anonymous user, otherwise it displays an error
      * message.
      * 
-     * @param Task $task, this is the entity Task.
-     * It's used to delete Task entity in database.
+     * @param Task $task This is the entity Task.
+     *                   It's used to delete Task entity in database.
      * 
-     * @param ManagerRegistry $managerRegistry, used to push data to the database.
-     * After summited the form, all data is stocked to the database in table Task.
+     * @param ManagerRegistry $managerRegistry Used to push data to the database.
+     *                                         After summited the form, all data is stocked to the database in table Task.
      * 
-     * @return Response function `deleteTaskAction` is returning a redirection to the route named
-     * 'task_list' after deleting a task if the conditions are met. If the conditions are not met, it
-     * returns a redirection to the route 'task_list' with an error flash message.
+     * @return Response Function `deleteTaskAction` is returning a redirection to the route named
+     *                  'task_list' after deleting a task if the conditions are met. If the conditions are not met, it
+     *                  returns a redirection to the route 'task_list' with an error flash message.
      */
     public function deleteTaskAction(Task $task, ManagerRegistry $managerRegistry)
     {

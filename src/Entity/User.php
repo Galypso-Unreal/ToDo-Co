@@ -36,8 +36,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: "string", length: 64)]
 
     /**
-     * @var $password within the `User` class. This property is used to store the password of a user entity.
-     * This password is hash before add in database.
+     * @var $password This property is used to store the password of a user entity.
+     *                This password is hash before add in database.
      */
     private $password;
 
@@ -60,8 +60,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(type: "json")]
     
     /**
-     * @var `$roles` within the `User` class. This property is used to store the role of a user entity.
-     * User can have only one role at the same time.
+     * @var `$roles` This property is used to store the role of a user entity.
+     *               User can have only one role at the same time.
      */
     private $roles = [];
 
@@ -145,7 +145,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * This PHP function returns the password value as a nullable string.
      * 
      * @return ?string The `getPassword()` function is returning a nullable string value, which means
-     * it can return either a string or `null`.
+     *                 it can return either a string or `null`.
      */
     public function getPassword(): ?string
     {
@@ -158,7 +158,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * The function `setPassword` in PHP sets the password for an object.
      *
      * @param mixed $password setPassword parameter The `setPassword` function is a method that sets the password for an object. The
-     * function takes one parameter, which is the new password that you want to set for the object.
+     *                        function takes one parameter, which is the new password that you want to set for the object.
      * 
      * @return void
      */
@@ -184,9 +184,9 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * The setEmail function in PHP sets the email property of an object.
      *
-     * @param mixed $email setEmail parameter. The `setEmail` function is a method that sets the email property of an object to
-     * the value passed as a parameter. In this case, the parameter is ``, which is the email
-     * address that you want to set for the object.
+     * @param mixed $email The `setEmail` function is a method that sets the email property of an object to
+     *                     the value passed as a parameter. In this case, the parameter is ``, which is the email
+     *                     address that you want to set for the object.
      * 
      * @return void
      */
@@ -201,7 +201,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
      * This PHP function named getRoles returns an array of roles.
      * 
      * @return array The `getRoles()` function is returning an array of roles stored in the ``
-     * property of the object.
+     *               property of the object.
      */
     public function getRoles(): array
     {
@@ -215,8 +215,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     /**
      * The function `setRoles` in PHP sets the roles of an object based on the provided array.
      * 
-     * @param array $roles setRoles parameter. The `setRoles` function is a method that sets the roles of an object. It
-     * takes an array of roles as a parameter and assigns it to the `roles` property of the object.
+     * @param array $roles The `setRoles` function is a method that sets the roles of an object. It
+     *                     takes an array of roles as a parameter and assigns it to the `roles` property of the object.
      */
     public function setRoles(array $roles): void
     {

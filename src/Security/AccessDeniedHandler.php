@@ -37,14 +37,14 @@ class AccessDeniedHandler implements AccessDeniedHandlerInterface
      * message and redirects to the login page.
      * 
      * @param Request $request The `$request` parameter in the `handle` function is an instance of the
-     * `Request` class in Symfony. It represents an HTTP request that is being handled by the
-     * application. This object contains all the information about the request, such as the request
-     * method, headers, parameters, and more.
+     *                         `Request` class in Symfony. It represents an HTTP request that is being handled by the
+     *                         application. This object contains all the information about the request, such as the request
+     *                         method, headers, parameters, and more.
      * 
      * @param AccessDeniedException $accessDeniedException The `AccessDeniedException` is an exception
-     * that is thrown when a user tries to access a resource or perform an action for which they do not
-     * have the necessary permissions or authorization. In the context of the `handle` function you
-     * provided, it is used to handle cases where access is denied to a
+     *                                                     that is thrown when a user tries to access a resource or perform an action for which they do not
+     *                                                     have the necessary permissions or authorization. In the context of the `handle` function you
+     *                                                     provided, it is used to handle cases where access is denied to a
      * 
      * @return ?Response A RedirectResponse is being returned with the URL generated for the 'login'
      * route.

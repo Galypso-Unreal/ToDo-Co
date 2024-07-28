@@ -22,9 +22,9 @@ class SecurityController extends AbstractController
      * 
      * @param AuthenticationUtils $authenticationUtils Utility service that provides authentication error details and the last entered username.
      * 
-     * @return Response the user is not authenticated fully, the method will return a rendered view of the
-     * login form with the last username and any authentication error. If the user is already
-     * authenticated, it will redirect to the homepage.
+     * @return Response The user is not authenticated fully, the method will return a rendered view of the
+     *                  login form with the last username and any authentication error. If the user is already
+     *                  authenticated, it will redirect to the homepage.
      */
     public function loginAction(AuthenticationUtils $authenticationUtils)
     {

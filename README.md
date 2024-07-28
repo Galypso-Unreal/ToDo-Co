@@ -42,10 +42,10 @@ Installez les dépendances PHP du projet avec Composer :
 
 ## Mise en place de la base de données
 
-Créez la base de données et exécutez les migrations :
+Créez la base de données et créez son schema:
 
 `php bin/console doctrine:database:create`
-`php bin/console doctrine:migrations:migrate`
+`php bin/console doctrine:schema:create`
 
 ## Installation des fixtures (données de test)
 
@@ -61,7 +61,7 @@ Si vous voulez exécuter tests unitaires, assurez-vous d'avoir PHPUnit installé
 
 ## Contribuer au projet
 
-Pour contribuer au projet, veuillez suivre les étapes dans le fichier "Comment contribuer au développement du projet ?" à la racine du dépot git
+Pour contribuer au projet, veuillez suivre les étapes dans le fichier "Guide de contribution au projet" à la racine du dépot git
 
 ## Documentation
 
@@ -74,5 +74,15 @@ Serveur de développement : Vous pouvez lancer un serveur de développement loca
 `symfony serve`
 
 Variables d'environnement supplémentaires : Ajoutez toute autre configuration nécessaire dans votre fichier .env.local.
+
+Pour mettre à jour les tâches vers l'utilisateur anonyme, il vous suffit de taper la commande suivante : 
+
+`php bin/console app:update-tasks-anonym`
+
+Exemple : `php bin/console app:update-tasks-anonym 114`
+
+Si vous ne possédez pas encore d'utilisateur anonyme, vous pouvez exécuter la ligne de commande sans ID. Cela permet de créer l'utilisateur et de le rattacher automatique à toutes les tâches null.
+
+Exemple : `php bin/console app:update-tasks-anonym`
 
 Merci de contribuer et de faire partie de notre projet !

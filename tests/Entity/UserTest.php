@@ -8,6 +8,7 @@ use App\Repository\UserRepository;
 use DateTime;
 use Doctrine\ORM\EntityManagerInterface;
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
+use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
 class UserTest extends KernelTestCase
 {
@@ -17,6 +18,11 @@ class UserTest extends KernelTestCase
      * symfony for database interaction like persist, flush, ect.
      */
     private ?EntityManagerInterface $entityManager = null;
+
+    /**
+     * @var UserPasswordHasherInterface $passwordHasher of type `UserPasswordHasherInterface` within the `UpdateTasksCommandTest` class need to defined to access passwordHasher.
+     */
+    private ?UserPasswordHasherInterface $passwordHasher = null;
 
     
     /**
@@ -29,6 +35,7 @@ class UserTest extends KernelTestCase
         $this->entityManager = $kernel->getContainer()
             ->get('doctrine')
             ->getManager();
+            $this->passwordHasher = static::getContainer()->get(UserPasswordHasherInterface::class);
 
     }// End setUp().
 
@@ -41,6 +48,7 @@ class UserTest extends KernelTestCase
 
 
         $userRepository = static::getContainer()->get(UserRepository::class);
+        
 
         // Query for a user named "test-user-phpunit".
         $testUser = $userRepository->findOneBy(['username' => 'test-user-phpunit']);
@@ -53,7 +61,7 @@ class UserTest extends KernelTestCase
 
 
         $user = new User();
-        $user->setPassword('noencodepass');
+        $user->setPassword($this->passwordHasher->hashPassword($user,'password123'));
         $user->setEmail('test-user@gmail.com');
         $user->setUsername('test-user-phpunit');
 
